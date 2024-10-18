@@ -2,26 +2,35 @@ package org.example.Message;
 
 import org.example.Instruction.Instruction;
 import org.example.Instruction.InstructionTypes;
-import org.example.Utils.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Message {
 
 
     private MessageTypes type;
-    List<Instruction> instructions = new ArrayList<>();
+    Instruction instruction;
 
-    public Message(MessageTypes type, List<Instruction> instructions){
+    public Message(MessageTypes type, Instruction instructions){
         this.type = type;
-        this.instructions = instructions;
+        this.instruction = instructions;
     }
 
+    public String toString(){
 
-    public static void main(String[] args){
-        Message prueba = new Message(MessageTypes.START,List.of(new Instruction(InstructionTypes.BACK_TO_MENU,null)) );
-        System.out.println(prueba.instructions.toString());
+        return null;
     }
+
+    public String getStringType(){
+        return this.type.toString();
+    }
+
+    public String getStringInstructions(){
+        return this.instruction.toString();
+    }
+    public Instruction getInstruction(){return this.instruction;}
+
+
+
 }

@@ -3,13 +3,12 @@ package org.example;
 import org.example.Instruction.Instruction;
 import org.example.Instruction.InstructionFactory;
 import org.example.Instruction.InstructionTypes;
+import org.example.Socket.SaboraSocket;
 import org.example.Utils.*;
 
-public class Main {
-    public static void main(String[] args) {
+import static org.example.Socket.SaboraSocket.generateID;
 
-        InstructionFactory insFactory = new InstructionFactory();
-        Instruction i = insFactory.createScenarioInstruction(InstructionTypes.BACK_TO_MENU,null);
-        System.out.println(i);
-    }
+public class Main {
+    static{deviceID = "1";}
+    public static String deviceID;
 }
