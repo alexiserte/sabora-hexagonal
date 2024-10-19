@@ -1,4 +1,6 @@
 package org.example.Socket;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.Instruction.Instruction;
 import org.example.Instruction.InstructionFactory;
 import org.example.Instruction.InstructionTypes;
@@ -46,7 +48,19 @@ public class PubSocket {
     }
 
 
-
+    public void sendMessage(Message m){
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String json = objectMapper.writeValueAsString(m);
+            System.out.println(json);
+            Thread.sleep(250);
+            this.socket.send(json);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     public static void main(String[] arg) throws InterruptedException {
@@ -66,13 +80,10 @@ public class PubSocket {
                 if (i < instructions.size()) {
                     Thread.sleep(250);
                     m.setInstruction(instructions.get(i));
-                    prueba.socket.send(m.toString());
-                    // Simulación de espera, puede bloquear la ejecución
+                    prueba.sendMessage(m);
                     i++;
                 }
                 else{break;}
-
-
         }
 
 

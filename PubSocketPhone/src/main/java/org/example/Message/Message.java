@@ -25,16 +25,6 @@ public class Message {
 
     public String toString(){return String.format("[%s,%s,%s,%s,%s]",userID,userIP,userMAC,type,instruction);}
 
-    public String getStringType(){
-        return this.type.toString();
-    }
-    public String getStringInstructions(){
-        return this.instruction.toString();
-    }
-
-    public Instruction getInstruction(){return this.instruction;}
-    public MessageTypes getMessageTypes(){return this.type;}
-
     public String getUserID() {
         return userID;
     }
@@ -43,7 +33,7 @@ public class Message {
         this.userID = userID;
     }
 
-
+    // Getters and Setters for userIP
     public String getUserIP() {
         return userIP;
     }
@@ -52,6 +42,7 @@ public class Message {
         this.userIP = userIP;
     }
 
+    // Getters and Setters for userMAC
     public String getUserMAC() {
         return userMAC;
     }
@@ -60,11 +51,22 @@ public class Message {
         this.userMAC = userMAC;
     }
 
-    public void setInstruction(Instruction i){
-        this.instruction = i;
+    // Getters and Setters for type
+    public MessageTypes getType() {
+        return type;
     }
-    public void setMessageType(MessageTypes mt){
-        this.type = mt;
+
+    public void setType(MessageTypes type) {
+        this.type = type;
+    }
+
+    // Getters and Setters for instruction
+    public Instruction getInstruction() {
+        return instruction;
+    }
+
+    public void setInstruction(Instruction instruction) {
+        this.instruction = instruction;
     }
 
 }
