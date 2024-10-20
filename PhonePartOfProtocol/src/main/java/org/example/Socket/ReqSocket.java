@@ -24,7 +24,7 @@ public class ReqSocket {
 
     public ReqSocket(int devicePort){
         try {
-            socket.connect("tcp://127.0.0.1:" + devicePort);
+            socket.connect("tcp://35.180.87.89:" + devicePort);
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
