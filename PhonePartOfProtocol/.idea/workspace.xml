@@ -5,31 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1ee3b59-cd21-4196-ac81-1bd56e23cf26" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Socket/ReqSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Socket/ReqSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PubRouterDealerServer/RouterDealer/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PubRouterDealerServer/RouterDealer/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PubRouterDealerServer/RouterDealer/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PubRouterDealerServer/RouterDealer/.idea/jpa-buddy.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PubRouterDealerServer/RouterDealer/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PubRouterDealerServer/RouterDealer/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PubRouterDealerServer/RouterDealer/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PubSocketPhone/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PubSocketPhone/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PubSocketPhone/.idea/jpa-buddy.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PubSocketPhone/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PubSocketPhone/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PubSocketPhone/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ServerPartOfProtocol/RouterDealer/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ServerPartOfProtocol/RouterDealer/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ServerPartOfProtocol/RouterDealer/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ServerPartOfProtocol/RouterDealer/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ServerPartOfProtocol/RouterDealer/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ServerPartOfProtocol/RouterDealer/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ServerPartOfProtocol/RouterDealer/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ServerPartOfProtocol/RouterDealer/src/main/java/org/example/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ServerPartOfProtocol/RouterDealer/src/main/java/org/example/Socket/RepSocket.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +59,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/CARPETAS DEL SISTEMA/DOCUMENTOS/sabora-protocol/PhonePartOfProtocol"
+    "last_opened_file_path": "D:/CARPETAS DEL SISTEMA/DOCUMENTOS/sabora-protocol/ServerPartOfProtocol"
   }
 }]]></component>
   <component name="RecentsManager">
