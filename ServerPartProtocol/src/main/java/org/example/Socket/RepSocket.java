@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class RepSocket {
     private static ZMQ.Context ctx = ZMQ.context(1);
-    private ZMQ.Socket socket = ctx.socket(SocketType.REQ);
+    private ZMQ.Socket socket = ctx.socket(SocketType.REP);
 
 
     public RepSocket(int devicePort){
