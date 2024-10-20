@@ -1,8 +1,7 @@
-package org.example.Socket;
+package com.sabora.server.Socket;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.Main;
 import org.zeromq.SocketType;
 import org.zeromq.ZMQ;
 import zmq.socket.reqrep.Rep;
@@ -28,17 +27,6 @@ public class RepSocket {
         this.socket.close();
     }
 
-    public static String generateID(){
-        int[] asciiTotal = new int[10 + 26 + 26]; int index = 0;
-        String res = "";
-        Random r = new Random();
-        for (int i = 0; i < 10; i++) asciiTotal[index++] = '0' + i;
-        for (int i = 0; i < 26; i++) asciiTotal[index++] = 'A' + i;
-        for (int i = 0; i < 26; i++) asciiTotal[index++] = 'a' + i;
-
-        for(int i = 0; i < 64;i++) res += (char) asciiTotal[r.nextInt(0,asciiTotal.length)];
-        return res;
-    }
 
 
     public void answerMessage(){
