@@ -5,9 +5,8 @@ import org.example.Instruction.InstructionFactory;
 import org.example.Instruction.InstructionTypes;
 import org.example.Socket.PubSocket;
 import org.example.Utils.*;
-import static org.example.Socket.PubSocket.generateID;
 
 public class Main {
-    static{deviceID = PubSocket.generateID();}
+    static{deviceID = IDGenerator.generateID();}
     public static String deviceID;
 }

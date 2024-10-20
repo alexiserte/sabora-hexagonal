@@ -9,16 +9,19 @@ import java.util.List;
 public class Message {
 
 
+    public enum DeviceType{MOBILE,COMPUTER,VR_GLASSES};
     private String userID;
     private String userIP;
     private String userMAC;
+    private DeviceType deviceType;
     private MessageTypes type;
     Instruction instruction;
 
-    public Message(String userID,String userIP,String userMAC,MessageTypes type, Instruction instructions){
+    public Message(String userID,String userIP,String userMAC,DeviceType deviceType,MessageTypes type, Instruction instructions){
         this.userID = userID;
         this.userIP = userIP;
         this.userMAC = userMAC;
+        this.deviceType = deviceType;
         this.type = type;
         this.instruction = instructions;
     }
@@ -49,6 +52,13 @@ public class Message {
 
     public void setUserMAC(String userMAC) {
         this.userMAC = userMAC;
+    }
+
+    public DeviceType getDeviceType(){
+        return this.deviceType;
+    }
+    public void setDeviceType(DeviceType deviceType){
+        this.deviceType = deviceType;
     }
 
     // Getters and Setters for type
