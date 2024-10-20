@@ -42,7 +42,7 @@ public class RepSocket {
 
 
     public void answerMessage(){
-        while (!Thread.currentThread().isInterrupted()) {
+        while (true) {
             // Espera mensajes de los clientes (dispositivos)
             byte[] request = this.socket.recv(0);
             String message = new String(request, ZMQ.CHARSET);
