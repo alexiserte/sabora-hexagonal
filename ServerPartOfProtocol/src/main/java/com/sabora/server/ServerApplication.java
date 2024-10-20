@@ -9,7 +9,7 @@ public class ServerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ServerApplication.class, args);
-		RepSocket socket = new RepSocket(11434);
+		RepSocket socket = new RepSocket(8080);
 		System.out.println("Hello World!");
 		socket.answerMessage();
 	}
