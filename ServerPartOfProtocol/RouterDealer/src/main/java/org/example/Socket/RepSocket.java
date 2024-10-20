@@ -56,6 +56,7 @@ public class RepSocket {
 
     public static void main(String[] args){
         RepSocket socket = new RepSocket(11434);
+        socket.answerMessage();
     }
 
 
