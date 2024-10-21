@@ -1,4 +1,4 @@
-package com.sabora.server.Socket;
+package com.sabora.server;
 
 public class Message {
 
