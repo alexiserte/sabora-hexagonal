@@ -10,43 +10,49 @@
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ff8c42, #ff3c98);
+            background: linear-gradient(135deg, #BFFF0B, #000000); /* Fondo espectacular usando los colores de la paleta */
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
+            color: #000000; /* Cambié el color del texto a negro para un mejor contraste */
         }
         .container {
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Hice la sombra más intensa */
+            border: 2px solid #D6D6D6; /* Agregué un borde gris claro */
         }
         h1 {
-            font-size: 48px;
+            font-size: 50px;
             margin: 0;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            color: #BFFF0B; /* Color fosforescente para destacar el título */
+            text-transform: uppercase; /* Letra en mayúsculas para un estilo más impactante */
         }
         p {
-            font-size: 18px;
-            margin: 10px 0 0;
-            opacity: 0.9;
+            font-size: 20px;
+            margin: 15px 0 0;
+            opacity: 0.85;
+            color: #EFEFEF; /* Color gris claro del texto */
         }
         .btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #ffffff;
-            color: #ff3c98;
+            margin-top: 30px;
+            padding: 12px 25px;
+            background-color: #000000; /* Fondo del botón en negro */
+            color: #FFFFFF; /* Texto blanco */
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
         .btn:hover {
-            background-color: #f0f0f0;
+            background-color: #BFFF0B; /* El botón cambia al verde fosforescente en hover */
+            color: #000000; /* Texto negro cuando se pasa el mouse */
+            transform: scale(1.05); /* Le da un ligero zoom al botón */
         }
     </style>
 </head>
