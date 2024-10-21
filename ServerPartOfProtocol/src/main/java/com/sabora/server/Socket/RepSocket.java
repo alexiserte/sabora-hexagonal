@@ -6,11 +6,13 @@ import org.zeromq.SocketType;
 import org.zeromq.ZMQ;
 import zmq.socket.reqrep.Rep;
 
+import java.util.HashMap;
 import java.util.Random;
 
 
 public class RepSocket {
     private static ZMQ.Context ctx = ZMQ.context(1);
+    private static HashMap<String,String> currentConnections = new HashMap<>();
     private ZMQ.Socket socket = ctx.socket(SocketType.REP);
 
 
@@ -34,6 +36,7 @@ public class RepSocket {
             // Espera mensajes de los clientes (dispositivos)
             byte[] request = this.socket.recv(0);
             String message = new String(request, ZMQ.CHARSET);
+            newConnection(message);
             System.out.println("Recibido: " + message);
 
             // Procesa el mensaje y responde
@@ -42,9 +45,24 @@ public class RepSocket {
         }
     }
 
+    public static void newConnection(String data){
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            Message msg = objectMapper.readValue(data, Message.class);
+            String userID = msg.getUserID();
+            String userIP = msg.getUserIP();
+            if(!currentConnections.containsKey(userIP)){
+                currentConnections.put(userIP,userID);
+            }
+            System.out.println(currentConnections.toString());
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
+
     public static void main(String[] args){
         RepSocket socket = new RepSocket(11434);
-        System.out.println("Hello World!");
+        System.out.println(currentConnections.toString());
         socket.answerMessage();
     }
 
