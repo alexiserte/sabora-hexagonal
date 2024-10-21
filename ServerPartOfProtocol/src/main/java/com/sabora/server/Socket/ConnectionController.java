@@ -44,7 +44,7 @@ public class ConnectionController {
 
     @GetMapping("/hola")
     public String mainPage(){
-        String webPage = leerArchivo("./bienvenida.html");
+        String webPage = leerArchivo("src/main/java/com/sabora/server/Socket/bienvenida.html");
         return webPage;
     }
 
