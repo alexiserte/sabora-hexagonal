@@ -14,7 +14,6 @@ import java.util.HashMap;
 
 
 @RestController
-@Controller
 public class ConnectionController {
     private static ZMQ.Context ctx = ZMQ.context(1);
     private static HashMap<String,String> currentGlassesConnections = new HashMap<>();
