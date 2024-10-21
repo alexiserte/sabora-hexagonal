@@ -1,28 +1,51 @@
 package com.sabora.server.Socket;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.zeromq.SocketType;
 import org.zeromq.ZMQ;
-import zmq.socket.reqrep.Rep;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.Random;
 
 
-public class RepSocket {
+@RestController
+@Controller
+public class ConnectionController {
     private static ZMQ.Context ctx = ZMQ.context(1);
     private static HashMap<String,String> currentGlassesConnections = new HashMap<>();
     private ZMQ.Socket socket = ctx.socket(SocketType.REP);
     private static ObjectMapper objectMapper = new ObjectMapper();
 
 
-    public RepSocket(int devicePort){
+    public ConnectionController(int devicePort){
         try {
             socket.bind("tcp://*:" + devicePort);
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
+    }
+
+
+    public static String leerArchivo(String rutaArchivo) {
+        String contenido = "";
+        try {
+            byte[] bytes = Files.readAllBytes(Paths.get(rutaArchivo));
+            contenido = new String(bytes);
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
+        return contenido;
+    }
+
+    @GetMapping("/hola")
+    public String mainPage(){
+        String webPage = leerArchivo("./bienvenida.html");
+        return webPage;
     }
 
     public void closeSocket(){
@@ -76,7 +99,7 @@ public class RepSocket {
     }
 
     public static void main(String[] args){
-        RepSocket socket = new RepSocket(11434);
+        ConnectionController socket = new ConnectionController(11434);
         System.out.println(currentGlassesConnections.toString());
         socket.answerMessage();
     }
