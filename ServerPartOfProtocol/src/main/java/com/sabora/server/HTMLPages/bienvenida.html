@@ -10,49 +10,49 @@
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #BFFF0B, #000000); /* Fondo espectacular usando los colores de la paleta */
+            background-color: #000000; /* Fondo sólido negro */
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #000000; /* Cambié el color del texto a negro para un mejor contraste */
+            color: #FFFFFF; /* Texto en blanco para alto contraste */
         }
         .container {
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: #BFFF0B; /* Fondo del contenedor en verde fosforescente */
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Hice la sombra más intensa */
-            border: 2px solid #D6D6D6; /* Agregué un borde gris claro */
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
+            border: 5px solid #FFFFFF; /* Borde grueso blanco */
         }
         h1 {
-            font-size: 50px;
+            font-size: 60px;
             margin: 0;
-            letter-spacing: 3px;
-            color: #BFFF0B; /* Color fosforescente para destacar el título */
-            text-transform: uppercase; /* Letra en mayúsculas para un estilo más impactante */
+            letter-spacing: 5px;
+            color: #000000; /* Título en negro sobre el fondo verde fosforescente */
+            text-transform: uppercase;
         }
         p {
-            font-size: 20px;
-            margin: 15px 0 0;
-            opacity: 0.85;
-            color: #EFEFEF; /* Color gris claro del texto */
+            font-size: 22px;
+            margin: 20px 0 0;
+            color: #000000; /* Texto en negro */
         }
         .btn {
             margin-top: 30px;
-            padding: 12px 25px;
-            background-color: #000000; /* Fondo del botón en negro */
-            color: #FFFFFF; /* Texto blanco */
+            padding: 15px 30px;
+            background-color: #FFFFFF; /* Fondo blanco para el botón */
+            color: #000000; /* Texto negro en el botón */
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 20px;
+            font-weight: bold;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
         .btn:hover {
-            background-color: #BFFF0B; /* El botón cambia al verde fosforescente en hover */
-            color: #000000; /* Texto negro cuando se pasa el mouse */
-            transform: scale(1.05); /* Le da un ligero zoom al botón */
+            background-color: #000000; /* Fondo negro al pasar el mouse */
+            color: #BFFF0B; /* Texto verde fosforescente en hover */
+            transform: scale(1.1); /* Zoom más pronunciado en hover */
         }
     </style>
 </head>
