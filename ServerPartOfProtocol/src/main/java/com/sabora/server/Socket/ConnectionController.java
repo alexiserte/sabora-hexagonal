@@ -20,6 +20,7 @@ public class ConnectionController {
     private ZMQ.Socket socket = ctx.socket(SocketType.REP);
     private static ObjectMapper objectMapper = new ObjectMapper();
 
+    public ConnectionController(){}
 
     public ConnectionController(int devicePort){
         try {
