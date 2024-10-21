@@ -24,6 +24,8 @@
             border-radius: 20px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
             border: 5px solid #FFFFFF; /* Borde grueso blanco */
+            width: 80%; /* Ajuste de ancho para móviles */
+            max-width: 500px; /* Máximo ancho para pantallas más grandes */
         }
         h1 {
             font-size: 60px;
@@ -53,6 +55,39 @@
             background-color: #000000; /* Fondo negro al pasar el mouse */
             color: #BFFF0B; /* Texto verde fosforescente en hover */
             transform: scale(1.1); /* Zoom más pronunciado en hover */
+        }
+
+        /* Media query para pantallas móviles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 45px; /* Tamaño de letra más pequeño para móviles */
+                letter-spacing: 3px;
+            }
+            p {
+                font-size: 18px; /* Tamaño de letra más pequeño para el párrafo */
+            }
+            .btn {
+                padding: 12px 20px; /* Botón más pequeño */
+                font-size: 18px; /* Tamaño de texto del botón más pequeño */
+            }
+        }
+
+        /* Media query para pantallas muy pequeñas (smartphones) */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px; /* Padding reducido para pantallas pequeñas */
+                width: 90%; /* Ocupa más espacio en móviles pequeños */
+            }
+            h1 {
+                font-size: 35px; /* Tamaño de título más pequeño aún */
+            }
+            p {
+                font-size: 16px; /* Tamaño de párrafo reducido */
+            }
+            .btn {
+                padding: 10px 15px; /* Botón aún más pequeño */
+                font-size: 16px; /* Texto del botón más pequeño */
+            }
         }
     </style>
 </head>
