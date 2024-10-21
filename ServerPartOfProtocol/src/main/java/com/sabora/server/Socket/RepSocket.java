@@ -12,8 +12,9 @@ import java.util.Random;
 
 public class RepSocket {
     private static ZMQ.Context ctx = ZMQ.context(1);
-    private static HashMap<String,String> currentConnections = new HashMap<>();
+    private static HashMap<String,String> currentGlassesConnections = new HashMap<>();
     private ZMQ.Socket socket = ctx.socket(SocketType.REP);
+    private static ObjectMapper objectMapper = new ObjectMapper();
 
 
     public RepSocket(int devicePort){
@@ -33,28 +34,42 @@ public class RepSocket {
 
     public void answerMessage(){
         while (true) {
-            // Espera mensajes de los clientes (dispositivos)
-            byte[] request = this.socket.recv(0);
-            String message = new String(request, ZMQ.CHARSET);
-            newConnection(message);
-            System.out.println("Recibido: " + message);
+            try {
+                byte[] request = this.socket.recv(0);
+                String message = new String(request, ZMQ.CHARSET);
+                Message msg = objectMapper.readValue(message, Message.class);
+                switch(msg.getType()){
+                    case "CONNECTION":
+                        newConnection(msg);
+                        break;
+                    default:
+                        System.out.println("FUNCIONALIDADES NO IMPLEMENTADAS");
+                }
+                System.out.println("Recibido: " + message);
 
-            // Procesa el mensaje y responde
-            String reply = "Respuesta para " + message;
-            this.socket.send(reply.getBytes(ZMQ.CHARSET), 0);
+                // Procesa el mensaje y responde
+                String reply = "Respuesta para " + message;
+                this.socket.send(reply.getBytes(ZMQ.CHARSET), 0);
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 
-    public static void newConnection(String data){
+    public static void newConnection(Message msg){
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            Message msg = objectMapper.readValue(data, Message.class);
-            String userID = msg.getUserID();
             String userIP = msg.getUserIP();
-            if(!currentConnections.containsKey(userIP)){
-                currentConnections.put(userIP,userID);
+            if(msg.getDeviceType().equals("VR_GLASSES")) {
+                String userID = msg.getUserID();
+                if (!currentGlassesConnections.containsKey(userIP)) {
+                    currentGlassesConnections.put(userIP, userID);
+                }
             }
-            System.out.println(currentConnections.toString());
+            else if(msg.getDeviceType().equals("MOBILE")){
+
+
+            }
+            System.out.println(currentGlassesConnections.toString());
         }catch (Exception e){
             System.err.println(e.getMessage());
         }
@@ -62,7 +77,7 @@ public class RepSocket {
 
     public static void main(String[] args){
         RepSocket socket = new RepSocket(11434);
-        System.out.println(currentConnections.toString());
+        System.out.println(currentGlassesConnections.toString());
         socket.answerMessage();
     }
 
