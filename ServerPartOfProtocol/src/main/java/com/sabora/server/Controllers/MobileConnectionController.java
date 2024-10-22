@@ -32,7 +32,7 @@ public class MobileConnectionController {
     @PutMapping("/mobile/select-glasses")
     public ResponseEntity selectGlasses(@RequestBody HashMap<String, ?> body){
         try{
-            return connectionServices.addVRGlassesConnection(mapper.writeValueAsString(body));
+            return connectionServices.addMobileGlassesConnection(mapper.writeValueAsString(body));
         }catch (Exception e){
             return new ResponseEntity("Error selecting glasses.",HttpStatus.INTERNAL_SERVER_ERROR);
         }
