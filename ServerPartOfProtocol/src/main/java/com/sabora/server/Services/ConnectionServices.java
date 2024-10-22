@@ -37,6 +37,7 @@ public class ConnectionServices {
         try {
             ObjectMapper mapper = new ObjectMapper();
             Message msg = mapper.readValue(data, Message.class);
+            if(!msg.getType().equals("SEARCH")){throw new Exception("Invalid message type");}
             return getGlassesInTheSameNetwork(msg.getUserIP());
         }catch (Exception e){
             System.out.println(e.getMessage());
