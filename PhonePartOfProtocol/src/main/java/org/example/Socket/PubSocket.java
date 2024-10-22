@@ -13,6 +13,7 @@ import org.zeromq.SocketType;
 import org.zeromq.ZMQ;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -55,26 +56,13 @@ public class PubSocket {
 
     public static void main(String[] arg) throws InterruptedException {
         InstructionFactory InsF = new InstructionFactory();
-        List<Instruction> instructions = new ArrayList<>();
-        instructions.add(InsF.createControlInstruction(InstructionTypes.START_EXPERIENCE,"null"));
-        instructions.add(InsF.createSoundInstruction(InstructionTypes.FULL_VOLUME,"null"));
-        instructions.add(InsF.createScenarioInstruction(InstructionTypes.BACK_TO_MENU,"null"));
-        instructions.add(InsF.createSoundInstruction(InstructionTypes.INCREASE_VOLUME,20));
 
         PubSocket prueba = new PubSocket(11434);
-        Message m = new Message(prueba.socketID, PublicIPAddress.getMyIP(),MACAddress.getMACAddress(), Message.DeviceType.MOBILE,MessageTypes.ACTION,null);
+        Message m = new Message(prueba.socketID, PublicIPAddress.getMyIP(),MACAddress.getMACAddress(), Message.DeviceType.MOBILE,MessageTypes.SEARCH,new HashMap<>(),null);
+        prueba.sendMessage(m);
         int i = 0;
 
-        while(true){
-            if(i == 0) prueba.socket.send("¡NUEVAS INSTRUCCIONES!");
-                if (i < instructions.size()) {
-                    Thread.sleep(250);
-                    m.setInstruction(instructions.get(i));
-                    prueba.sendMessage(m);
-                    i++;
-                }
-                else{break;}
-        }
+
 
 
     }

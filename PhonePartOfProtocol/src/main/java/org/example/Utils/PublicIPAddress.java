@@ -51,7 +51,7 @@ public class PublicIPAddress {
     }
 
     public static void main(String[] args){
-        System.out.println(twoConnectedToSameNetwork(getMyIP(),getMyIP()));
+        System.out.println(twoConnectedToSameNetwork("192.168.1.10","192.168.1.25"));
     }
 }
 
