@@ -19,7 +19,7 @@ public class MobileConnectionController {
     @PostMapping("/mobile/add-connection")
     public ResponseEntity addConnection(@RequestBody HashMap<String, ?> body){
         try {
-            connectionServices.addMobileConnection(body.toString());
+            connectionServices.addMobileConnection(body);
             return new ResponseEntity("Connection created." + CurrentConnections.currentMobileConnections + "\n" + body.toString(), HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity("Error creating connection.",HttpStatus.INTERNAL_SERVER_ERROR);
