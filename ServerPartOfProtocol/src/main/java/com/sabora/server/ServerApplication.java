@@ -24,4 +24,8 @@ public class ServerApplication {
 			return "Hola! Bienvenido a Sabora!";
 		}
 
+		@GetMapping("/current-connections")
+		public String currentConnections(){
+			return CurrentConnections.currentVRGlassesConnections.toString();
+		}
 }
