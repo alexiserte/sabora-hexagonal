@@ -34,10 +34,10 @@ public class CurrentConnections {
         return res;
     }
 
-    public static void registerMobileGlassesConnection(HashMap<String,String> selectedConnection){
+    public static void registerMobileGlassesConnection(HashMap<String,String> selectedConnection, String userIP){
         for(Pair<String, String> conn : currentVRGlassesConnections.keySet()){
             if(selectedConnection.containsKey(conn.getFirst())) {
-                currentVRGlassesConnections.put(conn, selectedConnection.get(conn.getFirst()));
+                currentVRGlassesConnections.put(conn, userIP);
             }
         }
     }
