@@ -16,17 +16,6 @@ import static com.sabora.server.CurrentConnections.*;
 @Service
 public class ConnectionServices {
 
-    public ResponseEntity addMobileConnection(String data){
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            Message msg = mapper.readValue(data, Message.class);
-            if(!msg.getType().equals("REGISTER")){return new ResponseEntity("Invalid message type", HttpStatus.BAD_REQUEST);}
-            addNewMobileConnection(msg.getUserIP(),msg.getUserID());
-        }catch (Exception e){
-            return new ResponseEntity("Error creating connection:\n" + e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return new ResponseEntity("Connection created.",HttpStatus.CREATED);
-    }
 
     public ResponseEntity addVRGlassesConnection(String data) {
         try {

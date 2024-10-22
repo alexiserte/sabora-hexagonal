@@ -19,14 +19,6 @@ public class MobileConnectionController {
     @Autowired
     ConnectionServices connectionServices;
 
-    @PostMapping("/mobile/add-connection")
-    public ResponseEntity addConnection(@RequestBody HashMap<String, ?> body){
-        try {
-            return connectionServices.addMobileConnection(mapper.writeValueAsString(body));
-        }catch (Exception e){
-            return new ResponseEntity("Error creating connection.",HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
     @GetMapping("/mobile/search-glasses")
     public ResponseEntity searchGlasses(@RequestBody HashMap<String, ?> body){

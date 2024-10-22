@@ -9,42 +9,28 @@ import java.util.List;
 import java.util.Map;
 
 public class CurrentConnections {
-    public static HashMap<String,String> currentMobileConnections = new HashMap<>();
     public static HashMap<Pair<String,String>,String> currentVRGlassesConnections = new HashMap<>();
 
-
-    public static void addNewMobileConnection(String userIP, String userID){
-        currentMobileConnections.put(userIP,userID);
-    }
     public static void addNewVRGlassesConnection(String userIP, String userID){
         currentVRGlassesConnections.put(Pair.of(userIP,userID),null);
     }
 
+    /**
+     * Retrieves a map of VR glasses connections that are in the same network as the given user IP.
+     *
+     * @param userIP the IP address of the user to find glasses in the same network
+     * @return a map where the keys are the IP addresses of the glasses in the same network,
+     *         and the values are the corresponding user IDs
+     */
     public static Map<String, String> getGlassesInTheSameNetwork(String userIP) {
         Map<String, String> res = new HashMap<>();
 
         for (Pair<String, String> conn : currentVRGlassesConnections.keySet()) {
             String ip = conn.getFirst();
-            String[] ipOneSplitted = userIP.split("\\.");
-            String[] ipTwoSplitted = ip.split("\\.");
-
-            if (ipOneSplitted.length != ipTwoSplitted.length) {
-                continue;
-            }
-
-            boolean sameSubnet = true;
-            for (int i = 0; i < ipOneSplitted.length - 1; i++) {
-                if (!ipOneSplitted[i].equals(ipTwoSplitted[i])) {
-                    sameSubnet = false;
-                    break;
-                }
-            }
-
-            if (sameSubnet) {
-                res.put(conn.getFirst(), conn.getSecond());
+            if (ip.startsWith(userIP.substring(0, userIP.lastIndexOf(".")))) {
+                res.put(ip, conn.getSecond());
             }
         }
-
         return res;
     }
 
