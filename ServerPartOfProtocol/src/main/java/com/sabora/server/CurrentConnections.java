@@ -46,7 +46,7 @@ public class CurrentConnections {
         Pair<String, String> glasses = Pair.of(glassesIP, glassesID);
         for (Pair<String, String> conn : currentVRGlassesConnections.keySet()) {
             if (conn.equals(glasses) && currentVRGlassesConnections.get(conn) != null) {
-                return conn.getFirst();
+                return currentVRGlassesConnections.get(conn);
             }
         }
         return null;
