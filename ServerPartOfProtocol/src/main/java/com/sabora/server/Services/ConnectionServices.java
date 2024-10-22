@@ -13,7 +13,7 @@ import static com.sabora.server.CurrentConnections.*;
 @Service
 public class ConnectionServices {
 
-    public void addMobileConnection(HashMap<String,String> data){
+    public void addMobileConnection(HashMap<String,?> data){
         try {
             ObjectMapper mapper = new ObjectMapper();
             Message msg = mapper.convertValue(data, Message.class);
