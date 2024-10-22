@@ -13,10 +13,10 @@ import static com.sabora.server.CurrentConnections.*;
 @Service
 public class ConnectionServices {
 
-    public void addMobileConnection(String data) {
+    public void addMobileConnection(HashMap<String,String> data){
         try {
             ObjectMapper mapper = new ObjectMapper();
-            Message msg = mapper.readValue(data, Message.class);
+            Message msg = mapper.convertValue(data, Message.class);
             addNewMobileConnection(msg.getUserIP(),msg.getUserID());
         }catch (Exception e){
             System.out.println(e.getMessage());
