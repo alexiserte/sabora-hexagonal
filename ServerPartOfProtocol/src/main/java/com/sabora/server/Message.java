@@ -1,5 +1,7 @@
 package com.sabora.server;
 
+import java.util.HashMap;
+
 public class Message {
 
 
@@ -8,6 +10,7 @@ public class Message {
         private String userMAC;
         private String deviceType;
         private String type;
+        private HashMap<String,String> messageParameters = new HashMap<>();
         private String instruction;
 
         // Getters y Setters
@@ -51,6 +54,14 @@ public class Message {
             this.type = type;
         }
 
+        public HashMap<String, String> getMessageParameters() {
+            return messageParameters;
+        }
+
+        public void setMessageParameters(HashMap<String, String> messageParameters) {
+            this.messageParameters = messageParameters;
+        }
+
         public String getInstruction() {
             return instruction;
         }
@@ -67,6 +78,7 @@ public class Message {
                     ", userMAC='" + userMAC + '\'' +
                     ", deviceType='" + deviceType + '\'' +
                     ", type='" + type + '\'' +
+                    ", messageParameters=" + messageParameters +
                     ", instruction='" + instruction + '\'' +
                     '}';
         }
