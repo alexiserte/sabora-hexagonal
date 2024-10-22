@@ -17,7 +17,7 @@ public class VRGlassesConnectionController {
     @Autowired
     ConnectionServices connectionServices;
 
-    @PostMapping("/glassses/add-connection")
+    @PostMapping("/glasses/add-connection")
     public ResponseEntity addConnection(@RequestBody HashMap<String, ?> body){
         try {
             return connectionServices.addVRGlassesConnection(mapper.writeValueAsString(body));
@@ -26,7 +26,7 @@ public class VRGlassesConnectionController {
         }
     }
 
-    @DeleteMapping("/mobile/remove-connection")
+    @DeleteMapping("/glasses/remove-connection")
     public ResponseEntity removeConnection(@RequestBody HashMap<String, ?> body){
         try{
             return connectionServices.removeVRGlassesConnection(mapper.writeValueAsString(body));
