@@ -14,15 +14,15 @@ import java.util.HashMap;
 @RestController
 public class MobileConnectionController {
 
+    private static final ObjectMapper mapper = new ObjectMapper();
+
     @Autowired
     ConnectionServices connectionServices;
 
     @PostMapping("/mobile/add-connection")
     public ResponseEntity addConnection(@RequestBody HashMap<String, ?> body){
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            connectionServices.addMobileConnection(mapper.writeValueAsString(body));
-            return new ResponseEntity("Connection created." + CurrentConnections.currentMobileConnections + "\n" + body.toString(), HttpStatus.OK);
+            return connectionServices.addMobileConnection(mapper.writeValueAsString(body));
         }catch (Exception e){
             return new ResponseEntity("Error creating connection.",HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -31,7 +31,7 @@ public class MobileConnectionController {
     @GetMapping("/mobile/search-glasses")
     public ResponseEntity searchGlasses(@RequestBody HashMap<String, ?> body){
         try {
-            return new ResponseEntity(connectionServices.getPossibleGlasses(body.toString()),HttpStatus.OK);
+            return connectionServices.getPossibleGlasses(mapper.writeValueAsString(body));
         }catch (Exception e){
             return new ResponseEntity("Error searching glasses." + e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -40,8 +40,7 @@ public class MobileConnectionController {
     @PutMapping("/mobile/select-glasses")
     public ResponseEntity selectGlasses(@RequestBody HashMap<String, ?> body){
         try{
-            connectionServices.addVRGlassesConnection(body.toString());
-            return new ResponseEntity("Connection created.",HttpStatus.OK);
+            return connectionServices.addVRGlassesConnection(mapper.writeValueAsString(body));
         }catch (Exception e){
             return new ResponseEntity("Error selecting glasses.",HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -50,8 +49,7 @@ public class MobileConnectionController {
     @DeleteMapping("/mobile/remove-connection")
     public ResponseEntity removeConnection(@RequestBody HashMap<String, ?> body){
         try{
-            connectionServices.removeMobileConnection(body.toString());
-            return new ResponseEntity("Connection removed.",HttpStatus.OK);
+            return connectionServices.removeMobileConnection(mapper.writeValueAsString(body));
         }catch (Exception e){
             return new ResponseEntity("Error removing connection.",HttpStatus.INTERNAL_SERVER_ERROR);
         }
