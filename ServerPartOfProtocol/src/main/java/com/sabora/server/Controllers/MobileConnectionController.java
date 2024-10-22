@@ -20,7 +20,7 @@ public class MobileConnectionController {
     public ResponseEntity addConnection(@RequestBody HashMap<String, ?> body){
         try {
             connectionServices.addMobileConnection(body.toString());
-            return new ResponseEntity("Connection created." + CurrentConnections.currentMobileConnections, HttpStatus.OK);
+            return new ResponseEntity("Connection created." + CurrentConnections.currentMobileConnections + "\n" + body.toString(), HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity("Error creating connection.",HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -31,7 +31,7 @@ public class MobileConnectionController {
         try {
             return new ResponseEntity(connectionServices.getPossibleGlasses(body.toString()),HttpStatus.OK);
         }catch (Exception e){
-            return new ResponseEntity("Error searching glasses.",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Error searching glasses." + e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
