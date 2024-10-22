@@ -20,12 +20,12 @@ public class ServerApplication {
 	}
 
 	@GetMapping("/test-vr")
-		public String testVRButton(){
+	public String testVRButton(){
 			return "Hola! Bienvenido a Sabora!";
-		}
+	}
 
-		@GetMapping("/current-connections")
-		public String currentConnections(){
-			return CurrentConnections.currentVRGlassesConnections.toString();
-		}
+	@GetMapping("/current-connections")
+	public String currentConnections(){
+		return CurrentConnections.currentVRGlassesConnections.toString();
+	}
 }

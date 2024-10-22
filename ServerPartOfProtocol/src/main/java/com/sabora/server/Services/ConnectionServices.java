@@ -46,7 +46,7 @@ public class ConnectionServices {
             ObjectMapper mapper = new ObjectMapper();
             Message msg = mapper.readValue(data, Message.class);
             if(!msg.getType().equals("CONNECTION")){return new ResponseEntity("Invalid message type", HttpStatus.BAD_REQUEST);}
-            registerMobileGlassesConnection(msg.getMessageParameters());
+            registerMobileGlassesConnection(msg.getMessageParameters(),msg.getUserIP());
         }catch (Exception e){
             return new ResponseEntity("Error creating connection:\n" + e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
