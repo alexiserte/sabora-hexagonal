@@ -1,5 +1,6 @@
 package com.sabora.server.Controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sabora.server.CurrentConnections;
 import com.sabora.server.Services.ConnectionServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,8 @@ public class MobileConnectionController {
     @PostMapping("/mobile/add-connection")
     public ResponseEntity addConnection(@RequestBody HashMap<String, ?> body){
         try {
-            connectionServices.addMobileConnection(body);
+            ObjectMapper mapper = new ObjectMapper();
+            connectionServices.addMobileConnection(mapper.writeValueAsString(body));
             return new ResponseEntity("Connection created." + CurrentConnections.currentMobileConnections + "\n" + body.toString(), HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity("Error creating connection.",HttpStatus.INTERNAL_SERVER_ERROR);
