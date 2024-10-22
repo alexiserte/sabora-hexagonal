@@ -4,6 +4,7 @@ import org.example.Instruction.Instruction;
 import org.example.Instruction.InstructionTypes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Message {
@@ -15,18 +16,20 @@ public class Message {
     private String userMAC;
     private DeviceType deviceType;
     private MessageTypes type;
+    private HashMap<String,String> messageParameters = new HashMap<>();
     Instruction instruction;
 
-    public Message(String userID,String userIP,String userMAC,DeviceType deviceType,MessageTypes type, Instruction instructions){
+    public Message(String userID,String userIP,String userMAC,DeviceType deviceType,MessageTypes type,HashMap<String,String> messageParameters,Instruction instructions) {
         this.userID = userID;
         this.userIP = userIP;
         this.userMAC = userMAC;
         this.deviceType = deviceType;
         this.type = type;
+        this.messageParameters = messageParameters;
         this.instruction = instructions;
     }
 
-    public String toString(){return String.format("[%s,%s,%s,%s,%s]",userID,userIP,userMAC,type,instruction);}
+    public String toString(){return String.format("[%s,%s,%s,%s,%s,%s]",userID,userIP,userMAC,type,messageParameters.toString(),instruction);}
 
     public String getUserID() {
         return userID;
@@ -68,6 +71,15 @@ public class Message {
 
     public void setType(MessageTypes type) {
         this.type = type;
+    }
+
+    // Getters and Setters for messageParameters
+    public HashMap<String, String> getMessageParameters() {
+        return messageParameters;
+    }
+
+    public void setMessageParameters(HashMap<String, String> messageParameters) {
+        this.messageParameters = messageParameters;
     }
 
     // Getters and Setters for instruction

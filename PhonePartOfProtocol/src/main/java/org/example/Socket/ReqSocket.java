@@ -64,11 +64,5 @@ public class ReqSocket {
         }
     }
 
-    public static void main(String[] args){
-        ReqSocket reqSocket = new ReqSocket(11434);
-        Message m = new Message(reqSocket.socketID, PublicIPAddress.getMyIP(),MACAddress.getMACAddress(), Message.DeviceType.MOBILE,MessageTypes.CONNECTION,null);
-        reqSocket.sendMessage(m);
-    }
-
 
 }
