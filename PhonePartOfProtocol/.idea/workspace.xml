@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d1ee3b59-cd21-4196-ac81-1bd56e23cf26" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Message/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Message/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Message/MessageTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Message/MessageTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Socket/PubSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Socket/PubSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Socket/ReqSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Socket/ReqSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Utils/PublicIPAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Utils/PublicIPAddress.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
