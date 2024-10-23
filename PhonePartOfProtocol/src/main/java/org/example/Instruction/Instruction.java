@@ -2,20 +2,32 @@ package org.example.Instruction;
 
 public class Instruction {
 
-    private InstructionTypes action;
-    private Object param;
+    private InstructionTypes type;
+    private String param;
 
-    public Instruction(InstructionTypes action, Object param){
-        this.action = action;
-        this.param = param;
+    public Instruction(InstructionTypes type, Object param){
+        this.type = type;
+        this.param = param.toString();
+    }
+
+    public InstructionTypes getType(){
+        return this.type;
+    }
+
+    public Object getParam(){
+        return this.param;
+    }
+
+    public void setType(InstructionTypes type){
+        this.type = type;
+    }
+
+    public void setParam(Object param){
+        this.param = param.toString();
     }
 
     @Override
     public String toString(){
-        return String.format("{%s,%s}",this.action,this.param);
+        return String.format("{%s,%s}",this.type,this.param);
     }
-
-    public InstructionTypes getAction(){return this.action;}
-
-    public Object getParam(){return this.param;}
 }
