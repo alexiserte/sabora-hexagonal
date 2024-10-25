@@ -15,15 +15,12 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        final String securitySchemeName = "bearerAuth";
+        final String securitySchemeName = "saboraAuth";
         return new OpenAPI()
-                .info(new Info().title("Authentication Service")
-                        .description("This is auth service use for validate the user.")
+                .info(new Info().title("API Sabora")
+                        .description("Documentación de la API REST de Sabora")
                         .version("v0.0.1")
                         .license(new License().name("Apache 2.0").url("http://springdoc.org")))
-                .externalDocs(new ExternalDocumentation()
-                        .description("SpringBoot Wiki Documentation")
-                        .url("https://springboot.wiki.github.org/docs"))
                 .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
                 .components(
                         new Components()
