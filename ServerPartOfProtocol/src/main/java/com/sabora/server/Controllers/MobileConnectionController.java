@@ -3,6 +3,9 @@ package com.sabora.server.Controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sabora.server.CurrentConnections;
 import com.sabora.server.Services.ConnectionServices;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +33,11 @@ public class MobileConnectionController {
     }
 
     @PutMapping("/mobile/select-glasses")
+    @Operation(summary = "Select a list of glasses to connect.", description = ":)")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Successfully created"),
+            @ApiResponse(responseCode = "505", description = "Internal Server Error")
+    })
     public ResponseEntity selectGlasses(@RequestBody HashMap<String, ?> body){
         try{
             return connectionServices.addMobileGlassesConnection(mapper.writeValueAsString(body));
