@@ -15,6 +15,7 @@ import java.net.http.HttpResponse;
 import java.util.HashMap;
 
 @RestController
+@RequestMapping("/mobile") // Agrupamos las rutas bajo el mismo prefijo
 public class MobileConnectionController {
 
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -22,38 +23,51 @@ public class MobileConnectionController {
     @Autowired
     ConnectionServices connectionServices;
 
-
-    @GetMapping("/mobile/search-glasses")
-    public ResponseEntity searchGlasses(@RequestBody HashMap<String, ?> body){
+    @GetMapping("/search-glasses")
+    @Operation(summary = "Search for available glasses",
+            description = "This endpoint searches for available glasses based on the provided criteria.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved glasses"),
+            @ApiResponse(responseCode = "400", description = "Bad Request, invalid input"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
+    public ResponseEntity<String> searchGlasses(@RequestBody HashMap<String, ?> body) {
         try {
             return connectionServices.getPossibleGlasses(mapper.writeValueAsString(body));
-        }catch (Exception e){
-            return new ResponseEntity("Error searching glasses." + e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error searching glasses: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PutMapping("/mobile/select-glasses")
-    @Operation(summary = "Select a list of glasses to connect.", description = ":)")
+    @PutMapping("/select-glasses")
+    @Operation(summary = "Select glasses to connect",
+            description = "This endpoint allows the mobile device to select a list of glasses for connection.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Successfully created"),
-            @ApiResponse(responseCode = "505", description = "Internal Server Error")
+            @ApiResponse(responseCode = "201", description = "Successfully selected glasses"),
+            @ApiResponse(responseCode = "400", description = "Bad Request, invalid input"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
-    public ResponseEntity selectGlasses(@RequestBody HashMap<String, ?> body){
-        try{
+    public ResponseEntity<String> selectGlasses(@RequestBody HashMap<String, ?> body) {
+        try {
             return connectionServices.addMobileGlassesConnection(mapper.writeValueAsString(body));
-        }catch (Exception e){
-            return new ResponseEntity("Error selecting glasses.",HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error selecting glasses: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @DeleteMapping("/mobile/remove-connection")
-    public ResponseEntity removeConnection(@RequestBody HashMap<String, ?> body){
-        try{
+    @DeleteMapping("/remove-connection")
+    @Operation(summary = "Remove a connection to glasses",
+            description = "This endpoint removes a connection between the mobile device and the selected glasses.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Successfully removed connection"),
+            @ApiResponse(responseCode = "400", description = "Bad Request, invalid input"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+    })
+    public ResponseEntity<String> removeConnection(@RequestBody HashMap<String, ?> body) {
+        try {
             return connectionServices.removeMobileConnection(mapper.writeValueAsString(body));
-        }catch (Exception e){
-            return new ResponseEntity("Error removing connection.",HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error removing connection: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
 }
