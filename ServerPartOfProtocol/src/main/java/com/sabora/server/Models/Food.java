@@ -1,10 +1,13 @@
 package com.sabora.server.Models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "alimento")
@@ -16,7 +19,7 @@ public class Food {
 
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
     @Column(name="nombre", length=30, nullable=false,unique = true)
@@ -25,19 +28,24 @@ public class Food {
     @Column(name="composicion", length=200, nullable=false)
     private String composition;
 
-    @Column(name="grasas",nullable=false)
-    private double fats;
+    @Min(0)
+    @Column(name="grasas", nullable=false, precision=10, scale=2)
+    private BigDecimal fats;
 
-    @Column(name="hidratos",nullable=false)
-    private double carbohydrates;
+    @Min(0)
+    @Column(name="hidratos", nullable=false, precision=10, scale=2)
+    private BigDecimal carbohydrates;
 
-    @Column(name="proteinas",nullable=false)
-    private double proteins;
+    @Min(0)
+    @Column(name="proteinas", nullable=false, precision=10, scale=2)
+    private BigDecimal proteins;
 
-    @Column(name="sal", nullable = false)
-    private double salt;
+    @Min(0)
+    @Column(name="sal", nullable = false, precision=10, scale=2)
+    private BigDecimal salt;
 
-    @Column(name="calorias", nullable = false)
-    private double calories;
+    @Min(0)
+    @Column(name="calorias", nullable = false, precision=10, scale=2)
+    private BigDecimal calories;
 
 }
