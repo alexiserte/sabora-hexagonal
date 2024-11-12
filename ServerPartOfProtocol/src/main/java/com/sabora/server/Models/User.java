@@ -1,9 +1,7 @@
 package com.sabora.server.Models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 
 @Entity
@@ -12,6 +10,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     @Id
@@ -25,6 +24,7 @@ public class User {
     private String apellidos;
 
     @Column(name="email", length=30, nullable=false, unique=true)
+    @Email(message="El email debe ser válido")
     private String email;
 
     @Column(name="contrasenya", length=20, nullable=false)
@@ -32,6 +32,7 @@ public class User {
 
     @Column(name="telefono",nullable=false,unique = true)
     private long telefono;
+    /*  Funcionará con teléfonos españoles, pero si se trata de algún número internacional que empiece por cero puede causar problemas*/
 
     @Column(name="username", length=20, nullable=false, unique = true)
     private String username;
