@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,9 +14,10 @@ import static com.sabora.server.Utils.FileReader.leerArchivo;
 
 @RestController
 @SpringBootApplication
+@Service
 public class ServerApplication {
 
-	@Autowired
+
 	public static FoodRepository foodRepository;
 
 	public static void main(String[] args) {
