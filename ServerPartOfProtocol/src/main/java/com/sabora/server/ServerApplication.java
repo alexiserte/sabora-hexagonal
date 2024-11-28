@@ -1,11 +1,13 @@
 package com.sabora.server;
 
+import com.sabora.server.Models.Food;
 import com.sabora.server.Models.User;
 import com.sabora.server.Repositories.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,18 +15,12 @@ import static com.sabora.server.Utils.FileReader.leerArchivo;
 
 @RestController
 @SpringBootApplication
-
 public class ServerApplication {
 
-	@Autowired
-	private FoodRepository foodRepository; // No debe ser estático
+	public ApplicationContext context;
 
 	public static void main(String[] args) {
 		var context = SpringApplication.run(ServerApplication.class, args);
-
-		// Usa el contexto para obtener la instancia de ServerApplication
-		ServerApplication app = context.getBean(ServerApplication.class);
-		System.out.println(app.foodRepository.findAll());
 	}
 
 
