@@ -3,9 +3,11 @@ package com.sabora.server.Services.Implementation;
 import com.sabora.server.Models.GlassesUser;
 import com.sabora.server.Repositories.GlassesUserRepository;
 import com.sabora.server.Services.UserService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class GlassesUserService  implements UserService<GlassesUser> {
 
     private GlassesUserRepository glassesUserRepository;

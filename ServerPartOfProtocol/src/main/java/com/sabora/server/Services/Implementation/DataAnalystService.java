@@ -3,9 +3,10 @@ package com.sabora.server.Services.Implementation;
 import com.sabora.server.Models.DataAnalyst;
 import com.sabora.server.Repositories.DataAnalystRepository;
 import com.sabora.server.Services.UserService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class DataAnalystService implements UserService<DataAnalyst> {
 
     private DataAnalystRepository dataAnalystRepository;

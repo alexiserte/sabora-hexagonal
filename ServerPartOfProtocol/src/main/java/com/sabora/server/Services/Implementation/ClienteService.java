@@ -3,9 +3,11 @@ package com.sabora.server.Services.Implementation;
 import com.sabora.server.Models.Cliente;
 import com.sabora.server.Repositories.ClienteRepository;
 import com.sabora.server.Services.UserService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ClienteService implements UserService<Cliente> {
 
     private ClienteRepository clienteRepository;
