@@ -3,9 +3,11 @@ package com.sabora.server.Services.Implementation;
 import com.sabora.server.Models.Food;
 import com.sabora.server.Repositories.FoodRepository;
 import com.sabora.server.Services.FoodService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class FoodServiceImplementation implements FoodService {
 
     private final FoodRepository foodRepository;
