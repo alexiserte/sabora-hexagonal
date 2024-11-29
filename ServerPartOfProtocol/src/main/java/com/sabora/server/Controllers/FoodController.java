@@ -1,39 +1,37 @@
 package com.sabora.server.Controllers;
 
+import com.sabora.server.DTOs.FoodDTO;
+import com.sabora.server.Mappers.FoodMapper;
 import com.sabora.server.Models.Food;
 import com.sabora.server.Services.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
 @RestController
+@RequestMapping("/food")
 public class FoodController {
 
     private final FoodService foodService;
+    private final FoodMapper foodMapper;
 
-    public FoodController(FoodService foodService){
+    public FoodController(FoodService foodService, FoodMapper foodMapper) {
         this.foodService = foodService;
+        this.foodMapper = foodMapper;
     }
 
-    @GetMapping("/food")
-    public String getFood(){
-        return "Food";
+    @GetMapping("")
+    public ResponseEntity<?> getFood(FoodDTO foodDTO){
+        return ResponseEntity.ok(foodService.getFood(foodDTO.getName()));
     }
 
-    @PostMapping("/food")
-    public String postFood(){
-        Food food = new Food();
-        food.setName("Pizza");
-        food.setCalories(BigDecimal.valueOf(300));
-        food.setCarbohydrates(BigDecimal.valueOf(30));
-        food.setComposition("Pizza with cheese");
-        food.setFats(BigDecimal.valueOf(10));
-        food.setProteins(BigDecimal.valueOf(20));
-        food.setSalt(BigDecimal.valueOf(5));
+    @PostMapping("")
+    public ResponseEntity<?> postFood(@RequestBody  FoodDTO foodDTO){
+        Food food = foodMapper.toEntity(foodDTO);
         foodService.addFood(food);
-        return "Food added";
+        return new ResponseEntity<>("Food added successfully", HttpStatus.CREATED);
     }
 }
