@@ -47,5 +47,21 @@ public class SessionServiceImplementation implements SessionService {
         return null;
     }
 
+    @Override
+    public UserDTO getUser(String username, String password) {
+        for (UserService<? extends User> userService : userServices.values()) {
+            User user = userService.getUser(username);
+            if (user != null) {
+                if (user.getPassword().equals(password)) {
+                    return new UserDTO(user);
+                }
+                else{
+                    throw new IllegalArgumentException("Invalid password");
+                }
+            }
+        }
+        throw new IllegalArgumentException("Invalid username");
+    }
+
 
 }

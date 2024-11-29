@@ -5,5 +5,6 @@ import com.sabora.server.Models.User;
 
 public interface SessionService {
         void register(UserDTO user);
+        UserDTO getUser(String username,String password);
         UserDTO getUser(String username);
 }
