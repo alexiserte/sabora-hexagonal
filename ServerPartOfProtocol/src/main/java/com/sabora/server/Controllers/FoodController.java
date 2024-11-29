@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+
 @RestController
 public class FoodController {
 
@@ -23,7 +25,15 @@ public class FoodController {
 
     @PostMapping("/food")
     public String postFood(){
-        foodService.addFood(new Food());
+        Food food = new Food();
+        food.setName("Pizza");
+        food.setCalories(BigDecimal.valueOf(300));
+        food.setCarbohydrates(BigDecimal.valueOf(30));
+        food.setComposition("Pizza with cheese");
+        food.setFats(BigDecimal.valueOf(10));
+        food.setProteins(BigDecimal.valueOf(20));
+        food.setSalt(BigDecimal.valueOf(5));
+        foodService.addFood(food);
         return "Food added";
     }
 }
