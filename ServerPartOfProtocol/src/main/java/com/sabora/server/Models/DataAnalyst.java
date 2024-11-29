@@ -1,10 +1,7 @@
 package com.sabora.server.Models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
@@ -12,4 +9,9 @@ import lombok.ToString;
 @Entity
 @Table(name = "analista_datos")
 @PrimaryKeyJoinColumn(name = "dni")
-public class DataAnalyst extends User{ }
+public class DataAnalyst extends User{
+    @Builder
+    public DataAnalyst(String dni, String name, String apellidos, String email, String password, long telefono, String username) {
+        super(dni, name, apellidos, email, password, telefono, username);
+    }
+}
