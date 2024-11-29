@@ -42,7 +42,7 @@ public class UserController {
         return new ResponseEntity<>("Usuario creado correctamente.",HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<?> getUser(@RequestBody HashMap<String,String> body) {
         String username = body.get("username");
         String password = body.get("password");
