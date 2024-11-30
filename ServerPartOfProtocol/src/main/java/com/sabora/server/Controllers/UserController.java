@@ -44,12 +44,13 @@ public class UserController {
 
     @GetMapping("")
     public ResponseEntity<?> getUser(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password){ {
-
         UserDTO user = sessionService.getUser(username,password);
         try{
             return new ResponseEntity<>(user, HttpStatus.OK);
         }catch (IllegalArgumentException e){
             return new ResponseEntity<>("Error: "+e.getMessage(),HttpStatus.BAD_REQUEST);
+            }
         }
     }
 }
+
