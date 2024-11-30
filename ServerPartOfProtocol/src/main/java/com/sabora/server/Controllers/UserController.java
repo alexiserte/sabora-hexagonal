@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getUser(@RequestParam String username, @RequestParam String password){ {
+    public ResponseEntity<?> getUser(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password){ {
 
         UserDTO user = sessionService.getUser(username,password);
         try{
