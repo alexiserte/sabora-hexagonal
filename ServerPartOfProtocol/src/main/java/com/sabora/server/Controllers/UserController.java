@@ -43,9 +43,8 @@ public class UserController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getUser(@RequestBody HashMap<String,String> body) {
-        String username = body.get("username");
-        String password = body.get("password");
+    public ResponseEntity<?> getUser(@RequestParam String username, @RequestParam String password){ {
+
         UserDTO user = sessionService.getUser(username,password);
         try{
             return new ResponseEntity<>(user, HttpStatus.OK);
