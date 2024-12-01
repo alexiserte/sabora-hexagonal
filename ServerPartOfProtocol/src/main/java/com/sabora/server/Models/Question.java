@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "pregunta")
 @Getter
@@ -25,4 +28,7 @@ public class Question {
     @ManyToOne
     @JoinColumn(name = "id_formulario", referencedColumnName = "id", nullable = false)
     private Form form;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<QuestionOption> options = new ArrayList<>();
 }
