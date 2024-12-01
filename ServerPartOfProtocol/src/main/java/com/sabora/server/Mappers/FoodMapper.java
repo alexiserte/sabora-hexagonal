@@ -12,5 +12,5 @@ public interface FoodMapper {
     @Mapping(target = "id", ignore = true)
     Food toEntity(FoodDTO food);
 
-    FoodDTO toFood(Food food);
+    FoodDTO toFoodDTO(Food food);
 }

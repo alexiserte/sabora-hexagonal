@@ -33,7 +33,7 @@ public class Form {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "autor", referencedColumnName = "dni", nullable = false) //
+    @JoinColumn(name = "autor", referencedColumnName = "dni", nullable = false)
     private FoodSpecialist author;
 
 }
