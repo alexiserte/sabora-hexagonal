@@ -4,12 +4,16 @@ import com.sabora.server.DTOs.FoodDTO;
 import com.sabora.server.Mappers.FoodMapper;
 import com.sabora.server.Models.Food;
 import com.sabora.server.Services.FoodService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
 
 @RestController
 @RequestMapping("/food")
@@ -24,12 +28,12 @@ public class FoodController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getFood(FoodDTO foodDTO){
+    public ResponseEntity<?> getFood(FoodDTO foodDTO, HttpRequest request){
         return ResponseEntity.ok(foodService.getFood(foodDTO.getName()));
     }
 
     @PostMapping("")
-    public ResponseEntity<?> postFood(@RequestBody  FoodDTO foodDTO){
+    public ResponseEntity<?> postFood(@RequestBody  FoodDTO foodDTO, HttpRequest request){
         Food food = foodMapper.toEntity(foodDTO);
         foodService.addFood(food);
         return new ResponseEntity<>("Food added successfully", HttpStatus.CREATED);

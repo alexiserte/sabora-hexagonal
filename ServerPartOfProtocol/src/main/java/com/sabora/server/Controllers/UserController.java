@@ -29,11 +29,7 @@ public class UserController {
     @Operation(summary = "Register a new user",
             description = "This endpoint register a new user from any type. All the data has to be provided in the request body.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "User created succesfully",
-                    content = @io.swagger.v3.oas.annotations.media.Content(examples = {
-                            @ExampleObject(name = "User created succesfully", value = "Usuario creado correctamente.")
-                    }),
-                    headers = {}),
+            @ApiResponse(responseCode = "201", description = "User created succesfully"),
             @ApiResponse(responseCode = "400", description = "Bad Request, invalid input"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
