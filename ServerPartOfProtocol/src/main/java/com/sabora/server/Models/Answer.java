@@ -26,4 +26,5 @@ public class Answer {
     @JoinColumn(name = "id_pregunta", referencedColumnName = "id", nullable = false)
     private Question question;
 
+    //Falta el campo id_experiencia que es la experiencia a la que pertenece la respuesta, cuando se cree la entidad experiencia se añadirá
 }

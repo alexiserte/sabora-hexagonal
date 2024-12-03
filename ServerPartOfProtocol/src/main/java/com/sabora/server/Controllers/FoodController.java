@@ -28,8 +28,13 @@ public class FoodController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getFood(FoodDTO foodDTO, HttpRequest request){
+    public ResponseEntity<?> getFood(FoodDTO foodDTO){
         return ResponseEntity.ok(foodService.getFood(foodDTO.getName()));
+    }
+
+    @GetMapping("s")
+    public ResponseEntity<?> getAllFoods(HttpRequest request){
+        return ResponseEntity.ok(foodService.getAllFoods());
     }
 
     @PostMapping("")
