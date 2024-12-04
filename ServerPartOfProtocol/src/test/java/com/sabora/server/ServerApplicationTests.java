@@ -3,6 +3,7 @@ package com.sabora.server;
 import com.sabora.server.Models.Food;
 import com.sabora.server.Repositories.FoodRepository;
 import com.sabora.server.Services.FoodService;
+import com.sabora.server.Services.Implementation.FoodServiceImplementation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,7 +29,7 @@ class ServerApplicationTests {
 	private FoodRepository foodRepository;
 
 	@InjectMocks
-	private FoodService foodService;
+	private FoodServiceImplementation foodService;
 
 	@Test
 	public void testHighCalorieFood() {
