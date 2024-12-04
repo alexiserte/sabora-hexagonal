@@ -13,11 +13,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -55,11 +58,17 @@ class ServerApplicationTests {
 
 	@Test
 	public void testIncorrectBehaviour() {
-		FileReader reader = new FileReader();
-		String readerResult = reader.leerArchivo("not/a/real/path");
-		assertThrows(Exception.class, () -> {
-			readerResult.startsWith("Error al leer el archivo:");
-		});
+		// Redirigir la salida estándar para capturar los mensajes impresos
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		PrintStream originalOut = System.out;
+		System.setOut(new PrintStream(outputStream));
+		try {
+			FileReader reader = new FileReader();
+			reader.leerArchivo("not/a/real/path");
+		} finally {
+			System.setOut(originalOut);
+		}
+		String printedOutput = outputStream.toString();
+		assertTrue(printedOutput.contains("Error al leer el archivo:"));
 	}
-
 }
