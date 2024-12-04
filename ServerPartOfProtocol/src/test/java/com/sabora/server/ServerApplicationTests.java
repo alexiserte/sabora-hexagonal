@@ -45,9 +45,9 @@ class ServerApplicationTests {
 	}
 
 	@Test
-	public void testFileReader() {
-		String fileContent = FileReader.leerArchivo("src/main/java/com/sabora/server/HTMLPages/bienvenida.html");
-		assert fileContent.contains("Hello World!");
+	public void test() {
+		String reader = FileReader.leerArchivo("src/test/java/com/sabora/server/DataToTest/example_text.txt");
+		assert reader.equals("Hello World!");
 	}
 
 }
