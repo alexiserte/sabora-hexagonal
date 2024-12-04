@@ -21,10 +21,6 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class ServerApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
 	@Mock
 	private FoodRepository foodRepository;
 
@@ -45,8 +41,6 @@ class ServerApplicationTests {
 
 		assert highCalorieFoods.size() == 1;
 		assert highCalorieFoods.get(0).getName().equals("Salsa de soja");
-
-
 	}
 
 }
