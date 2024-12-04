@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "respuesta")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Answer {
 
     @Id
