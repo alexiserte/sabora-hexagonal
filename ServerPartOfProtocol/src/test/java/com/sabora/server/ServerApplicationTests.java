@@ -1,21 +1,33 @@
 package com.sabora.server;
 
 import com.sabora.server.Models.Food;
+import com.sabora.server.Repositories.FoodRepository;
 import com.sabora.server.Services.FoodService;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+import static org.mockito.Mockito.when;
+
 @SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class ServerApplicationTests {
+
 	@Test
 	void contextLoads() {
 	}
 
-	@Autowired
+	@Mock
+	private FoodRepository foodRepository;
+
+	@InjectMocks
 	private FoodService foodService;
 
 	@Test
@@ -25,10 +37,14 @@ class ServerApplicationTests {
 				new Food(2,"Salsa de soja", "Salsa altamente calórica", BigDecimal.valueOf(2000), BigDecimal.valueOf(100), BigDecimal.valueOf(50), BigDecimal.valueOf(10),BigDecimal.valueOf(2001)),
 				new Food(3,"Mejillones en escabeche", "Mejillones en su tinta", BigDecimal.valueOf(2000), BigDecimal.valueOf(100), BigDecimal.valueOf(50), BigDecimal.valueOf(10),BigDecimal.valueOf(3))
 		);
-		List<Food> highCalorieFoods = foodService.getHighCalorieFoods(foods);
+
+		when(foodService.getAllFoods()).thenReturn(foods);
+
+		List<Food> highCalorieFoods = foodService.getHighCalorieFoods(foodService.getAllFoods());
 
 		assert highCalorieFoods.size() == 1;
 		assert highCalorieFoods.get(0).getName().equals("Salsa de soja");
+
 
 	}
 
