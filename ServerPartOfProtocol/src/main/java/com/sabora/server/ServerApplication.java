@@ -21,6 +21,7 @@ public class ServerApplication {
 
 	public static void main(String[] args) {
 		var context = SpringApplication.run(ServerApplication.class, args);
+
 	}
 
 

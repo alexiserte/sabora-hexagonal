@@ -11,7 +11,6 @@ import java.util.List;
 
 @SpringBootTest
 class ServerApplicationTests {
-
 	@Test
 	void contextLoads() {
 	}
@@ -27,6 +26,8 @@ class ServerApplicationTests {
 				new Food(3,"Mejillones en escabeche", "Mejillones en su tinta", BigDecimal.valueOf(2000), BigDecimal.valueOf(100), BigDecimal.valueOf(50), BigDecimal.valueOf(10),BigDecimal.valueOf(3))
 		);
 		List<Food> highCalorieFoods = foodService.getHighCalorieFoods(foods);
+
+		System.out.println(highCalorieFoods);
 
 		assert highCalorieFoods.size() == 1;
 		assert highCalorieFoods.get(0).getName().equals("Salsa de soja");
