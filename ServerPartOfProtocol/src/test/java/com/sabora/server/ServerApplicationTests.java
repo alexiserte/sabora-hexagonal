@@ -13,9 +13,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -45,9 +47,19 @@ class ServerApplicationTests {
 	}
 
 	@Test
-	public void test() {
-		String reader = FileReader.leerArchivo("src/test/java/com/sabora/server/DataToTest/example_text.txt");
-		assert reader.equals("Hello World!");
+	public void testCorrectBehaviour() {
+		FileReader reader = new FileReader();
+		String readerResult = FileReader.leerArchivo("src/test/java/com/sabora/server/DataToTest/example_text.txt");
+		assert readerResult.equals("Hello World!");
+	}
+
+	@Test
+	public void testIncorrectBehaviour() {
+		FileReader reader = new FileReader();
+		String readerResult = reader.leerArchivo("not/a/real/path");
+		assertThrows(Exception.class, () -> {
+			readerResult.startsWith("Error al leer el archivo:");
+		});
 	}
 
 }

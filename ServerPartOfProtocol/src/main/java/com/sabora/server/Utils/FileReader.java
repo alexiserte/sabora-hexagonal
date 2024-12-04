@@ -10,7 +10,7 @@ public class FileReader {
         try {
             byte[] bytes = Files.readAllBytes(Paths.get(rutaArchivo));
             contenido = new String(bytes);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
         return contenido;
