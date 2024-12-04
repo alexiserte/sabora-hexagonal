@@ -28,8 +28,8 @@ public class FoodController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getFood(FoodDTO foodDTO){
-        return ResponseEntity.ok(foodService.getFood(foodDTO.getName()));
+    public ResponseEntity<?> getFood(@RequestParam(name = "name") String name, HttpRequest request){
+        return ResponseEntity.ok(foodService.getFood(name));
     }
 
     @GetMapping("s")
