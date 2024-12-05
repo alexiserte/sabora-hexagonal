@@ -28,17 +28,17 @@ public class FoodController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getFood(@RequestParam(name = "name") String name, HttpRequest request){
+    public ResponseEntity<?> getFood(@RequestParam(name = "name") String name){
         return ResponseEntity.ok(foodService.getFood(name));
     }
 
     @GetMapping("s")
-    public ResponseEntity<?> getAllFoods(HttpRequest request){
+    public ResponseEntity<?> getAllFoods(){
         return ResponseEntity.ok(foodService.getAllFoods());
     }
 
     @PostMapping("")
-    public ResponseEntity<?> postFood(@RequestBody  FoodDTO foodDTO, HttpRequest request){
+    public ResponseEntity<?> postFood(@RequestBody  FoodDTO foodDTO){
         Food food = foodMapper.toEntity(foodDTO);
         foodService.addFood(food);
         return new ResponseEntity<>("Food added successfully", HttpStatus.CREATED);
