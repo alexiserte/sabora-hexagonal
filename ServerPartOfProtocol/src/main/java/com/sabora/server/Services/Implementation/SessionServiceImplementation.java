@@ -9,6 +9,8 @@ import com.sabora.server.Services.UserService;
 import com.sabora.server.Utils.PasswordEncrypter;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -57,7 +59,7 @@ public class SessionServiceImplementation implements SessionService {
         for (UserService<? extends User> userService : userServices.values()) {
             User user = userService.getUser(username);
             if (user != null) {
-                if (user.getPassword().equals(password)) {
+                if (passwordEncrypter.checkPassword(password, user.getPassword())) {
                     return new UserDTO(user);
                 }
                 else{
@@ -67,6 +69,5 @@ public class SessionServiceImplementation implements SessionService {
         }
         throw new UserNotFoundException(username);
     }
-
 
 }

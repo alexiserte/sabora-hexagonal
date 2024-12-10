@@ -17,4 +17,5 @@ public class PasswordEncrypter {
     public boolean checkPassword(String password, String encodedPassword) {
         return passwordEncoder.matches(password, encodedPassword);
     }
+
 }
