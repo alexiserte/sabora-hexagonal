@@ -1,6 +1,7 @@
 package com.sabora.server.Controllers;
 
 import com.sabora.server.DTOs.UserDTO;
+import com.sabora.server.Exceptions.AlreadyExistingUserException;
 import com.sabora.server.Exceptions.IncorrectPasswordException;
 import com.sabora.server.Exceptions.UserNotFoundException;
 import com.sabora.server.Models.User;
@@ -39,9 +40,17 @@ public class UserController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     public ResponseEntity<?> register(@RequestBody UserDTO userDTO) {
-        sessionService.register(userDTO);
-        log.info("User {} created successfully", userDTO.getUsername());
-        return new ResponseEntity<>("Usuario creado correctamente.",HttpStatus.CREATED);
+        try {
+            sessionService.register(userDTO);
+            log.info("User {} created successfully", userDTO.getUsername());
+            return new ResponseEntity<>("Usuario creado correctamente.", HttpStatus.CREATED);
+        } catch (AlreadyExistingUserException e) {
+            log.error("User {} already exists", userDTO.getUsername());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            log.error("Internal server error registering the user: {}", e.getMessage());
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("")
@@ -58,7 +67,7 @@ public class UserController {
             log.error("Failed to login user: {} because of {}", username, e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
         } catch (Exception e) {
-            log.error("Internal server error: {}", e.getMessage());
+            log.error("Internal server error getting the user: {}", e.getMessage());
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

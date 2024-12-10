@@ -1,10 +1,12 @@
 package com.sabora.server.Services.Implementation;
 
 import com.sabora.server.DTOs.UserDTO;
+import com.sabora.server.Exceptions.AlreadyExistingUserException;
 import com.sabora.server.Exceptions.IllegalUserType;
 import com.sabora.server.Exceptions.IncorrectPasswordException;
 import com.sabora.server.Exceptions.UserNotFoundException;
 import com.sabora.server.Models.User;
+import com.sabora.server.Repositories.UserRepository;
 import com.sabora.server.Services.SessionService;
 import com.sabora.server.Services.UserService;
 import com.sabora.server.Utils.PasswordEncrypter;
@@ -18,14 +20,16 @@ import java.util.Map;
 public class SessionServiceImplementation implements SessionService {
 
     private final Map<String, UserService<? extends User>> userServices;
+    private final UserRepository userRepository;
     private final PasswordEncrypter passwordEncrypter = new PasswordEncrypter();
 
     public SessionServiceImplementation(
             GlassesUserService glassesUserService,
             FoodSpecialistService foodSpecialistService,
             ClienteService clienteService,
-            DataAnalystService dataAnalystService
+            DataAnalystService dataAnalystService, UserRepository userRepository
     ) {
+        this.userRepository = userRepository;
         userServices = Map.of(
                 "GlassesUser", glassesUserService,
                 "FoodSpecialist", foodSpecialistService,
@@ -41,7 +45,11 @@ public class SessionServiceImplementation implements SessionService {
             throw new IllegalUserType(userDTO.getType());
         }
         UserService<User> userService = (UserService<User>) userServices.get(userDTO.getType());
-        userService.registerUser(user);
+        if(userRepository.existsByUsername(user.getUsername())){
+                throw new AlreadyExistingUserException(user.getUsername());
+        }else{
+                userService.registerUser(user);
+        }
     }
 
     @Override
