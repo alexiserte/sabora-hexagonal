@@ -1,5 +1,6 @@
 package com.sabora.server.Utils;
 
+import com.sabora.server.Exceptions.IncorrectPasswordException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -15,7 +16,8 @@ public class PasswordEncrypter {
     }
 
     public boolean checkPassword(String password, String encodedPassword) {
-        return passwordEncoder.matches(password, encodedPassword);
+        if (passwordEncoder.matches(password, encodedPassword)) return true;
+        else throw new IncorrectPasswordException();
     }
 
 }

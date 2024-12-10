@@ -1,6 +1,8 @@
 package com.sabora.server.Controllers;
 
 import com.sabora.server.DTOs.UserDTO;
+import com.sabora.server.Exceptions.IncorrectPasswordException;
+import com.sabora.server.Exceptions.UserNotFoundException;
 import com.sabora.server.Models.User;
 import com.sabora.server.Services.Implementation.SessionServiceImplementation;
 import com.sabora.server.Services.SessionService;
@@ -8,6 +10,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +22,7 @@ import java.util.HashMap;
 @RequestMapping("/user")
 public class UserController {
 
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
     private final SessionService sessionService;
 
     public UserController(SessionService sessionService){
@@ -35,17 +40,26 @@ public class UserController {
     })
     public ResponseEntity<?> register(@RequestBody UserDTO userDTO) {
         sessionService.register(userDTO);
+        log.info("User {} created successfully", userDTO.getUsername());
         return new ResponseEntity<>("Usuario creado correctamente.",HttpStatus.CREATED);
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getUser(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password){ {
-        UserDTO user = sessionService.getUser(username,password);
-        try{
+    public ResponseEntity<?> getUser(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password) {
+
+        try {
+            UserDTO user = sessionService.getUser(username, password);
+            log.info("Successful login for user: {}", username);
             return new ResponseEntity<>(user, HttpStatus.OK);
-        }catch (IllegalArgumentException e){
-            return new ResponseEntity<>("Error: "+e.getMessage(),HttpStatus.BAD_REQUEST);
-            }
+        } catch (UserNotFoundException e) {
+            log.error(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (IncorrectPasswordException e) {
+            log.error("Failed to login user: {} because of {}", username, e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+        } catch (Exception e) {
+            log.error("Internal server error: {}", e.getMessage());
+            return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

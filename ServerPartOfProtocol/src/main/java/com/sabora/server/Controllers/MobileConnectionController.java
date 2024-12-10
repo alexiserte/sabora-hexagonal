@@ -6,6 +6,8 @@ import com.sabora.server.Services.ConnectionServices;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import java.util.HashMap;
 public class MobileConnectionController {
 
     private static final ObjectMapper mapper = new ObjectMapper();
+    private static final Logger log = LoggerFactory.getLogger(MobileConnectionController.class);
 
     @Autowired
     ConnectionServices connectionServices;
@@ -33,6 +36,7 @@ public class MobileConnectionController {
     })
     public ResponseEntity<String> searchGlasses(@RequestBody HashMap<String, ?> body) {
         try {
+            log.info("Searching for glasses: {}", body);
             return connectionServices.getPossibleGlasses(mapper.writeValueAsString(body));
         } catch (Exception e) {
             return new ResponseEntity<>("Error searching glasses: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -49,6 +53,7 @@ public class MobileConnectionController {
     })
     public ResponseEntity<String> selectGlasses(@RequestBody HashMap<String, ?> body) {
         try {
+            log.info("Selecting glasses: {}", body);
             return connectionServices.addMobileGlassesConnection(mapper.writeValueAsString(body));
         } catch (Exception e) {
             return new ResponseEntity<>("Error selecting glasses: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -65,6 +70,7 @@ public class MobileConnectionController {
     })
     public ResponseEntity<String> removeConnection(@RequestBody HashMap<String, ?> body) {
         try {
+            log.info("Removing connection: {}", body);
             return connectionServices.removeMobileConnection(mapper.writeValueAsString(body));
         } catch (Exception e) {
             return new ResponseEntity<>("Error removing connection: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

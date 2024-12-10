@@ -2,6 +2,7 @@ package com.sabora.server.Services.Implementation;
 
 import com.sabora.server.DTOs.UserDTO;
 import com.sabora.server.Exceptions.IllegalUserType;
+import com.sabora.server.Exceptions.IncorrectPasswordException;
 import com.sabora.server.Exceptions.UserNotFoundException;
 import com.sabora.server.Models.User;
 import com.sabora.server.Services.SessionService;
@@ -59,12 +60,9 @@ public class SessionServiceImplementation implements SessionService {
         for (UserService<? extends User> userService : userServices.values()) {
             User user = userService.getUser(username);
             if (user != null) {
-                if (passwordEncrypter.checkPassword(password, user.getPassword())) {
-                    return new UserDTO(user);
-                }
-                else{
-                    throw new IllegalArgumentException("Invalid password");
-                }
+                    if (passwordEncrypter.checkPassword(password, user.getPassword())) {
+                        return new UserDTO(user);
+                    }
             }
         }
         throw new UserNotFoundException(username);
