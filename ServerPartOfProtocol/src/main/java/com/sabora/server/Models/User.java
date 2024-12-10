@@ -27,8 +27,10 @@ public class User {
     @Email(message="El email debe ser válido")
     private String email;
 
-    @Column(name="contrasenya", length=20, nullable=false)
+    @Column(name = "contrasenya", columnDefinition = "LONGTEXT", nullable = false)
+    @Lob
     private String password;
+
 
     @Column(name="telefono",nullable=false,unique = true)
     private long telefono;
