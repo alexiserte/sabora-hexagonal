@@ -57,7 +57,7 @@ public class SessionServiceImplementation implements SessionService {
         for (UserService<? extends User> userService : userServices.values()) {
             User user = userService.getUser(username);
             if (user != null) {
-                if (passwordEncrypter.checkPassword(password, user.getPassword())) {
+                if (user.getPassword().equals(password)) {
                     return new UserDTO(user);
                 }
                 else{
