@@ -1,9 +1,12 @@
 package com.sabora.server.Services.Implementation;
 
 import com.sabora.server.DTOs.UserDTO;
+import com.sabora.server.Exceptions.IllegalUserType;
+import com.sabora.server.Exceptions.UserNotFoundException;
 import com.sabora.server.Models.User;
 import com.sabora.server.Services.SessionService;
 import com.sabora.server.Services.UserService;
+import com.sabora.server.Utils.PasswordEncrypter;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -12,6 +15,7 @@ import java.util.Map;
 public class SessionServiceImplementation implements SessionService {
 
     private final Map<String, UserService<? extends User>> userServices;
+    private final PasswordEncrypter passwordEncrypter = new PasswordEncrypter();
 
     public SessionServiceImplementation(
             GlassesUserService glassesUserService,
@@ -29,8 +33,9 @@ public class SessionServiceImplementation implements SessionService {
 
     public void register(UserDTO userDTO) {
         User user = userDTO.toUser();
+        user.setPassword(passwordEncrypter.encryptPassword(user.getPassword()));
         if (user == null || !userServices.containsKey(userDTO.getType())) {
-            throw new IllegalArgumentException("Invalid user type: " + userDTO.getType());
+            throw new IllegalUserType(userDTO.getType());
         }
         UserService<User> userService = (UserService<User>) userServices.get(userDTO.getType());
         userService.registerUser(user);
@@ -44,7 +49,7 @@ public class SessionServiceImplementation implements SessionService {
                 return new UserDTO(user);
             }
         }
-        return null;
+        throw new UserNotFoundException(username);
     }
 
     @Override
@@ -52,7 +57,7 @@ public class SessionServiceImplementation implements SessionService {
         for (UserService<? extends User> userService : userServices.values()) {
             User user = userService.getUser(username);
             if (user != null) {
-                if (user.getPassword().equals(password)) {
+                if (passwordEncrypter.checkPassword(password, user.getPassword())) {
                     return new UserDTO(user);
                 }
                 else{
@@ -60,7 +65,7 @@ public class SessionServiceImplementation implements SessionService {
                 }
             }
         }
-        throw new IllegalArgumentException("Invalid username");
+        throw new UserNotFoundException(username);
     }
 
 
