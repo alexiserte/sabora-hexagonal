@@ -6,10 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.web.client.RestTemplate;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserControllerTest {
 
     @LocalServerPort
@@ -18,7 +16,7 @@ public class UserControllerTest {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String BASE_URL = "http://localhost:" + port + "/";
+    private final String BASE_URL = "http://localhost:/8080";
 
     @Test
     void greetingShouldReturnDefaultMessage() throws Exception {
