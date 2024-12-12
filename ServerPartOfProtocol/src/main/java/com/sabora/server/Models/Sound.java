@@ -20,5 +20,7 @@ public class Sound {
     @Column(name = "nombre", length = 30, nullable = false, unique = true)
     private String name;
 
-    //pensando si añadir un campo que sea una url a un bucket de s3
+    @Column(name = "ruta", columnDefinition = "LONGTEXT", nullable = false)
+    @Lob
+    private String filepath;
 }
