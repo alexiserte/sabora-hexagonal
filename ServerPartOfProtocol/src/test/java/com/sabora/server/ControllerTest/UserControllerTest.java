@@ -20,7 +20,7 @@ public class UserControllerTest {
 
     @Test
     void greetingShouldReturnDefaultMessage() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/test-vr",
+        assertThat(this.restTemplate.getForObject(BASE_URL + "/test-vr",
                 String.class)).contains("Hola! Bienvenido a Sabora!");
     }
 }
