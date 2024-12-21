@@ -29,7 +29,7 @@ public class Scenario {
     private String photoPath;
 
     @ManyToOne
-    @Column(name="id_sonido")
+    @JoinColumn(name = "id_sonido", referencedColumnName = "id")
     private Sound sound;
 
 }
