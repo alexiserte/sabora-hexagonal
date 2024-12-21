@@ -9,11 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class FileManagementController {
 
+    @Autowired
     private FileServiceClient fileServiceClient;
-
-    public FileManagementController(FileServiceClient fileServiceClient) {
-        this.fileServiceClient = fileServiceClient;
-    }
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam(name = "file") MultipartFile file) {
