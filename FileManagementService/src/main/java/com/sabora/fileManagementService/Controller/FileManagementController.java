@@ -19,7 +19,7 @@ public class FileManagementController {
         this.fileManagementService = fileManagementService;
     }
 
-    @PostMapping("/upload/")
+    @PostMapping("/upload")
     public ResponseEntity<?> uploadFile(@RequestParam(name = "file") MultipartFile file) {
         if(file.isEmpty()) {
             return new ResponseEntity<>(new EmptyFileException("The file is empty!"), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -30,7 +30,7 @@ public class FileManagementController {
         }
     }
 
-    @DeleteMapping("/delete/")
+    @DeleteMapping("/delete")
     public ResponseEntity<?> deleteFile(@RequestParam(name = "fileName") String fileName) {
         fileManagementService.deleteFile(fileName);
         return new ResponseEntity<>("File deleted successfully", HttpStatus.OK);
