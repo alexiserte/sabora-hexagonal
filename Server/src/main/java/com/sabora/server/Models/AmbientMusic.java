@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "efecto_sonido")
+@Table(name = "musica_ambiental")
 @PrimaryKeyJoinColumn(name = "id_sonido")
 public class AmbientMusic extends Sound {
 
