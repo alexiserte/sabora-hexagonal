@@ -14,6 +14,6 @@ public interface FileServiceClient {
     @DeleteMapping("/file-service/delete")
     ResponseEntity<String> deleteFile(@RequestParam("fileName") String fileName);
 
-    @GetMapping("/resources/{}")
+    @GetMapping("/resources/{fileName}")
     ResponseEntity<MultipartFile> downloadFile(@PathVariable("fileName") String fileName);
 }
