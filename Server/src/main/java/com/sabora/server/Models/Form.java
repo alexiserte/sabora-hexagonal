@@ -21,8 +21,7 @@ public class Form {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    @JdbcTypeCode(SqlTypes.INTEGER)
+    @Column(name = "id")
     private Integer id;
 
     @Temporal(TemporalType.DATE) // Solo la parte de la fecha (sin hora)

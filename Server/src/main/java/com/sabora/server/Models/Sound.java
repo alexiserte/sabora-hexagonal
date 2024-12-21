@@ -1,6 +1,7 @@
 package com.sabora.server.Models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,8 +9,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "sonido")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Sound {
 
     @Id
