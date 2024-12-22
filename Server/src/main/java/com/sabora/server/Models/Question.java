@@ -23,8 +23,8 @@ public class Question {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="valor", length=100, nullable=false)
-    private String value;
+    @Column(name="titulo", length=1000, nullable=false)
+    private String title;
 
     @ManyToOne
     @JoinColumn(name = "id_formulario", referencedColumnName = "id", nullable = false)

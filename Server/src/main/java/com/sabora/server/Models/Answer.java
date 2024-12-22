@@ -21,10 +21,11 @@ public class Answer {
     @Column(name="valor", length=2500, nullable=false)
     private String value;
 
-
     @ManyToOne
     @JoinColumn(name = "id_pregunta", referencedColumnName = "id", nullable = false)
     private Question question;
 
-    //Falta el campo id_experiencia que es la experiencia a la que pertenece la respuesta, cuando se cree la entidad experiencia se añadirá
+    @ManyToOne
+    @JoinColumn(name = "id_experiencia", referencedColumnName = "id", nullable = false)
+    private Experience experience;
 }

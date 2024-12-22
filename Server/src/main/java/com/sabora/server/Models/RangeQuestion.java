@@ -29,8 +29,8 @@ public class RangeQuestion extends Question{
     private int interval;
 
     @Builder
-    public RangeQuestion(int id, String value, Form form, List<QuestionOption> options, int min, int max, int interval) {
-        super(id, value, form, options);
+    public RangeQuestion(int id, String value, Form form, int min, int max, int interval) {
+        super(id, value, form, null);
         this.min = min;
         this.max = max;
         this.interval = interval;
