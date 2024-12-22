@@ -62,7 +62,13 @@ public class QuestionServicesImplementation implements QuestionService {
                             .collect(Collectors.toList())
             );
             return uniqueQuestion;
-        } else {
+        } else if (questionDTO instanceof AnswerRedactionQuestionDTO) {
+            AnswerRedactionQuestionDTO answerRedactionDTO = (AnswerRedactionQuestionDTO) questionDTO;
+            AnswerWritingQuestion answerRedactionQuestion = new AnswerWritingQuestion();
+            answerRedactionQuestion.setTitle(answerRedactionDTO.getQuestion());
+            return answerRedactionQuestion;
+        }
+        else {
             throw new IllegalArgumentException("Tipo de pregunta desconocido: " + questionDTO.getClass());
         }
     }

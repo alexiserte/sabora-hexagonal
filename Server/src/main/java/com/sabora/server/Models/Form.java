@@ -28,7 +28,7 @@ public class Form {
     @Column(name = "fecha_creacion", nullable = false)
     private Date date;
 
-    @Column(name = "nombre", length = 20, nullable = false)
+    @Column(name = "nombre", length = 1000, nullable = false)
     private String name;
 
     @ManyToOne
