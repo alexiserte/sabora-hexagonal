@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/form")
@@ -23,13 +24,12 @@ public class FormController {
     }
 
 
-    @GetMapping("s")
-    public ResponseEntity<?> getForm() {
+    @GetMapping("/all")
+    public ResponseEntity<List<FormDTO>> getForm() {
         List<Form> forms = formService.getAllForms();
-        List<FormDTO> formDTOS = new ArrayList<>();
-        for (Form form : forms) {
-            formDTOS.add(formService.createFormDTO(form));
-        }
+        List<FormDTO> formDTOS = forms.stream()
+                .map(formService::createFormDTO)
+                .collect(Collectors.toList());
         log.info("Getting all forms");
         return ResponseEntity.ok(formDTOS);
     }
