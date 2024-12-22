@@ -1,9 +1,6 @@
 package com.sabora.server.Services.Implementation;
 
-import com.sabora.server.DTOs.MultipleAnswerQuestionDTO;
-import com.sabora.server.DTOs.QuestionDTO;
-import com.sabora.server.DTOs.RangeQuestionDTO;
-import com.sabora.server.DTOs.UniqueAnswerQuestionDTO;
+import com.sabora.server.DTOs.*;
 import com.sabora.server.Models.*;
 import com.sabora.server.Repositories.*;
 import com.sabora.server.Services.QuestionService;
@@ -99,6 +96,12 @@ public class QuestionServicesImplementation implements QuestionService {
                     questionId,
                     title,
                     options
+            );
+        }
+        else if (question instanceof AnswerWritingQuestion) {
+            return new AnswerRedactionQuestionDTO(
+                    questionId,
+                    title
             );
         }
 

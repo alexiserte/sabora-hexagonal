@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AnswerRedactionQuestionDTO extends QuestionDTO {
+
     public AnswerRedactionQuestionDTO(int id, String question) {
         super(id, question);
     }
