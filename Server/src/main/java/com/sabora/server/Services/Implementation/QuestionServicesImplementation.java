@@ -4,10 +4,12 @@ import com.sabora.server.DTOs.*;
 import com.sabora.server.Models.*;
 import com.sabora.server.Repositories.*;
 import com.sabora.server.Services.QuestionService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class QuestionServicesImplementation implements QuestionService {
 
     private QuestionRepository questionRepository;
