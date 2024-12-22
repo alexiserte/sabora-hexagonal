@@ -53,7 +53,7 @@ public class FormServicesImplementation implements FormServices {
 
     public void saveForm(FormDTO formDTO) {
         Form form = new Form();
-        form.setAuthor((FoodSpecialist) userRepository.findByDNINumber(formDTO.getFoodSpecialist()));
+        form.setAuthor((FoodSpecialist) userRepository.findByDni(formDTO.getFoodSpecialist()));
         form.setName(formDTO.getName());
         form.setDate(formDTO.getCreationDate());
 
