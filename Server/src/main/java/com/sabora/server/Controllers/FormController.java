@@ -5,6 +5,7 @@ import com.sabora.server.Models.Form;
 import com.sabora.server.Services.Implementation.FormServicesImplementation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -65,56 +66,7 @@ public class FormController {
 
 
     @PostMapping("")
-    @Operation(summary = "Add a new form",
-            description = "This endpoint adds a new form. All the data has to be provided in the request body following the FormDTO structure.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Form added successfully"),
-            @ApiResponse(responseCode = "400", description = "Bad Request, invalid input"),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error")
-    })
-    public ResponseEntity<?> postForm(@Parameter(
-            description = "Survey details to create a new survey",
-            examples = @ExampleObject(value = "{\n" +
-                    "  \"id\": 1,\n" +
-                    "  \"name\": \"Encuesta de satisfacción\",\n" +
-                    "  \"foodSpecialist\": \"John Doe\",\n" +
-                    "  \"creationDate\": \"2024-12-22\",\n" +
-                    "  \"questions\": [\n" +
-                    "    {\n" +
-                    "      \"type\": \"RANGE\",\n" +
-                    "      \"id\": 101,\n" +
-                    "      \"question\": \"¿Qué tan satisfecho estás con nuestro servicio?\",\n" +
-                    "      \"min\": 1,\n" +
-                    "      \"max\": 10,\n" +
-                    "      \"interval\": 1\n" +
-                    "    },\n" +
-                    "    {\n" +
-                    "      \"type\": \"MULTIPLE_ANSWER\",\n" +
-                    "      \"id\": 102,\n" +
-                    "      \"question\": \"¿Qué servicios utilizaste?\",\n" +
-                    "      \"options\": [\n" +
-                    "        \"Entrega a domicilio\",\n" +
-                    "        \"Atención en tienda\",\n" +
-                    "        \"Asistencia telefónica\"\n" +
-                    "      ]\n" +
-                    "    },\n" +
-                    "    {\n" +
-                    "      \"type\": \"UNIQUE_ANSWER\",\n" +
-                    "      \"id\": 103,\n" +
-                    "      \"question\": \"¿Recomendarías nuestro servicio?\",\n" +
-                    "      \"options\": [\n" +
-                    "        \"Sí\",\n" +
-                    "        \"No\"\n" +
-                    "      ]\n" +
-                    "    },\n" +
-                    "    {\n" +
-                    "      \"type\": \"REDACTION\",\n" +
-                    "      \"id\": 104,\n" +
-                    "      \"question\": \"Por favor, escribe un comentario sobre tu experiencia.\"\n" +
-                    "    }\n" +
-                    "  ]\n" +
-                    "}"))
-                    @RequestBody FormDTO formDTO) {
+    public ResponseEntity<?> postForm(@RequestBody FormDTO formDTO) {
         formService.saveForm(formDTO);
         log.info("Form {} added successfully", formDTO.getName());
         return ResponseEntity.ok("Form added successfully");
