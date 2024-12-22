@@ -34,14 +34,14 @@ public class FormController {
         return ResponseEntity.ok(formDTOS);
     }
 
-    @GetMapping("")
-    public ResponseEntity<?> getFormById(int id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getFormById(@PathVariable int id) {
         log.info("Getting form with id: {}", id);
         return ResponseEntity.ok(formService.createFormDTO(formService.getFormById(id)));
     }
 
-    @DeleteMapping("")
-    public ResponseEntity<?> deleteForm(int id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteForm(@PathVariable int id) {
         log.info("Deleting form with id: {}", id);
         formService.deleteForm(id);
         return ResponseEntity.ok("Form deleted successfully");
