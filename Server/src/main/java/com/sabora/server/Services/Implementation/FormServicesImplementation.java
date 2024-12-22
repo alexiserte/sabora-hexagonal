@@ -35,7 +35,7 @@ public class FormServicesImplementation implements FormServices {
     public FormDTO createFormDTO(Form form) {
         int formId = form.getId();
         String formName = form.getName();
-        String authorUsername = form.getAuthor().getUsername();
+        String authorUsername = form.getAuthor().getDni();
         Date creationDate = form.getDate();
 
         List<QuestionDTO> questionsDTO = new ArrayList<>();
