@@ -14,7 +14,7 @@ import lombok.*;
 public class User {
 
     @Id
-    @Column(name="dni", length=9)
+    @Column(name="dni", length=750)
     private String dni;
 
     @Column(name="nombre", length=20, nullable=false)
@@ -23,7 +23,7 @@ public class User {
     @Column(name="apellidos", length=50, nullable=false)
     private String apellidos;
 
-    @Column(name="email", length=30, nullable=false, unique=true)
+    @Column(name="email", length=750, nullable=false, unique=true)
     @Email(message="El email debe ser válido")
     private String email;
 
@@ -32,7 +32,7 @@ public class User {
     private String password;
 
 
-    @Column(name="telefono",length = 20, nullable=false,unique = true)
+    @Column(name="telefono",length = 750, nullable=false,unique = true)
     private String telefono;
     /*  Funcionará con teléfonos españoles, pero si se trata de algún número internacional que empiece por cero puede causar problemas*/
 
