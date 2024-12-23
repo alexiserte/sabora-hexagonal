@@ -8,9 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 @FeignClient(name = "file-service", url = "http://localhost:8081")
 public interface FileServiceClient {
 
-    @PostMapping("/file-service/upload")
+    @PostMapping("/upload")
     ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file);
 
-    @DeleteMapping("/file-service/delete")
+    @DeleteMapping("/delete")
     ResponseEntity<String> deleteFile(@RequestParam("fileName") String fileName);
 }
