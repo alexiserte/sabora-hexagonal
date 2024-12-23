@@ -32,8 +32,8 @@ public class User {
     private String password;
 
 
-    @Column(name="telefono",nullable=false,unique = true)
-    private long telefono;
+    @Column(name="telefono",length = 20, nullable=false,unique = true)
+    private String telefono;
     /*  Funcionará con teléfonos españoles, pero si se trata de algún número internacional que empiece por cero puede causar problemas*/
 
     @Column(name="username", length=20, nullable=false, unique = true)

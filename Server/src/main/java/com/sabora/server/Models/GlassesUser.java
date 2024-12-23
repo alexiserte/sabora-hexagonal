@@ -24,7 +24,7 @@ public class GlassesUser extends User{
     private String gender;
 
     @Builder
-    public GlassesUser(String dni, String name, String apellidos, String email, String password, long telefono, String username, int age, String gender) {
+    public GlassesUser(String dni, String name, String apellidos, String email, String password, String telefono, String username, int age, String gender) {
         super(dni, name, apellidos, email, password, telefono, username);
         this.age = age;
         this.gender = gender;

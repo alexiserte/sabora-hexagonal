@@ -18,7 +18,7 @@ public class Cliente extends User{
     private String bankAccount;
 
     @Builder
-    public Cliente(String dni, String name, String apellidos, String email, String password, long telefono, String username, String business, String bankAccount) {
+    public Cliente(String dni, String name, String apellidos, String email, String password, String telefono, String username, String business, String bankAccount) {
         super(dni, name, apellidos, email, password, telefono, username);
         this.business = business;
         this.bankAccount = bankAccount;

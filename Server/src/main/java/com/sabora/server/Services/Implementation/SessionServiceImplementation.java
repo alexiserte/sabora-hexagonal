@@ -1,19 +1,19 @@
 package com.sabora.server.Services.Implementation;
 
+import com.sabora.server.Configuration.EncryptionConfig;
 import com.sabora.server.DTOs.UserDTO;
 import com.sabora.server.Exceptions.AlreadyExistingUserException;
 import com.sabora.server.Exceptions.IllegalUserType;
-import com.sabora.server.Exceptions.IncorrectPasswordException;
 import com.sabora.server.Exceptions.UserNotFoundException;
+import com.sabora.server.Models.Cliente;
 import com.sabora.server.Models.User;
 import com.sabora.server.Repositories.UserRepository;
 import com.sabora.server.Services.SessionService;
 import com.sabora.server.Services.UserService;
-import com.sabora.server.Utils.PasswordEncrypter;
+import com.sabora.server.Utils.Encryption.DataEncryption;
+import com.sabora.server.Utils.Encryption.PasswordEncrypter;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -22,14 +22,16 @@ public class SessionServiceImplementation implements SessionService {
     private final Map<String, UserService<? extends User>> userServices;
     private final UserRepository userRepository;
     private final PasswordEncrypter passwordEncrypter = new PasswordEncrypter();
+    private final EncryptionConfig encryptionConfig;
 
     public SessionServiceImplementation(
             GlassesUserService glassesUserService,
             FoodSpecialistService foodSpecialistService,
             ClienteService clienteService,
-            DataAnalystService dataAnalystService, UserRepository userRepository
+            DataAnalystService dataAnalystService, UserRepository userRepository, EncryptionConfig encryptionConfig
     ) {
         this.userRepository = userRepository;
+        this.encryptionConfig = encryptionConfig;
         userServices = Map.of(
                 "GlassesUser", glassesUserService,
                 "FoodSpecialist", foodSpecialistService,
@@ -48,7 +50,20 @@ public class SessionServiceImplementation implements SessionService {
         if(userRepository.existsByUsername(user.getUsername())){
                 throw new AlreadyExistingUserException(user.getUsername());
         }else{
-                userService.registerUser(user);
+                String base64Key = encryptionConfig.getSecretKey();
+            try {
+                user.setDni(DataEncryption.encrypt(user.getDni(), base64Key));
+                user.setEmail(DataEncryption.encrypt(user.getEmail(), base64Key));
+                user.setTelefono(DataEncryption.encrypt(String.valueOf(user.getTelefono()), base64Key));
+
+                if(user instanceof Cliente){
+                    Cliente cliente = (Cliente) user;
+                    cliente.setBankAccount(DataEncryption.encrypt(cliente.getBankAccount(), base64Key));
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            userService.registerUser(user);
         }
     }
 
@@ -57,6 +72,17 @@ public class SessionServiceImplementation implements SessionService {
         for (UserService<? extends User> userService : userServices.values()) {
             User user = userService.getUser(username);
             if (user != null) {
+                try {
+                    user.setTelefono(DataEncryption.decrypt(user.getTelefono(), encryptionConfig.getSecretKey()));
+                    user.setEmail(DataEncryption.decrypt(user.getEmail(), encryptionConfig.getSecretKey()));
+                    user.setDni(DataEncryption.decrypt(user.getDni(), encryptionConfig.getSecretKey()));
+                    if(user instanceof Cliente){
+                        Cliente cliente = (Cliente) user;
+                        cliente.setBankAccount(DataEncryption.decrypt(cliente.getBankAccount(), encryptionConfig.getSecretKey()));
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 return new UserDTO(user);
             }
         }

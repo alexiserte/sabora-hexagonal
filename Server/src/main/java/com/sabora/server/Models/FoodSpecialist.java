@@ -24,7 +24,7 @@ public class FoodSpecialist extends User{
     private String organization;
 
     @Builder
-    public FoodSpecialist(String dni, String name, String apellidos, String email, String password, long telefono, String username, String organization) {
+    public FoodSpecialist(String dni, String name, String apellidos, String email, String password, String telefono, String username, String organization) {
         super(dni, name, apellidos, email, password, telefono, username);
         this.organization = organization;
     }

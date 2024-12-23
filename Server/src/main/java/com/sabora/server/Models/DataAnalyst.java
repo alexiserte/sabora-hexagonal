@@ -11,7 +11,7 @@ import lombok.*;
 @PrimaryKeyJoinColumn(name = "dni")
 public class DataAnalyst extends User{
     @Builder
-    public DataAnalyst(String dni, String name, String apellidos, String email, String password, long telefono, String username) {
+    public DataAnalyst(String dni, String name, String apellidos, String email, String password, String telefono, String username) {
         super(dni, name, apellidos, email, password, telefono, username);
     }
 }
