@@ -1,14 +1,12 @@
 package com.sabora.server.Controllers;
 
 import com.sabora.server.DTOs.UserDTO;
-import com.sabora.server.Exceptions.AlreadyExistingUserException;
-import com.sabora.server.Exceptions.IncorrectPasswordException;
-import com.sabora.server.Exceptions.UserNotFoundException;
-import com.sabora.server.Models.User;
-import com.sabora.server.Services.Implementation.SessionServiceImplementation;
+import com.sabora.server.Exceptions.User.AlreadyExistingUserException;
+import com.sabora.server.Exceptions.User.IncorrectPasswordException;
+import com.sabora.server.Exceptions.User.UserNotFoundException;
+import com.sabora.server.Exceptions.User.UserValidationException;
 import com.sabora.server.Services.SessionService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
@@ -16,8 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
 
 @RestController
 @RequestMapping("/user")
@@ -47,7 +43,10 @@ public class UserController {
         } catch (AlreadyExistingUserException e) {
             log.error("User {} already exists", userDTO.getUsername());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
+        }catch (UserValidationException e) {
+            log.error("Invalid user data: {}", e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }catch (Exception e) {
             log.error("Internal server error registering the user: {}", e.getMessage());
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
         }

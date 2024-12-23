@@ -1,6 +1,6 @@
 package com.sabora.server.Utils.Encryption;
 
-import com.sabora.server.Exceptions.IncorrectPasswordException;
+import com.sabora.server.Exceptions.User.IncorrectPasswordException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

@@ -1,4 +1,4 @@
-package com.sabora.server.Exceptions;
+package com.sabora.server.Exceptions.User;
 
 public class AlreadyExistingUserException extends RuntimeException{
     public AlreadyExistingUserException(String username) {

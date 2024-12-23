@@ -1,4 +1,4 @@
-package com.sabora.server.Exceptions;
+package com.sabora.server.Exceptions.User;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String userName) {

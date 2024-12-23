@@ -2,9 +2,10 @@ package com.sabora.server.Services.Implementation;
 
 import com.sabora.server.Configuration.EncryptionConfig;
 import com.sabora.server.DTOs.UserDTO;
-import com.sabora.server.Exceptions.AlreadyExistingUserException;
-import com.sabora.server.Exceptions.IllegalUserType;
-import com.sabora.server.Exceptions.UserNotFoundException;
+import com.sabora.server.Exceptions.User.AlreadyExistingUserException;
+import com.sabora.server.Exceptions.User.IllegalUserType;
+import com.sabora.server.Exceptions.User.UserNotFoundException;
+import com.sabora.server.Exceptions.User.UserValidationException;
 import com.sabora.server.Models.Cliente;
 import com.sabora.server.Models.User;
 import com.sabora.server.Repositories.UserRepository;
@@ -12,6 +13,7 @@ import com.sabora.server.Services.SessionService;
 import com.sabora.server.Services.UserService;
 import com.sabora.server.Utils.Encryption.DataEncryption;
 import com.sabora.server.Utils.Encryption.PasswordEncrypter;
+import com.sabora.server.Utils.Validation.UserValidation;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -41,6 +43,7 @@ public class SessionServiceImplementation implements SessionService {
     }
 
     public void register(UserDTO userDTO) {
+        UserValidation.validateUser(userDTO);
         User user = userDTO.toUser();
         user.setPassword(passwordEncrypter.encryptPassword(user.getPassword()));
         if (user == null || !userServices.containsKey(userDTO.getType())) {
