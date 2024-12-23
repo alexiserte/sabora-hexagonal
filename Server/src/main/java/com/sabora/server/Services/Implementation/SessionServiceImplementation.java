@@ -68,35 +68,20 @@ public class SessionServiceImplementation implements SessionService {
     }
 
     @Override
-    public UserDTO getUser(String username) {
-        for (UserService<? extends User> userService : userServices.values()) {
-            User user = userService.getUser(username);
-            if (user != null) {
-                try {
-                    user.setTelefono(DataEncryption.decrypt(user.getTelefono(), encryptionConfig.getSecretKey()));
-                    user.setEmail(DataEncryption.decrypt(user.getEmail(), encryptionConfig.getSecretKey()));
-                    user.setDni(DataEncryption.decrypt(user.getDni(), encryptionConfig.getSecretKey()));
-                    if(user instanceof Cliente){
-                        Cliente cliente = (Cliente) user;
-                        cliente.setBankAccount(DataEncryption.decrypt(cliente.getBankAccount(), encryptionConfig.getSecretKey()));
-                    }
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-                return new UserDTO(user);
-            }
-        }
-        throw new UserNotFoundException(username);
-    }
-
-    @Override
     public UserDTO getUser(String username, String password) {
         for (UserService<? extends User> userService : userServices.values()) {
             User user = userService.getUser(username);
             if (user != null) {
+                try {
+                    user.setDni(DataEncryption.decrypt(user.getDni(), encryptionConfig.getSecretKey()));
+                    user.setEmail(DataEncryption.decrypt(user.getEmail(), encryptionConfig.getSecretKey()));
+                    user.setTelefono(DataEncryption.decrypt(user.getTelefono(), encryptionConfig.getSecretKey()));
                     if (passwordEncrypter.checkPassword(password, user.getPassword())) {
                         return new UserDTO(user);
                     }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
         throw new UserNotFoundException(username);
