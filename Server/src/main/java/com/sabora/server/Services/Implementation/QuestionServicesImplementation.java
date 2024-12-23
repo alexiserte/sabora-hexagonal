@@ -29,6 +29,7 @@ public class QuestionServicesImplementation implements QuestionService {
             rangeQuestion.setTitle(rangeDTO.getQuestion());
             rangeQuestion.setMin(rangeDTO.getMin());
             rangeQuestion.setMax(rangeDTO.getMax());
+            rangeQuestion.setInterval(rangeDTO.getInterval());
             return rangeQuestion;
 
         } else if (questionDTO instanceof MultipleAnswerQuestionDTO) {
