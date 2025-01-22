@@ -13,13 +13,19 @@ public class NewConnectionServices{
 
     public void createConnection(String name, String localIp, String remoteIp){
         // Si existe un elemento en la lista con la misma direccion IP publica y privada se actualiza, si no se añade
-        for(ConnectionParams connection : connections){
-            if(connection.getLocalIp().equals(localIp) && connection.getRemoteIp().equals(remoteIp)){
-                connection.setName(name);
-                return;
-            }
+        if(connections.size() == 0) {
+            connections.add(new ConnectionParams(name,localIp,remoteIp));
+            return;
         }
-        connections.add(new ConnectionParams(name,localIp,remoteIp));
+        else {
+            for (ConnectionParams connection : connections) {
+                if (connection.getLocalIp().equals(localIp) && connection.getRemoteIp().equals(remoteIp)) {
+                    connection.setName(name);
+                    return;
+                }
+            }
+            connections.add(new ConnectionParams(name, localIp, remoteIp));
+        }
     }
 
     public void removeConnection(String name){
