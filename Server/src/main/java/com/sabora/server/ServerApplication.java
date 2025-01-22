@@ -3,6 +3,7 @@ package com.sabora.server;
 import com.sabora.server.Models.Food;
 import com.sabora.server.Models.User;
 import com.sabora.server.Repositories.FoodRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
@@ -34,8 +35,8 @@ public class ServerApplication {
 	}
 
 	@GetMapping("/test-vr")
-	public String testVRButton(){
-			return "Hola! Bienvenido a Sabora!";
+	public String testVRButton(HttpServletRequest request){
+			return request.getRemoteAddr();
 	}
 
 	@GetMapping("/current-connections")
