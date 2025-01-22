@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 public class ConnectionParams {
     private String name;
     private String localIp;
