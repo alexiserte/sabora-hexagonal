@@ -14,13 +14,9 @@ public class ConnectionController {
 
     @GetMapping("/connection/{name}")
     public String connection(@PathVariable String name, HttpServletRequest request){
-        try {
-            Thread.sleep(1000);
             createConnection(request.getRemoteAddr());
+            System.out.println(request.getRemoteAddr());
             return "Connection created";
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 
