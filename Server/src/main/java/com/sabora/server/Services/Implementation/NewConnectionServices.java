@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public class NewConnectionServices{
 
-    private static class ConnectionParams{
+    public static class ConnectionParams{
         private String name;
         private String localIp;
         private String remoteIp;
