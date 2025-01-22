@@ -1,5 +1,6 @@
 package com.sabora.server.ConnectionBeta;
 
+import com.sabora.server.Models.ConnectionObject;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +13,10 @@ public class ConnectionController {
 
     private static final int PORT = 3938;
 
-    @GetMapping("/connection/{name}")
-    public String connection(@PathVariable String name, HttpServletRequest request){
-            createConnection(request.getRemoteAddr());
-            System.out.println(request.getRemoteAddr());
-            return "Connection created";
+    @PostMapping("/connection/")
+    public String connection(@RequestBody ConnectionObject object, HttpServletRequest request){
+        createConnection(object.getLocalIp());
+        return "Connection created";
     }
 
 
