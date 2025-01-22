@@ -15,7 +15,7 @@ public class ConnectionController {
 
     private static final int PORT = 3938;
 
-    @PostMapping("/connection/{name}")
+    @GetMapping("/connection/{name}")
     public String connection(@PathVariable String name, HttpServletRequest request){
         try {
             Thread.sleep(1000);
