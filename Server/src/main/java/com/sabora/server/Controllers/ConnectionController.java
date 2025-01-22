@@ -15,6 +15,8 @@ public class ConnectionController {
 
     @PostMapping("/connection")
     public ResponseEntity<?> connection(@RequestBody ConnectionObject object, HttpServletRequest request){
+        System.out.println(object.getName());
+        System.out.println(object.getLocalIp());
         connectionServices.createConnection(object.getName(),object.getLocalIp(),request.getRemoteAddr());
         return ResponseEntity.ok("Connection created");
     }
