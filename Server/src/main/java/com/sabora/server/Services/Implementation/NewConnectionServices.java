@@ -39,10 +39,16 @@ public class NewConnectionServices{
     public List<ConnectionParams> getLocalConnection(String remoteIP){
         List<ConnectionParams> localConnections = new ArrayList<>();
         for(ConnectionParams connection : connections){
-            if(connection.getRemoteIp().equals(remoteIP)){
+            if(areInTheSameNetwork(connection.getRemoteIp(),remoteIP)){
                 localConnections.add(connection);
             }
         }
         return localConnections;
+    }
+
+    private boolean areInTheSameNetwork(String ip1, String ip2){
+        String[] ip1Parts = ip1.split("\\.");
+        String[] ip2Parts = ip2.split("\\.");
+        return ip1Parts[0].equals(ip2Parts[0]) && ip1Parts[1].equals(ip2Parts[1]);
     }
 }
