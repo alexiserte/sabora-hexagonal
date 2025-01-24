@@ -2,6 +2,7 @@ package com.sabora.server.Controllers;
 
 import com.sabora.server.DTOs.ScenarioDTO;
 import com.sabora.server.Services.ScenarioServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,11 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class ScenarioController {
 
-    private ScenarioServices scenarioServices;
-
-    public ScenarioController(ScenarioServices scenarioServices) {
-        this.scenarioServices = scenarioServices;
-    }
+    @Autowired
+    ScenarioServices scenarioServices;
 
     @PostMapping("/scenario")
     public ResponseEntity<?> createScenario(@RequestBody ScenarioDTO scenarioDTO, MultipartFile file){
