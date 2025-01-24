@@ -4,15 +4,14 @@ import com.sabora.server.Clients.FileServiceClient;
 import com.sabora.server.DTOs.ScenarioDTO;
 import com.sabora.server.Models.Scenario;
 import com.sabora.server.Services.ScenarioServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ScenarioServicesImplementation implements ScenarioServices {
 
+    @Autowired
     private FileServiceClient fileServiceClient;
 
-    public ScenarioServicesImplementation(FileServiceClient fileServiceClient) {
-        this.fileServiceClient = fileServiceClient;
-    }
 
     @Override
     public void createScenario(ScenarioDTO scenarioDTO, MultipartFile file) {
