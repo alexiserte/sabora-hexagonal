@@ -15,7 +15,7 @@ public class OllamaRequest {
             // Crear JSON con los datos de la solicitud
             String requestBody = """
                 {
-                    "model": "phi4",
+                    "model": "sabora-ai-model",
                     "prompt": "tell me a joke",
                     "stream": false
                 }
