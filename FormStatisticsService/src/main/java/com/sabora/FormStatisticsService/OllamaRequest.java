@@ -19,7 +19,7 @@ public class OllamaRequest {
             String requestBody = """
                 {
                     "model": "sabora-ai-model",
-                    "prompt": "{
+                    "prompt": {
                                      "id": 1,
                                      "name": "Encuesta de satisfacción y accesibilidad",
                                      "foodSpecialist": "12345672A",
@@ -66,7 +66,7 @@ public class OllamaRequest {
                                        }
                                      ]
                                    }
-                                   '",
+                                   ",
                     "stream": false
                 }
                 """;
