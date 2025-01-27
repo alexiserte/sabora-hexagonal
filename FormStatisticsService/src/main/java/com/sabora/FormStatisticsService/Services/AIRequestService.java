@@ -1,55 +1,46 @@
-package com.sabora.FormStatisticsService;
+package com.sabora.FormStatisticsService.Services;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Service;
 
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class OllamaRequest {
+@Service
+public class AIRequestService {
 
-    public static void main(String[] args) {
+    private static final ObjectMapper mapper = new ObjectMapper();
+
+    public static String getAIResponse(String promptData){
         try {
-            // Crear cliente HTTP
             HttpClient client = HttpClient.newHttpClient();
-
-            // Crear JSON con los datos de la solicitud
-            String requestBody = """
+            String requestBody = String.format("""
                 {
                     "model": "sabora-ai-model",
-                    "prompt": "tell me a joke",
+                    "prompt": "%s",
                     "stream": false
                 }
-                """;
+                """, promptData);
 
-            // Crear solicitud HTTP POST
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI("http://localhost:11434/api/generate"))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();
-
-            // Enviar solicitud y obtener respuesta
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            String responseBody = response.body();
 
-            // Imprimir la respuesta
-            System.out.println("Respuesta del servidor:");
-            System.out.println(response.body());
-
-            //Obtener el campo response del JSON empleando objectmapper
-            String responseString = response.body();
-
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode node = mapper.readTree(responseString);
-            String joke = node.get("response").asText();
-            System.out.println("Joke: " + joke);
+            JsonNode node = mapper.readTree(responseBody);
+            return node.get("response").asText();
 
         } catch (Exception e) {
             System.err.println("Error realizando la petición:");
             e.printStackTrace();
         }
+
+        return "No se pudo obtener información añadida, por favor pruebe mas tarde";
     }
 }
-
