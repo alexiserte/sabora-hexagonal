@@ -10,7 +10,7 @@ public class FormStatisticsServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FormStatisticsServiceApplication.class, args);
-		OllamaRequest.main(args);
+		AIRequestService.getAIResponse("Hola");
 	}
 
 }

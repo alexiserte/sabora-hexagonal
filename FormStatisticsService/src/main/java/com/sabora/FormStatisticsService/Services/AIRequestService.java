@@ -2,6 +2,7 @@ package com.sabora.FormStatisticsService.Services;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sabora.FormStatisticsService.Models.RequestObject;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
@@ -17,14 +18,8 @@ public class AIRequestService {
     public static String getAIResponse(String promptData){
         try {
             HttpClient client = HttpClient.newHttpClient();
-            String requestBody = String.format("""
-                {
-                    "model": "sabora-ai-model",
-                    "prompt": "%s",
-                    "stream": false
-                }
-                """, promptData);
-
+            RequestObject requestObject = new RequestObject("sabora-ai-model", promptData, false);
+            String requestBody = mapper.writeValueAsString(requestObject);
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI("http://localhost:11434/api/generate"))
                     .header("Content-Type", "application/json")
