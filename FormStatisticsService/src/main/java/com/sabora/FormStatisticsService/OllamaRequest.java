@@ -1,5 +1,8 @@
 package com.sabora.FormStatisticsService;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -34,6 +37,14 @@ public class OllamaRequest {
             // Imprimir la respuesta
             System.out.println("Respuesta del servidor:");
             System.out.println(response.body());
+
+            //Obtener el campo response del JSON empleando objectmapper
+            String responseString = response.body();
+
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode node = mapper.readTree(responseString);
+            String joke = node.get("response").asText();
+            System.out.println("Joke: " + joke);
 
         } catch (Exception e) {
             System.err.println("Error realizando la petición:");
