@@ -35,12 +35,7 @@ public class FormServices {
         formDescription.setId(formId);
         String formDescriptionString = AIRequestService.getAIResponse(form);
         formDescription.setForm_analysis(formDescriptionString);
-       formDescriptionRepository.findById(Long.valueOf(Integer.toString(formId)))
-               .map(existing -> {
-                     existing.setForm_analysis(formDescriptionString);
-                   return formDescriptionRepository.save(existing);
-               })
-               .orElseGet(() -> formDescriptionRepository.save(formDescription));
+        formDescriptionRepository.save(formDescription);
    }
 
    protected void createResponseAnalysis(String response){
