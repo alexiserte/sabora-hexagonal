@@ -19,7 +19,7 @@ public class FormDescription {
 
     @Id
     @Column(name="id_formulario")
-    private int id;
+    private long id;
 
     @Column(name="analisis_formulario", columnDefinition = "LONGTEXT")
     private String form_analysis;
