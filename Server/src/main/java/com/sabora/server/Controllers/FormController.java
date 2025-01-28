@@ -76,8 +76,9 @@ public class FormController {
         formService.saveForm(formDTO);
         log.info("Form {} added successfully", formDTO.getName());
         try {
-            formDTO.setId(formService.getFormByName(formDTO.getName()).getId());
-            rabbitMQMessageProducerService.sendMessageCreatedForm(objectMapper.writeValueAsString(formDTO));
+            Form form = formService.getFormByName(formDTO.getName());
+            FormDTO formDTO1 = formService.createFormDTO(form);
+            rabbitMQMessageProducerService.sendMessageCreatedForm(objectMapper.writeValueAsString(formDTO1));
         }catch (Exception e) {
             log.error("Error sending message to RabbitMQ: {}", e.getMessage());
         }
