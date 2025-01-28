@@ -8,7 +8,7 @@ public class WebController {
 
 
     @PostMapping("/form")
-    public String getFormStatistics() {
+    public String getFormStatistics(@RequestBody String formId) {
         return "Estadisticas del formulario";
     }
 }
