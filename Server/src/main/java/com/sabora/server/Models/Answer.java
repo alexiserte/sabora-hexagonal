@@ -28,4 +28,8 @@ public class Answer {
     @ManyToOne
     @JoinColumn(name = "id_experiencia", referencedColumnName = "id", nullable = false)
     private Experience experience;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario_gafas", referencedColumnName = "dni", nullable = false)
+    private GlassesUser author;
 }
