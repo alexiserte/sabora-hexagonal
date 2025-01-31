@@ -1,6 +1,6 @@
 package com.sabora.server.Repositories;
 
-import com.sabora.server.Models.User;
+import com.sabora.server.Entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,5 @@
-package com.sabora.server.Models;
+package com.sabora.server.Entities;
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

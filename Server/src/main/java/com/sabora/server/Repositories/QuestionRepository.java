@@ -1,6 +1,6 @@
 package com.sabora.server.Repositories;
 
-import com.sabora.server.Models.Question;
+import com.sabora.server.Entities.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

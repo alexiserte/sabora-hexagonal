@@ -1,9 +1,8 @@
 package com.sabora.server.Services.Implementation;
 
-import com.sabora.server.Models.Food;
+import com.sabora.server.Entities.Food;
 import com.sabora.server.Repositories.FoodRepository;
 import com.sabora.server.Services.FoodService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

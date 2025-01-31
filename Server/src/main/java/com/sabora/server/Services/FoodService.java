@@ -1,6 +1,6 @@
 package com.sabora.server.Services;
 
-import com.sabora.server.Models.Food;
+import com.sabora.server.Entities.Food;
 
 import java.util.List;
 

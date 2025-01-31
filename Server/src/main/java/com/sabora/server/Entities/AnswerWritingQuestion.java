@@ -1,11 +1,7 @@
-package com.sabora.server.Models;
+package com.sabora.server.Entities;
 
-import com.sabora.server.Services.Implementation.ClienteService;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import lombok.*;
-import org.hibernate.annotations.Check;
 
 import java.util.List;
 

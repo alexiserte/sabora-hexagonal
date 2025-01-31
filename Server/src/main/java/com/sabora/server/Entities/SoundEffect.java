@@ -1,4 +1,4 @@
-package com.sabora.server.Models;
+package com.sabora.server.Entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;

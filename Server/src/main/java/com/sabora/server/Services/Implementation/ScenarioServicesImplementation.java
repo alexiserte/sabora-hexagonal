@@ -2,7 +2,7 @@ package com.sabora.server.Services.Implementation;
 
 import com.sabora.server.Clients.FileServiceClient;
 import com.sabora.server.DTOs.ScenarioDTO;
-import com.sabora.server.Models.Scenario;
+import com.sabora.server.Entities.Scenario;
 import com.sabora.server.Services.ScenarioServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

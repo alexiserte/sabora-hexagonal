@@ -1,6 +1,6 @@
 package com.sabora.server.Services.Implementation;
 
-import com.sabora.server.Models.GlassesUser;
+import com.sabora.server.Entities.GlassesUser;
 import com.sabora.server.Repositories.GlassesUserRepository;
 import com.sabora.server.Services.UserService;
 import org.springframework.stereotype.Service;

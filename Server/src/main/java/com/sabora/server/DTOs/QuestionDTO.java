@@ -2,10 +2,6 @@ package com.sabora.server.DTOs;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.sabora.server.Models.AnswerWritingQuestion;
-import com.sabora.server.Models.MultipleAnswerQuestion;
-import com.sabora.server.Models.RangeQuestion;
-import com.sabora.server.Models.UniqueAnswerQuestion;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
