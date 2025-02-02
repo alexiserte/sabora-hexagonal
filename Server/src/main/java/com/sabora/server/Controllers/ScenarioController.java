@@ -22,8 +22,8 @@ public class ScenarioController {
     }
 
     @PostMapping("/scenario")
-    public ResponseEntity<?> createScenario(@RequestBody ScenarioDTO scenarioDTO, MultipartFile file){
-        scenarioServices.createScenario(scenarioDTO, file);
+    public ResponseEntity<?> createScenario(@RequestBody ScenarioDTO scenarioDTO){
+        scenarioServices.createScenario(scenarioDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
