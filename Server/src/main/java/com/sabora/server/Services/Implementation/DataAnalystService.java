@@ -1,6 +1,6 @@
 package com.sabora.server.Services.Implementation;
 
-import com.sabora.server.Models.DataAnalyst;
+import com.sabora.server.Entities.DataAnalyst;
 import com.sabora.server.Repositories.DataAnalystRepository;
 import com.sabora.server.Services.UserService;
 import org.springframework.stereotype.Service;

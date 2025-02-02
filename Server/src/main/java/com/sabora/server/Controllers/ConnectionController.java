@@ -1,6 +1,6 @@
 package com.sabora.server.Controllers;
 
-import com.sabora.server.Models.ConnectionObject;
+import com.sabora.server.Entities.ConnectionObject;
 import com.sabora.server.Services.Implementation.NewConnectionServices;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;

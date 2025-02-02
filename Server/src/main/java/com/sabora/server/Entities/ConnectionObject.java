@@ -1,4 +1,4 @@
-package com.sabora.server.Models;
+package com.sabora.server.Entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

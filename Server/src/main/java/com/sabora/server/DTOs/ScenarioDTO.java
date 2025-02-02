@@ -1,7 +1,6 @@
 package com.sabora.server.DTOs;
 
-import com.sabora.server.Models.Sound;
-import jakarta.persistence.*;
+import com.sabora.server.Entities.Sound;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

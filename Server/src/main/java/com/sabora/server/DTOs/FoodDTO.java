@@ -1,8 +1,6 @@
 package com.sabora.server.DTOs;
 
-import com.sabora.server.Models.Food;
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.Min;
+import com.sabora.server.Entities.Food;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

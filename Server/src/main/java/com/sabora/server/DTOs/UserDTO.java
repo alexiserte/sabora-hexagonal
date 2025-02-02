@@ -1,10 +1,8 @@
 package com.sabora.server.DTOs;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sabora.server.Models.*;
+import com.sabora.server.Entities.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.HashMap;

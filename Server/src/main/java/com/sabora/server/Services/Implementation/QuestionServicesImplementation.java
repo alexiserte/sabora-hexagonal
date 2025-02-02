@@ -1,7 +1,7 @@
 package com.sabora.server.Services.Implementation;
 
 import com.sabora.server.DTOs.*;
-import com.sabora.server.Models.*;
+import com.sabora.server.Entities.*;
 import com.sabora.server.Repositories.*;
 import com.sabora.server.Services.QuestionService;
 import org.springframework.stereotype.Service;

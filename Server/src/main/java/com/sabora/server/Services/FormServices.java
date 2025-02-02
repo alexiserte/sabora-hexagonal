@@ -1,9 +1,7 @@
 package com.sabora.server.Services;
 
 import com.sabora.server.DTOs.FormDTO;
-import com.sabora.server.Models.Form;
-
-import java.util.Optional;
+import com.sabora.server.Entities.Form;
 
 public interface FormServices {
     public FormDTO createFormDTO(Form form);

@@ -1,6 +1,6 @@
 package com.sabora.server.Services.Implementation;
 
-import com.sabora.server.Models.FoodSpecialist;
+import com.sabora.server.Entities.FoodSpecialist;
 import com.sabora.server.Repositories.FoodSpecialistRepository;
 import com.sabora.server.Services.UserService;
 import org.springframework.stereotype.Service;

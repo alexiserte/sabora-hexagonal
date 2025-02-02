@@ -1,12 +1,7 @@
 package com.sabora.server;
 
-import com.sabora.server.Models.Food;
-import com.sabora.server.Models.User;
-import com.sabora.server.Repositories.FoodRepository;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ApplicationContext;

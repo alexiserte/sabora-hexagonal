@@ -1,4 +1,4 @@
-package com.sabora.server.Models;
+package com.sabora.server.Entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -12,12 +12,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "musica_ambiental")
+@Table(name = "narracion")
 @PrimaryKeyJoinColumn(name = "id_sonido")
-public class AmbientMusic extends Sound {
+public class Narration extends Sound {
 
     @Builder
-    public AmbientMusic(int id, String name, String filepath) {
+    public Narration(int id, String name, String filepath) {
         super(id, name, filepath);
     }
 }
