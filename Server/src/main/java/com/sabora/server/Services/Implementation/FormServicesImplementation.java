@@ -97,5 +97,8 @@ public class FormServicesImplementation implements FormServices {
         formRepository.deleteById(Long.valueOf(id));
     }
 
+    public Form getFormByName(String name) {
+        return formRepository.findByName(name);
+    }
 
 }

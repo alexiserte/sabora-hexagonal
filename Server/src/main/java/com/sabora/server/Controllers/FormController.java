@@ -1,8 +1,10 @@
 package com.sabora.server.Controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sabora.server.DTOs.FormDTO;
 import com.sabora.server.Entities.Form;
 import com.sabora.server.Services.Implementation.FormServicesImplementation;
+import com.sabora.server.Services.Implementation.RabbitMQMessageProducerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -21,9 +23,12 @@ public class FormController {
 
     private final FormServicesImplementation formService;
     private static final Logger log = LoggerFactory.getLogger(FormController.class);
+    private final RabbitMQMessageProducerService rabbitMQMessageProducerService;
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    public FormController(FormServicesImplementation formService) {
+    public FormController(FormServicesImplementation formService, RabbitMQMessageProducerService rabbitMQMessageProducerService) {
         this.formService = formService;
+        this.rabbitMQMessageProducerService = rabbitMQMessageProducerService;
     }
 
 
@@ -61,11 +66,19 @@ public class FormController {
     }
 
 
-
     @PostMapping("")
     public ResponseEntity<?> postForm(@RequestBody FormDTO formDTO) {
+
         formService.saveForm(formDTO);
         log.info("Form {} added successfully", formDTO.getName());
+        try {
+            Form form = formService.getFormByName(formDTO.getName());
+            FormDTO formDTO1 = formService.createFormDTO(form);
+            log.warn("Sending form with id: {} to RabbitMQ", formDTO1.getId());
+            rabbitMQMessageProducerService.sendMessageCreatedForm(objectMapper.writeValueAsString(formDTO1));
+        }catch (Exception e) {
+            log.error("Error sending message to RabbitMQ: {}", e.getMessage());
+        }
         return ResponseEntity.ok("Form added successfully");
     }
 }

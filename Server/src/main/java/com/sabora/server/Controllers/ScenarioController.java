@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 public class ScenarioController {
@@ -18,8 +19,8 @@ public class ScenarioController {
     }
 
     @PostMapping("/scenario")
-    public ResponseEntity<?> createScenario(@RequestBody ScenarioDTO scenarioDTO){
-        scenarioServices.createScenario(scenarioDTO);
+    public ResponseEntity<?> createScenario(@RequestBody ScenarioDTO scenarioDTO, MultipartFile file){
+        scenarioServices.createScenario(scenarioDTO, file);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

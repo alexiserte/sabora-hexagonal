@@ -43,7 +43,6 @@ public class SessionServiceImplementation implements SessionService {
 
     public void register(UserDTO userDTO) {
         UserValidation.validateUser(userDTO);
-        System.out.println(userDTO);
         User user = userDTO.toUser();
         user.setPassword(passwordEncrypter.encryptPassword(user.getPassword()));
         if (user == null || !userServices.containsKey(userDTO.getType())) {
