@@ -14,7 +14,7 @@ public class Cliente extends User{
     @Column(name="empresa", length=20, nullable=false)
     private String business;
 
-    @Column(name="cuenta_bancaria", length=24, nullable=false)
+    @Column(name="cuenta_bancaria", length=512, nullable=false)
     private String bankAccount;
 
     @Builder
