@@ -74,7 +74,7 @@ public class ExperienceServicesImplementation implements ExperienceServices {
     public List<ExperienceDTO> getUnfinishedExperiences(String client) {
        List<ExperienceDTO> experiences = new ArrayList<>();
        Cliente cliente = (Cliente) userRepository.findByUsername(client);
-       List<Experience> unfinishedExperiences = experienceRepository.findAll().stream().filter(experience -> experience.getClient().equals(cliente) && (experience.getTime() == 0 || experience.getTime() == null)).toList();
+       List<Experience> unfinishedExperiences = experienceRepository.findAll().stream().filter(experience -> experience.getClient().equals(cliente) && experience.getTime() == null).toList();
          for (Experience experience : unfinishedExperiences) {
              ExperienceDTO experienceDTO = getExperienceDTO(experience);
              experiences.add(experienceDTO);
