@@ -36,6 +36,7 @@ public class ExperienceController {
             experienceServices.endExperience(experienceDTO);
             return ResponseEntity.ok("Experience ended successfully");
         }catch (Exception e){
+            e.printStackTrace();
             log.error("Error ending experience: {}", e.getMessage());
         }
         return ResponseEntity.badRequest().build();
@@ -43,6 +44,11 @@ public class ExperienceController {
 
     @GetMapping("/unfinished/")
     public ResponseEntity<?> getUnfinishedExperiences(@RequestParam(name = "client") String client){
+        try{
             return ResponseEntity.ok(experienceServices.getUnfinishedExperiences(client));
+        }catch (Exception e){
+            log.error("Error getting unfinished experiences: {}", e.getMessage());
+        }
+        return ResponseEntity.badRequest().build();
     }
 }
