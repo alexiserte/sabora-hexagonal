@@ -15,7 +15,7 @@ import lombok.Setter;
 public class ExperienceSound {
 
     @EmbeddedId
-    private ExperienceSoundID id;
+    private ExperienceSoundID id = new ExperienceSoundID();
 
     @ManyToOne
     @MapsId("experienceID")
