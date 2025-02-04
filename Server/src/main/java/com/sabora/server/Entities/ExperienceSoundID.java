@@ -12,6 +12,6 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @Embeddable
 public class ExperienceSoundID implements Serializable {
-    private int experienceID;
-    private int soundID;
+    private Integer experienceID;
+    private Integer soundID;
 }
