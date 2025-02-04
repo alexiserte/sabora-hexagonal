@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,4 +29,7 @@ public class Sound {
     @Column(name = "ruta", columnDefinition = "LONGTEXT", nullable = false)
     @Lob
     private String filepath;
+
+    @OneToMany(mappedBy = "sound", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ExperienceSound> experiences = new ArrayList<>();
 }

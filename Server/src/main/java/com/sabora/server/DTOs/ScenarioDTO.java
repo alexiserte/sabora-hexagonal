@@ -15,5 +15,5 @@ public class ScenarioDTO {
     private String name;
     private String place;
     private String photoPath;
-    private Sound sound;
+    private String sound;
 }

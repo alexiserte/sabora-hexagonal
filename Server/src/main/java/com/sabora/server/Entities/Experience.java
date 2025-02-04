@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "experiencia")
 @Getter
@@ -20,7 +23,7 @@ public class Experience {
     @Column(name="id")
     private int id;
 
-    @Column(name="tiempo",nullable = false)
+    @Column(name="tiempo")
     private long time;
 
     @ManyToOne
@@ -38,4 +41,7 @@ public class Experience {
     @ManyToOne
     @JoinColumn(name = "id_alimento", referencedColumnName = "id", nullable = false)
     private Food food;
+
+    @OneToMany(mappedBy = "experience", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ExperienceSound> sounds = new ArrayList<>();
 }
