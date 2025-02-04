@@ -22,13 +22,15 @@ public class ExperienceServicesImplementation implements ExperienceServices {
     private final SoundRepository soundRepository;
     private UserRepository userRepository;
     private FoodRepository foodRepository;
+    private ExperienceSoundRepository experienceSoundRepository;
 
-    public ExperienceServicesImplementation(ExperienceRepository experienceRepository, ScenarioRepository scenarioRepository, SoundRepository soundRepository, UserRepository userRepository, FoodRepository foodRepository) {
+    public ExperienceServicesImplementation(ExperienceRepository experienceRepository, ScenarioRepository scenarioRepository, SoundRepository soundRepository, UserRepository userRepository, FoodRepository foodRepository, ExperienceSoundRepository experienceSoundRepository) {
         this.experienceRepository = experienceRepository;
         this.scenarioRepository = scenarioRepository;
         this.soundRepository = soundRepository;
         this.userRepository = userRepository;
         this.foodRepository = foodRepository;
+        this.experienceSoundRepository = experienceSoundRepository;
     }
 
 
@@ -58,6 +60,7 @@ public class ExperienceServicesImplementation implements ExperienceServices {
             ExperienceSound experienceSound = new ExperienceSound();
             experienceSound.setExperience(experience);
             experienceSound.setSound(sound1);
+            experienceSoundRepository.save(experienceSound);
             experienceSounds.add(experienceSound);
             log.info("Sound added to experience: {}", sound);
         }
