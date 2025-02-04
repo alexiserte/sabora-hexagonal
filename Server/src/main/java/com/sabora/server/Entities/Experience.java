@@ -42,6 +42,6 @@ public class Experience {
     @JoinColumn(name = "id_alimento", referencedColumnName = "id", nullable = false)
     private Food food;
 
-    @OneToMany(mappedBy = "experience", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "experience")
     private List<ExperienceSound> sounds = new ArrayList<>();
 }

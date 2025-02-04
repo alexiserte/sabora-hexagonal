@@ -30,7 +30,7 @@ public class Sound {
     @Lob
     private String filepath;
 
-    @OneToMany(mappedBy = "sound", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "sound")
     private List<ExperienceSound> experiences = new ArrayList<>();
 
     public Sound(int id, String name, String filepath) {
