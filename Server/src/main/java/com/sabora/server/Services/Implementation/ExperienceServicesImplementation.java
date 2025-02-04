@@ -46,19 +46,33 @@ public class ExperienceServicesImplementation implements ExperienceServices {
 
     @Override
     public void endExperience(ExperienceDTO experienceDTO) {
-        List<ExperienceSound> experienceSounds = new ArrayList<>();
+        // Buscar la experiencia por ID, asegurándote de que existe
         Experience experience = experienceRepository.findById(experienceDTO.getId());
+
         long time = experienceDTO.getTime();
         List<String> sounds = experienceDTO.getSounds();
-        for (String sound : sounds) {
-            Sound sound1 = soundRepository.findByName(sound);
-            ExperienceSound experienceSound = new ExperienceSound();
-            experienceSound.setExperience(experience);
-            experienceSound.setSound(sound1);
-            experienceSounds.add(experienceSound);
+
+        // Limpiar la lista actual de sounds
+        experience.getSounds().clear();
+
+        // Crear los nuevos ExperienceSound y asignarlos a la experiencia
+        for (String soundName : sounds) {
+            Sound sound = soundRepository.findByName(soundName);
+            if (sound != null) {
+                ExperienceSound experienceSound = new ExperienceSound();
+                experienceSound.setExperience(experience);
+                experienceSound.setSound(sound);
+                experience.getSounds().add(experienceSound);  // Se agrega al listado de la experiencia
+            } else {
+                // Si el sonido no existe, lanzar una excepción o manejarlo de alguna forma
+                throw new RuntimeException("Sound not found: " + soundName);
+            }
         }
-        experience.setSounds(experienceSounds);
+
+        // Actualizar el tiempo
         experience.setTime(time);
+
+        // Guardar la experiencia con la lista actualizada de sounds
         experienceRepository.save(experience);
     }
 
