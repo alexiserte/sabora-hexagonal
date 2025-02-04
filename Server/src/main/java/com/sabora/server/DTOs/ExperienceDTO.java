@@ -1,6 +1,5 @@
 package com.sabora.server.DTOs;
 
-import com.sabora.server.Entities.ExperienceSound;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ExperienceDTO {
     private int id;
-    private long time;
+    private Long time;
     private String client;
     private String scenario;
     private String sound;
