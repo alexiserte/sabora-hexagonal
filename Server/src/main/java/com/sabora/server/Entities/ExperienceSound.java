@@ -27,4 +27,15 @@ public class ExperienceSound {
     @JoinColumn(name = "id_sonido")
     private Sound sound;
 
+    public void setExperience(Experience experience) {
+        this.experience = experience;
+        this.id.setExperienceID(experience.getId());
+    }
+
+    public void setSound(Sound sound) {
+        this.sound = sound;
+        this.id.setSoundID(sound.getId());
+    }
+
+
 }
