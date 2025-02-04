@@ -24,7 +24,7 @@ public class Experience {
     private int id;
 
     @Column(name="tiempo")
-    private long time;
+    private Long time;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente", referencedColumnName = "dni", nullable = false)

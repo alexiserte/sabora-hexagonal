@@ -32,4 +32,10 @@ public class Sound {
 
     @OneToMany(mappedBy = "sound", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ExperienceSound> experiences = new ArrayList<>();
+
+    public Sound(int id, String name, String filepath) {
+        this.id = id;
+        this.name = name;
+        this.filepath = filepath;
+    }
 }

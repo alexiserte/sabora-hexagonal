@@ -61,4 +61,26 @@ public class ExperienceServicesImplementation implements ExperienceServices {
         experience.setTime(time);
         experienceRepository.save(experience);
     }
+
+    @Override
+    public List<ExperienceDTO> getUnfinishedExperiences(String client) {
+       List<ExperienceDTO> experiences = new ArrayList<>();
+       Cliente cliente = (Cliente) userRepository.findByUsername(client);
+       List<Experience> unfinishedExperiences = experienceRepository.findAll().stream().filter(experience -> experience.getClient().equals(cliente) && (experience.getTime() == 0 || experience.getTime() == null)).toList();
+         for (Experience experience : unfinishedExperiences) {
+             ExperienceDTO experienceDTO = getExperienceDTO(experience);
+             experiences.add(experienceDTO);
+         }
+       return experiences;
+    }
+
+    private static ExperienceDTO getExperienceDTO(Experience experience) {
+        ExperienceDTO experienceDTO = new ExperienceDTO();
+        experienceDTO.setId(experience.getId());
+        experienceDTO.setClient(experience.getClient().getUsername());
+        experienceDTO.setScenario(experience.getScenario().getName());
+        experienceDTO.setSound(experience.getSound().getName());
+        experienceDTO.setFood(experience.getFood().getName());
+        return experienceDTO;
+    }
 }
