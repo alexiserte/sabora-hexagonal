@@ -43,11 +43,6 @@ public class ExperienceController {
 
     @GetMapping("/unfinished/")
     public ResponseEntity<?> getUnfinishedExperiences(@RequestParam(name = "client") String client){
-        try{
             return ResponseEntity.ok(experienceServices.getUnfinishedExperiences(client));
-        }catch (Exception e){
-            log.error("Error getting unfinished experiences: {}", e.getStackTrace());
-        }
-        return ResponseEntity.badRequest().build();
     }
 }
