@@ -46,7 +46,7 @@ public class ExperienceController {
         try{
             return ResponseEntity.ok(experienceServices.getUnfinishedExperiences(client));
         }catch (Exception e){
-            log.error("Error getting unfinished experiences: {}", e.getMessage());
+            log.error("Error getting unfinished experiences: {}", e.getStackTrace());
         }
         return ResponseEntity.badRequest().build();
     }
