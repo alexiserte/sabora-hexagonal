@@ -29,15 +29,4 @@ public class ServerApplication {
 		return webPage;
 	}
 
-	@GetMapping("/test-vr")
-	public String testVRButton(HttpServletRequest request){
-			return request.getRemoteAddr();
-	}
-
-	@GetMapping("/current-connections")
-	public String currentConnections(){
-		return CurrentConnections.currentVRGlassesConnections.toString();
-	}
-
-
 }
