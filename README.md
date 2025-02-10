@@ -2,7 +2,8 @@
   <br>
 </h1>
 
-![sabora](Server/src/main/resources/sabora-logo.png)
+<div align="center">![sabora](Server/src/main/resources/sabora-logo.png)</div>
+
 
 <h1 align="center">
   sabora
@@ -23,6 +24,14 @@ We mix real products with virtual environments to be able to carry out food tast
 
 # Features
 - **User Authentication**: Users can create an account and log in to the application.
+- **Data Encryption**: User data is encrypted using the AES algorithm.
+- **Food Management**: Users can view, add, edit, and delete food items.
+- **Form Management**: Users can view, add, edit, and delete forms.
+- **AI Integration**: AI is used to analyze the forms and provide insights.
+- **Mixed Reality**: Users can view food items in a mixed reality environment.
+- **File Management**: Users can upload and download files.
+- **Experience Management**: Users can view, add, edit, and delete experiences.
+  - 
 
 # Technologies
 <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white">
