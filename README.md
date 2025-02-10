@@ -31,7 +31,7 @@ We mix real products with virtual environments to be able to carry out food tast
 - **Mixed Reality**: Users can view food items in a mixed reality environment.
 - **File Management**: Users can upload and download files.
 - **Experience Management**: Users can view, add, edit, and delete experiences.
-  - 
+ 
 
 # Technologies
 <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white">
