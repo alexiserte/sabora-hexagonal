@@ -116,7 +116,7 @@ public class ConnectionTest {
 
         //Act
         newConnectionServices.createConnection(connName, localIp, remoteIp);
-        List<ConnectionParams> localConnections = newConnectionServices.getLocalConnection("127.0.0.0");
+        List<ConnectionParams> localConnections = newConnectionServices.getLocalConnection("255.255.255.255");
 
         //Assert
         assertTrue(localConnections.size() == 0);

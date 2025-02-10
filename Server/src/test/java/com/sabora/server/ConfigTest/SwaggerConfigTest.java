@@ -38,7 +38,7 @@ public class SwaggerConfigTest {
         assertEquals("saboraAuth", customOpenAPI.getComponents().getSecuritySchemes().keySet().iterator().next());
 
         // Check that the security scheme type of the customOpenAPI bean is "HTTP"
-        assertEquals("HTTP", customOpenAPI.getComponents().getSecuritySchemes().get("saboraAuth").getType().toString());
+        assertEquals("http", customOpenAPI.getComponents().getSecuritySchemes().get("saboraAuth").getType().toString());
 
         // Check that the security scheme of the custom
         // OpenAPI bean is "bearer"
