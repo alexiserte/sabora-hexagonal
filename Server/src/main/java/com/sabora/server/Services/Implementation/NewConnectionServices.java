@@ -15,7 +15,6 @@ public class NewConnectionServices{
         // Si existe un elemento en la lista con la misma direccion IP publica y privada se actualiza, si no se añade
         if(connections.size() == 0) {
             connections.add(new ConnectionParams(name,localIp,remoteIp));
-            return;
         }
         else {
             for (ConnectionParams connection : connections) {
@@ -51,4 +50,5 @@ public class NewConnectionServices{
         String[] ip2Parts = ip2.split("\\.");
         return ip1Parts[0].equals(ip2Parts[0]) && ip1Parts[1].equals(ip2Parts[1]);
     }
+
 }
