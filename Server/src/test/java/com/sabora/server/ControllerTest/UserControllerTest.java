@@ -16,7 +16,7 @@ public class UserControllerTest {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String BASE_URL = "http://localhost:/8080";
+    private final String BASE_URL = "http://localhost";
 
     @Test
     void greetingShouldReturnDefaultMessage() throws Exception {
