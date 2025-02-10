@@ -2,8 +2,8 @@
   <br>
 </h1>
 
-<div align="center">![sabora](Server/src/main/resources/sabora-logo.png)</div>
 
+![sabora](Server/src/main/resources/sabora-logo.png)
 
 <h1 align="center">
   sabora
