@@ -29,6 +29,7 @@ public class ExperienceController {
             log.error("Error starting experience: {}", e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
      }
+
     }
 
     @PutMapping("/end")
