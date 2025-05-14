@@ -22,6 +22,7 @@ Sabora is a project born from the fusion of innovation in mixed reality and the 
 We mix real products with virtual environments to be able to carry out food tastings and collect the emotions and reactions of each user to these products depending on their environment through forms.
 
 
+
 # Features
 - **User Authentication**: Users can create an account and log in to the application.
 - **Data Encryption**: User data is encrypted using the AES algorithm.
