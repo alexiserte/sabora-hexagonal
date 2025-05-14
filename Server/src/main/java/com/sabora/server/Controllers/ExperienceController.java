@@ -5,6 +5,7 @@ import com.sabora.server.Services.ExperienceServices;
 import feign.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +27,8 @@ public class ExperienceController {
          return ResponseEntity.ok(experienceServices.addExperience(experienceDTO));
         }catch (Exception e){
             log.error("Error starting experience: {}", e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
      }
-        return ResponseEntity.badRequest().build();
     }
 
     @PutMapping("/end")
