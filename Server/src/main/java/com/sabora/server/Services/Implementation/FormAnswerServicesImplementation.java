@@ -10,6 +10,7 @@ import com.sabora.server.Repositories.UserRepository;
 import com.sabora.server.Services.FormAnswerServices;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,15 +37,14 @@ public class FormAnswerServicesImplementation implements FormAnswerServices {
 
             Question question = questionRepository.findById(answer.getQuestionId());
             answerEntity.setQuestion(question);
-
-            User user = userRepository.findByDni(formAnswerDTO.getUserDni());
-            answerEntity.setAuthor((GlassesUser) user);
+            answerEntity.setAuthor(formAnswerDTO.getUserIdentifier());
 
             answerEntity.setValue(answer.getAnswer());
 
+
             Experience experience = experienceRepository.findById(formAnswerDTO.getExperienceId());
             answerEntity.setExperience(experience);
-
+            answerEntity.setAnswerTimeStamp(LocalDateTime.now());
             answerRepository.save(answerEntity);
         }
     }

@@ -12,6 +12,6 @@ import java.util.List;
 public class FormAnswerDTO {
     private int formId;
     private int experienceId;
-    private String userDni;
+    private Long userIdentifier;
     private List<AnswerDTO> answers;
 }
