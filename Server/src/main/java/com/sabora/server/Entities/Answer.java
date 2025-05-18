@@ -29,7 +29,9 @@ public class Answer {
     @JoinColumn(name = "id_experiencia", referencedColumnName = "id", nullable = false)
     private Experience experience;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario_gafas", referencedColumnName = "dni", nullable = false)
-    private GlassesUser author;
+    @Column(name="fecha_respuesta", nullable=false)
+    private java.time.LocalDateTime answerTimeStamp;
+
+    @Column(name="id_usuario_gafas", nullable=false)
+    private Long author;
 }
