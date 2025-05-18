@@ -32,6 +32,6 @@ public class Answer {
     @Column(name="fecha_respuesta", nullable=false)
     private java.time.LocalDateTime answerTimeStamp;
 
-    @Column(name="id_usuario_gafas", nullable=false)
-    private Long author;
+    @Column(name="id_usuario_gafas", nullable=false, length = 750)
+    private String author;
 }
