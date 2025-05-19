@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class TabletConnectionController {
 
 
-    NewConnectionServices connectionServices;
+    TabletConnectionServicesImplementation connectionServices;
 
     public TabletConnectionController(TabletConnectionServicesImplementation connectionServices) {
         this.connectionServices = connectionServices;
