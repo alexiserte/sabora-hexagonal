@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class NewConnectionServices{
 
-    private static List<ConnectionParams> connections = new ArrayList<>();
+    protected static List<ConnectionParams> connections = new ArrayList<>();
 
     public void createConnection(String name, String localIp, String remoteIp){
         // Si existe un elemento en la lista con la misma direccion IP publica y privada se actualiza, si no se añade
