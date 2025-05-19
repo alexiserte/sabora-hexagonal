@@ -18,7 +18,7 @@ public class TabletConnectionController {
         this.connectionServices = connectionServices;
     }
 
-    @PostMapping("/connection")
+    @PostMapping("/tablet/connection")
     public ResponseEntity<?> connection(@RequestBody ConnectionObject object, HttpServletRequest request){
         System.out.println(object.getName());
         System.out.println(object.getLocalIp());
@@ -26,18 +26,18 @@ public class TabletConnectionController {
         return ResponseEntity.ok("Connection created");
     }
 
-    @DeleteMapping("/connection")
+    @DeleteMapping("/tablet/connection")
     public ResponseEntity<?> removeConnection(@RequestBody ConnectionObject object){
         connectionServices.removeConnection(object.getName());
         return ResponseEntity.ok("Connection removed");
     }
 
-    @GetMapping("/all-connections")
+    @GetMapping("/tablet/all-connections")
     public ResponseEntity<?> getConnections(){
         return ResponseEntity.ok(connectionServices.getConnections());
     }
 
-    @GetMapping("/connections")
+    @GetMapping("/tablet/connections")
     public ResponseEntity<?> getLocalConnections(HttpServletRequest request){
         return ResponseEntity.ok(connectionServices.getLocalConnection(request.getRemoteAddr()));
     }
