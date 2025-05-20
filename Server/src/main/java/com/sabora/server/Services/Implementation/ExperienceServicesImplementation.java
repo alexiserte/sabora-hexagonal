@@ -43,9 +43,9 @@ public class ExperienceServicesImplementation implements ExperienceServices {
         experience.setFood(foodRepository.findByName(experienceDTO.getFood()));
         experienceRepository.save(experience);
 
-        Experience savedExperience = experienceRepository.findByClientAndScenarioAndSoundAndFood(experience.getClient(), experience.getScenario(), experience.getSound(), experience.getFood());
+        List<Experience> savedExperience = experienceRepository.findByClientAndScenarioAndSoundAndFood(experience.getClient(), experience.getScenario(), experience.getSound(), experience.getFood());
         ExperienceDTO savedExperienceDTO = experienceDTO;
-        savedExperienceDTO.setId(savedExperience.getId());
+        savedExperienceDTO.setId(savedExperience.getLast().getId());;
         return savedExperienceDTO;
     }
 
