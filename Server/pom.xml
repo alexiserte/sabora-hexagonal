@@ -11,7 +11,8 @@
 	<groupId>com.sabora</groupId>
 	<artifactId>server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>server</name>
+    <packaging>pom</packaging>
+    <name>server</name>
 	<description>sabora backend server</description>
 	<url/>
 	<licenses>
@@ -20,7 +21,12 @@
 	<developers>
 		<developer/>
 	</developers>
-	<scm>
+    <modules>
+        <module>boot</module>
+		<module>driving/api-rest</module>
+		<module>driven/mysql-repository</module>
+	</modules>
+    <scm>
 		<connection/>
 		<developerConnection/>
 		<tag/>
