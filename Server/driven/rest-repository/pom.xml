@@ -5,8 +5,9 @@
         <groupId>com.sabora</groupId>
         <artifactId>server</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <artifactId>application</artifactId>
-    <name>Archetype - application</name>
+    <artifactId>rest-repository</artifactId>
+    <name>Archetype - rest-repository</name>
     <url>http://maven.apache.org</url>
 </project>

@@ -6,7 +6,7 @@
         <artifactId>server</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>application</artifactId>
-    <name>Archetype - application</name>
+    <artifactId>shared</artifactId>
+    <name>Archetype - shared</name>
     <url>http://maven.apache.org</url>
 </project>

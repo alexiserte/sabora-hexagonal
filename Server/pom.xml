@@ -25,6 +25,9 @@
         <module>boot</module>
 		<module>driving/api-rest</module>
 		<module>driven/mysql-repository</module>
+		<module>application</module>
+		<module>shared</module>
+		<module>driven/rest-repository</module>
 	</modules>
     <scm>
 		<connection/>
