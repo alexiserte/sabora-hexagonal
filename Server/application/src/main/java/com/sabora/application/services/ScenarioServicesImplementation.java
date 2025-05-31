@@ -1,36 +1,28 @@
 package com.sabora.application.services;
 
-import com.sabora.server.Clients.FileServiceClient;
-import com.sabora.server.DTOs.ScenarioDTO;
-import com.sabora.server.Entities.Scenario;
-import com.sabora.server.Repositories.ScenarioRepository;
-import com.sabora.server.Repositories.SoundRepository;
-import com.sabora.server.Services.ScenarioServices;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.sabora.application.domain.Scenario;
+import com.sabora.application.ports.driven.FileServiceClientRepositoryPort;
+import com.sabora.application.ports.driven.ScenarioRepositoryPort;
+import com.sabora.application.ports.driven.SoundRepositoryPort;
+import com.sabora.application.ports.driving.ScenarioServices;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
+@AllArgsConstructor
 public class ScenarioServicesImplementation implements ScenarioServices {
-    @Autowired
-    private FileServiceClient fileServiceClient;
 
 
-    private ScenarioRepository scenarioRepository;
-    private SoundRepository soundRepository;
+    private ScenarioRepositoryPort scenarioRepository;
+    private SoundRepositoryPort soundRepository;
 
-    public ScenarioServicesImplementation(ScenarioRepository  scenarioRepository, SoundRepository soundRepository) {
-        this.scenarioRepository = scenarioRepository;
-        this.soundRepository = soundRepository;
-    }
+    private FileServiceClientServiceImplementation fileServiceClient;
 
     @Override
-    public void createScenario(ScenarioDTO scenarioDTO, MultipartFile file) {
-        Scenario scenario = new Scenario();
-        scenario.setName(scenarioDTO.getName());
-        scenario.setPlace(scenarioDTO.getPlace());
-        scenario.setPhotoPath(fileServiceClient.uploadFile(file).getBody());
-        scenario.setSound(soundRepository.findByName(scenarioDTO.getSound()));
+    public void createScenario(Scenario scenario, MultipartFile file) {
+        scenario.setPhotoPath(fileServiceClient.uploadFile(file));
+        scenario.setSound(soundRepository.findByName(scenario.getSound().getName()));
         scenarioRepository.save(scenario);
     }
 }

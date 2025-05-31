@@ -1,14 +1,15 @@
 package com.sabora.api.adapters;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sabora.server.DTOs.FormDTO;
-import com.sabora.server.Entities.Form;
-import com.sabora.server.Services.Implementation.FormServicesImplementation;
-import com.sabora.server.Services.Implementation.RabbitMQMessageProducerService;
+import com.sabora.api.dtos.FormDTO;
+import com.sabora.api.mappers.FormDTOMapper;
+import com.sabora.application.ports.driving.FormServices;
+import com.sabora.application.services.RabbitMQMessageProducerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -19,17 +20,16 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/form")
+@AllArgsConstructor
 public class FormController {
 
-    private final FormServicesImplementation formService;
+    private final FormServices formService;
     private static final Logger log = LoggerFactory.getLogger(FormController.class);
     private final RabbitMQMessageProducerService rabbitMQMessageProducerService;
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    public FormController(FormServicesImplementation formService, RabbitMQMessageProducerService rabbitMQMessageProducerService) {
-        this.formService = formService;
-        this.rabbitMQMessageProducerService = rabbitMQMessageProducerService;
-    }
+    private FormDTOMapper formDTOMapper;
+
 
 
     @GetMapping("/all")
@@ -40,16 +40,13 @@ public class FormController {
             @ApiResponse(responseCode = "204", description = "No forms found")
     })
     public ResponseEntity<List<FormDTO>> getForm() {
-        List<Form> forms = formService.getAllForms();
+        List<FormDTO> forms = formService.getAllForms().stream().map(formDTOMapper::toDTO).collect(Collectors.toList());
         if(forms.isEmpty()) {
             log.error("No forms found");
             return ResponseEntity.noContent().build();
         }
-        List<FormDTO> formDTOS = forms.stream()
-                .map(formService::createFormDTO)
-                .collect(Collectors.toList());
         log.info("Getting all forms");
-        return ResponseEntity.ok(formDTOS);
+        return ResponseEntity.ok(forms);
     }
 
     @GetMapping("/{id}")
@@ -69,13 +66,12 @@ public class FormController {
     @PostMapping("")
     public ResponseEntity<?> postForm(@RequestBody FormDTO formDTO) {
 
-        formService.saveForm(formDTO);
+        formService.saveForm(formDTOMapper.toDomain(formDTO));
         log.info("Form {} added successfully", formDTO.getName());
         try {
-            Form form = formService.getFormByName(formDTO.getName());
-            FormDTO formDTO1 = formService.createFormDTO(form);
-            log.warn("Sending form with id: {} to RabbitMQ", formDTO1.getId());
-            rabbitMQMessageProducerService.sendMessageCreatedForm(objectMapper.writeValueAsString(formDTO1));
+            FormDTO form = formDTOMapper.toDTO(formService.getFormByName(formDTO.getName()));
+            log.warn("Sending form with id: {} to RabbitMQ", form.getId());
+            rabbitMQMessageProducerService.sendMessageCreatedForm(objectMapper.writeValueAsString(form));
         }catch (Exception e) {
             log.error("Error sending message to RabbitMQ: {}", e.getMessage());
         }

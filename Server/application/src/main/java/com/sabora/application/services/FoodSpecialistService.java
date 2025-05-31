@@ -1,20 +1,19 @@
 package com.sabora.application.services;
 
-import com.sabora.server.Entities.FoodSpecialist;
-import com.sabora.server.Repositories.FoodSpecialistRepository;
-import com.sabora.server.Services.UserService;
+import com.sabora.application.domain.FoodSpecialist;
+import com.sabora.application.ports.driven.FoodSpecialistRepositoryPort;
+import com.sabora.application.ports.driving.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class FoodSpecialistService implements UserService<FoodSpecialist> {
 
-    private FoodSpecialistRepository foodSpecialistRepository;
+    private FoodSpecialistRepositoryPort foodSpecialistRepository;
 
-    public FoodSpecialistService(FoodSpecialistRepository foodSpecialistRepository){
-        this.foodSpecialistRepository = foodSpecialistRepository;
-    }
 
     @Override
     public void registerUser(FoodSpecialist user) {

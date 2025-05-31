@@ -1,9 +1,7 @@
 package com.sabora.api.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -11,10 +9,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 public class UniqueAnswerQuestionDTO extends QuestionDTO {
     private List<String> options;
-    public UniqueAnswerQuestionDTO(int id, String question, List<String> options) {
-        super(id, question);
-        this.options = options;
-    }
 }

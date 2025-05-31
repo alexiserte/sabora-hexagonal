@@ -1,28 +1,32 @@
 package com.sabora.api.adapters;
 
-import com.sabora.server.DTOs.FormAnswerDTO;
-import com.sabora.server.Services.FormAnswerServices;
+
+import com.sabora.api.dtos.FormAnswerDTO;
+import com.sabora.api.dtos.SimpleMessageDTO;
+import com.sabora.api.mappers.FormAnswerDTOMapper;
+import com.sabora.application.ports.driving.FormAnswerServices;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
 
 @RestController
+@AllArgsConstructor
 public class AnswerController {
 
     private FormAnswerServices formAnswerServices;
+    private FormAnswerDTOMapper formAnswerDTOMapper;
     private static final Logger log = Logger.getLogger(AnswerController.class.getName());
 
-    public AnswerController(FormAnswerServices formAnswerServices) {
-        this.formAnswerServices = formAnswerServices;
-    }
-
     @PostMapping("/form/{id}/answer")
-    public ResponseEntity<?> answerForm(@PathVariable String id, @RequestBody FormAnswerDTO formAnswerDTO) {
+    public ResponseEntity<SimpleMessageDTO> answerForm(@PathVariable String id, @RequestBody FormAnswerDTO formAnswerDTO) {
         try {
             log.info("Answering form with id: " + id);
-            formAnswerServices.answerForm(formAnswerDTO);
-            return ResponseEntity.ok("Respuestas almacenadas correctamente!");
+            formAnswerServices.answerForm(formAnswerDTOMapper.toDomain(formAnswerDTO));
+            return ResponseEntity.ok(SimpleMessageDTO.builder()
+                    .message("Form answered successfully")
+                    .build());
         } catch (Exception e) {
             log.severe("Error answering form with id: " + id);
             log.severe(e.getMessage());

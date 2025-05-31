@@ -1,22 +1,13 @@
 package com.sabora.application.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.Table;
-import lombok.*;
-
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@SuperBuilder
 public class UniqueAnswerQuestion extends Question {
-
-    @Builder
-    public UniqueAnswerQuestion(int id, String value, Form form, List<QuestionOption> options) {
-        super(id, value, form, options);
-    }
-
 }

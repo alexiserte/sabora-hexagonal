@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface FileServiceClient {
 
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> uploadFile(@RequestPart("file") MultipartFile file);
+    ResponseEntity<String> uploadFile(@RequestPart("file") MultipartFile file);
 
 
     @DeleteMapping("/delete")

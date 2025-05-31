@@ -1,6 +1,7 @@
 package com.sabora.application.ports.driving;
 
-import com.sabora.server.Entities.Food;
+
+import com.sabora.application.domain.Food;
 
 import java.util.List;
 

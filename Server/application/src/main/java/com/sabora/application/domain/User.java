@@ -1,14 +1,12 @@
 package com.sabora.application.domain;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 public class User {
 
     private String dni;

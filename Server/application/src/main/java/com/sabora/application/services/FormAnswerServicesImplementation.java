@@ -1,84 +1,55 @@
 package com.sabora.application.services;
 
-import com.sabora.server.DTOs.AnswerDTO;
-import com.sabora.server.DTOs.FormAnswerDTO;
-import com.sabora.server.Entities.*;
-import com.sabora.server.Repositories.AnswerRepository;
-import com.sabora.server.Repositories.ExperienceRepository;
-import com.sabora.server.Repositories.QuestionRepository;
-import com.sabora.server.Repositories.UserRepository;
-import com.sabora.server.Services.FormAnswerServices;
+import com.sabora.application.domain.Answer;
+import com.sabora.application.domain.Experience;
+import com.sabora.application.domain.FormAnswer;
+import com.sabora.application.domain.Question;
+import com.sabora.application.ports.driven.AnswerRepositoryPort;
+import com.sabora.application.ports.driven.ExperienceRepositoryPort;
+import com.sabora.application.ports.driven.QuestionRepositoryPort;
+import com.sabora.application.ports.driven.UserRepositoryPort;
+import com.sabora.application.ports.driving.FormAnswerServices;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class FormAnswerServicesImplementation implements FormAnswerServices {
 
-    private AnswerRepository answerRepository;
-    private QuestionRepository questionRepository;
-    private UserRepository userRepository;
-    private ExperienceRepository experienceRepository;
+    private AnswerRepositoryPort answerRepository;
+    private QuestionRepositoryPort questionRepository;
+    private ExperienceRepositoryPort experienceRepository;
 
-    public FormAnswerServicesImplementation(AnswerRepository answerRepository, QuestionRepository questionRepository, UserRepository userRepository, ExperienceRepository experienceRepository) {
-        this.answerRepository = answerRepository;
-        this.questionRepository = questionRepository;
-        this.userRepository = userRepository;
-        this.experienceRepository = experienceRepository;
-    }
 
     @Override
-    public void answerForm(FormAnswerDTO formAnswerDTO) {
-        List<AnswerDTO> formAnswers = formAnswerDTO.getAnswers();
-        for (AnswerDTO answer : formAnswers) {
-            Answer answerEntity = new Answer();
+    public void answerForm(FormAnswer formAnswer) {
+        for (Answer answer : formAnswer.getAnswers()) {
+            Question question = questionRepository.findById(answer.getQuestion().getId());
+            answer.setQuestion(question);
 
-            Question question = questionRepository.findById(answer.getQuestionId());
-            answerEntity.setQuestion(question);
-            answerEntity.setAuthor(formAnswerDTO.getUserIdentifier());
-
-            answerEntity.setValue(answer.getAnswer());
-
-
-            Experience experience = experienceRepository.findById(formAnswerDTO.getExperienceId());
-            answerEntity.setExperience(experience);
-            answerEntity.setAnswerTimeStamp(LocalDateTime.now());
-            answerRepository.save(answerEntity);
+            Experience experience = experienceRepository.findById(answer.getExperience().getId());
+            answer.setExperience(experience);
+            answerRepository.save(answer);
         }
     }
 
     @Override
-    public List<AnswerDTO> getFormAnswers(int formId) {
+    public List<Answer> getFormAnswers(Integer formId) {
         List<Question> questions = questionRepository.findByFormId(formId);
-        List<AnswerDTO> res = new ArrayList<>();
+        List<Answer> res = new ArrayList<>();
 
         for (Question question : questions) {
-            List<Answer> answers = answerRepository.findByQuestionId(question.getId());
-            for (Answer answer : answers) {
-                AnswerDTO answerDTO = new AnswerDTO();
-                answerDTO.setId(answer.getId());
-                answerDTO.setQuestionId(answer.getQuestion().getId());
-                answerDTO.setAnswer(answer.getValue());
-                res.add(answerDTO);
-            }
+            answerRepository.findByQuestionId(question.getId()).forEach(answer -> res.add(answer));
         }
         return res;
     }
 
     @Override
-    public List<AnswerDTO> getAnswersToAQuestion(int questionId) {
-        List<Answer> answers = answerRepository.findByQuestionId(questionId);
-        List<AnswerDTO> res = new ArrayList<>();
-        for (Answer answer : answers) {
-            AnswerDTO answerDTO = new AnswerDTO();
-            answerDTO.setId(answer.getId());
-            answerDTO.setQuestionId(answer.getQuestion().getId());
-            answerDTO.setAnswer(answer.getValue());
-            res.add(answerDTO);
-        }
-        return res;
+    public List<Answer> getAnswersToAQuestion(Integer questionId) {
+        return answerRepository.findByQuestionId(questionId);
     }
 
 

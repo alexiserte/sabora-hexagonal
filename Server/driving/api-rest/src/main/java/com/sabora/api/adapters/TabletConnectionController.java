@@ -1,10 +1,9 @@
 package com.sabora.api.adapters;
 
-import com.sabora.server.Entities.ConnectionObject;
-import com.sabora.server.Services.Implementation.NewConnectionServices;
-import com.sabora.server.Services.Implementation.TabletConnectionServicesImplementation;
+
+import com.sabora.application.domain.ConnectionObject;
+import com.sabora.application.services.TabletConnectionServicesImplementation;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

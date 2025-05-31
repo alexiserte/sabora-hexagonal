@@ -1,81 +1,69 @@
 package com.sabora.application.services;
 
-import com.sabora.server.Configuration.EncryptionConfig;
-import com.sabora.server.DTOs.*;
-import com.sabora.server.Entities.*;
-import com.sabora.server.Repositories.*;
-import com.sabora.server.Services.FormServices;
-import com.sabora.server.Utils.Encryption.DataEncryption;
+import com.sabora.application.config.EncryptionConfig;
+import com.sabora.application.domain.FoodSpecialist;
+import com.sabora.application.domain.Form;
+import com.sabora.application.domain.Question;
+import com.sabora.application.domain.QuestionOption;
+import com.sabora.application.ports.driven.*;
+import com.sabora.application.ports.driving.FormServices;
+import com.sabora.application.Encryption.*;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class FormServicesImplementation implements FormServices {
 
-    private FormRepository formRepository;
-    private QuestionRepository questionRepository;
-    private AnswerRepository answerRepository;
-    private QuestionOptionRepository questionOptionRepository;
-    private QuestionServicesImplementation questionServices;
-    private UserRepository userRepository;
+    private FormRepositoryPort formRepository;
+    private QuestionRepositoryPort questionRepository;
+    private AnswerRepositoryPort answerRepository;
+    private QuestionOptionRepositoryPort questionOptionRepository;
+    private UserRepositoryPort userRepository;
     private EncryptionConfig encryptionConfig;
 
-
-    public FormServicesImplementation(FormRepository formRepository, QuestionRepository questionRepository, AnswerRepository answerRepository, QuestionOptionRepository questionOptionRepository, QuestionServicesImplementation questionServices, UserRepository userRepository, EncryptionConfig encryptionConfig) {
-        this.formRepository = formRepository;
-        this.questionRepository = questionRepository;
-        this.answerRepository = answerRepository;
-        this.questionOptionRepository = questionOptionRepository;
-        this.questionServices = questionServices;
-        this.userRepository = userRepository;
-        this.encryptionConfig = encryptionConfig;
-    }
-
-    public FormDTO createFormDTO(Form form) {
+    @Override
+    public Form createFormDTO(Form form) {
         try {
             int formId = form.getId();
             String formName = form.getName();
             String authorUsername = DataEncryption.decrypt(form.getAuthor().getDni(), encryptionConfig.getSecretKey());
             Date creationDate = form.getDate();
-
-            List<QuestionDTO> questionsDTO = new ArrayList<>();
             List<Question> questions = questionRepository.findByFormId(formId);
-            for (Question question : questions) {
-                questionsDTO.add(questionServices.mapToQuestionDTO(question));
-            }
-            return new FormDTO(formId, formName, authorUsername, creationDate, questionsDTO);
-        }catch (Exception e) {
+            return Form.builder()
+                    .id(formId)
+                    .name(formName)
+                    .author((FoodSpecialist) userRepository.findByDni(DataEncryption.encrypt(authorUsername, encryptionConfig.getSecretKey())))
+                    .date(creationDate)
+                    .questions(questions)
+                    .build();
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
 
+    @Override
     public List<Form> getAllForms() {
         return formRepository.findAll();
     }
 
-    public void saveForm(FormDTO formDTO) {
+    @Override
+    public void saveForm(Form form) {
 
         try {
-            Form form = new Form();
-
-            String dniEncrypted = DataEncryption.encrypt(formDTO.getFoodSpecialist(),encryptionConfig.getSecretKey());
+            String dniEncrypted = DataEncryption.encrypt(form.getAuthor().getDni(), encryptionConfig.getSecretKey());
             form.setAuthor((FoodSpecialist) userRepository.findByDni(dniEncrypted));
-            form.setName(formDTO.getName());
-            form.setDate(formDTO.getCreationDate());
-
             form = formRepository.save(form);
 
-            for(QuestionDTO questionDTO : formDTO.getQuestions()) {
-                Question question = questionServices.questionDTOToQuestion(questionDTO);
+            for (Question question : form.getQuestions()) {
                 question.setForm(form);
                 questionRepository.save(question);
                 List<QuestionOption> options = question.getOptions();
-                for(QuestionOption option : options) {
+                for (QuestionOption option : options) {
                     option.setQuestion(question);
                     questionOptionRepository.save(option);
                 }
@@ -85,18 +73,17 @@ public class FormServicesImplementation implements FormServices {
         }
     }
 
-    public Form getFormById(int id) {
-        Optional<Form> forms = formRepository.findById(Long.valueOf(id));
-        if(forms.isPresent()) {
-            return forms.get();
-        }
-        return null;
+    @Override
+    public Form getFormById(Integer id) {
+        return formRepository.findById(Long.valueOf(id));
     }
 
-    public void deleteForm(int id) {
+    @Override
+    public void deleteForm(Integer id) {
         formRepository.deleteById(Long.valueOf(id));
     }
 
+    @Override
     public Form getFormByName(String name) {
         return formRepository.findByName(name);
     }

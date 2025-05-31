@@ -1,11 +1,15 @@
 package com.sabora.application.ports.driving;
 
-import com.sabora.server.DTOs.FormDTO;
-import com.sabora.server.Entities.Form;
+
+import com.sabora.application.domain.Form;
+
+import java.util.List;
 
 public interface FormServices {
-    public FormDTO createFormDTO(Form form);
-    public void saveForm(FormDTO formDTO);
-    public Form getFormById(int id);
-    public void deleteForm(int id);
+    Form createFormDTO(Form form);
+    void saveForm(Form formDTO);
+    Form getFormById(Integer id);
+    void deleteForm(Integer id);
+    Form getFormByName(String name);
+    List<Form> getAllForms();
 }

@@ -1,23 +1,15 @@
 package com.sabora.api.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 public class RangeQuestionDTO extends QuestionDTO {
     private int min;
     private int max;
     private int interval;
-
-    public RangeQuestionDTO(int id, String question, int min, int max, int interval) {
-        super(id, question);
-        this.min = min;
-        this.max = max;
-        this.interval = interval;
-    }
 }

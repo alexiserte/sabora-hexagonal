@@ -1,19 +1,19 @@
 package com.sabora.application.services;
 
-import com.sabora.server.Entities.DataAnalyst;
-import com.sabora.server.Repositories.DataAnalystRepository;
-import com.sabora.server.Services.UserService;
+import com.sabora.application.domain.DataAnalyst;
+import com.sabora.application.ports.driven.DataAnalystRepositoryPort;
+import com.sabora.application.ports.driving.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
+@AllArgsConstructor
 public class DataAnalystService implements UserService<DataAnalyst> {
 
-    private DataAnalystRepository dataAnalystRepository;
+    private DataAnalystRepositoryPort dataAnalystRepository;
 
-    public DataAnalystService(DataAnalystRepository dataAnalystRepository){
-        this.dataAnalystRepository = dataAnalystRepository;
-    }
 
     @Override
     public void registerUser(DataAnalyst user) {

@@ -1,7 +1,6 @@
 package com.sabora.application.domain;
 
 
-import jakarta.persistence.*;
 import lombok.*;
 
 @Getter

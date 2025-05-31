@@ -1,9 +1,9 @@
 package com.sabora.application.domain;
 
-import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Builder
 @Getter
@@ -16,5 +16,6 @@ public class Form {
     private Date date;
     private String name;
     private FoodSpecialist author;
+    private List<Question> questions;
 
 }

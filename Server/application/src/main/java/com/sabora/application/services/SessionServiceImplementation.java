@@ -1,38 +1,41 @@
 package com.sabora.application.services;
 
-import com.sabora.server.Configuration.EncryptionConfig;
-import com.sabora.server.DTOs.UserDTO;
-import com.sabora.server.Exceptions.User.AlreadyExistingUserException;
-import com.sabora.server.Exceptions.User.IllegalUserType;
-import com.sabora.server.Exceptions.User.UserNotFoundException;
-import com.sabora.server.Entities.Cliente;
-import com.sabora.server.Entities.User;
-import com.sabora.server.Repositories.UserRepository;
-import com.sabora.server.Services.SessionService;
-import com.sabora.server.Services.UserService;
-import com.sabora.server.Utils.Encryption.DataEncryption;
-import com.sabora.server.Utils.Encryption.PasswordEncrypter;
-import com.sabora.server.Utils.Validation.UserValidation;
+import com.sabora.application.config.EncryptionConfig;
+import com.sabora.application.domain.Cliente;
+import com.sabora.application.domain.User;
+import com.sabora.application.exception.User.AlreadyExistingUserException;
+import com.sabora.application.exception.User.UserNotFoundException;
+import com.sabora.application.ports.driven.UserRepositoryPort;
+import com.sabora.application.ports.driving.SessionService;
+
+import com.sabora.application.ports.driving.UserService;
+import com.sabora.application.Encryption.DataEncryption;
+import com.sabora.application.Encryption.PasswordEncrypter;
+import com.sabora.application.validation.UserValidation;
+import jakarta.annotation.PostConstruct;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
 @Service
+@AllArgsConstructor
 public class SessionServiceImplementation implements SessionService {
 
-    private final Map<String, UserService<? extends User>> userServices;
-    private final UserRepository userRepository;
-    private final PasswordEncrypter passwordEncrypter = new PasswordEncrypter();
+    private final GlassesUserService glassesUserService;
+    private final FoodSpecialistService foodSpecialistService;
+    private final ClienteService clienteService;
+    private final DataAnalystService dataAnalystService;
+
+    private final UserRepositoryPort userRepository;
     private final EncryptionConfig encryptionConfig;
 
-    public SessionServiceImplementation(
-            GlassesUserService glassesUserService,
-            FoodSpecialistService foodSpecialistService,
-            ClienteService clienteService,
-            DataAnalystService dataAnalystService, UserRepository userRepository, EncryptionConfig encryptionConfig
-    ) {
-        this.userRepository = userRepository;
-        this.encryptionConfig = encryptionConfig;
+    private Map<String, UserService<? extends User>> userServices;
+    private final PasswordEncrypter passwordEncrypter = new PasswordEncrypter();
+
+
+    @PostConstruct
+    public void initUserServices() {
         userServices = Map.of(
                 "GlassesUser", glassesUserService,
                 "FoodSpecialist", foodSpecialistService,
@@ -41,14 +44,12 @@ public class SessionServiceImplementation implements SessionService {
         );
     }
 
-    public void register(UserDTO userDTO) {
-        UserValidation.validateUser(userDTO);
-        User user = userDTO.toUser();
+    public void register(User user) {
+        UserValidation.validateUser(user);
+
         user.setPassword(passwordEncrypter.encryptPassword(user.getPassword()));
-        if (user == null || !userServices.containsKey(userDTO.getType())) {
-            throw new IllegalUserType(userDTO.getType());
-        }
-        UserService<User> userService = (UserService<User>) userServices.get(userDTO.getType());
+
+        UserService<User> userService = (UserService<User>) userServices.get(user.getClass().getSimpleName());
         if(userRepository.existsByUsername(user.getUsername())){
                 throw new AlreadyExistingUserException(user.getUsername());
         }else{
@@ -70,7 +71,7 @@ public class SessionServiceImplementation implements SessionService {
     }
 
     @Override
-    public UserDTO getUser(String username, String password) {
+    public User getUser(String username, String password) {
         for (UserService<? extends User> userService : userServices.values()) {
             User user = userService.getUser(username);
             if (user != null) {
@@ -79,7 +80,7 @@ public class SessionServiceImplementation implements SessionService {
                     user.setEmail(DataEncryption.decrypt(user.getEmail(), encryptionConfig.getSecretKey()));
                     user.setTelefono(DataEncryption.decrypt(user.getTelefono(), encryptionConfig.getSecretKey()));
                     if (passwordEncrypter.checkPassword(password, user.getPassword())) {
-                        return new UserDTO(user);
+                        return user;
                     }
                 } catch (Exception e) {
                     throw new RuntimeException(e);

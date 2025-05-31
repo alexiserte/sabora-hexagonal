@@ -1,9 +1,6 @@
 package com.sabora.api.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Date;
 import java.util.List;
@@ -12,6 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class FormDTO {
 
     private Integer id;

@@ -1,14 +1,17 @@
 package com.sabora.api.adapters;
 
-import com.sabora.server.DTOs.UserDTO;
-import com.sabora.server.Exceptions.User.AlreadyExistingUserException;
-import com.sabora.server.Exceptions.User.IncorrectPasswordException;
-import com.sabora.server.Exceptions.User.UserNotFoundException;
-import com.sabora.server.Exceptions.User.UserValidationException;
-import com.sabora.server.Services.SessionService;
+import com.sabora.api.dtos.UserDTO;
+import com.sabora.api.mappers.UserDTOMapper;
+import com.sabora.application.exception.User.AlreadyExistingUserException;
+import com.sabora.application.exception.User.IncorrectPasswordException;
+import com.sabora.application.exception.User.UserNotFoundException;
+import com.sabora.application.exception.User.UserValidationException;
+import com.sabora.application.ports.driving.SessionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,16 +19,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor
+@Slf4j
 @RequestMapping("/user")
 public class UserController {
 
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
     private final SessionService sessionService;
-
-    public UserController(SessionService sessionService){
-        this.sessionService = sessionService;
-    }
-
+    private final UserDTOMapper userDTOMapper;
 
     @PostMapping("")
     @Operation(summary = "Register a new user",
@@ -37,7 +37,7 @@ public class UserController {
     })
     public ResponseEntity<?> register(@RequestBody UserDTO userDTO) {
         try {
-            sessionService.register(userDTO);
+            sessionService.register(userDTOMapper.toUser(userDTO));
             log.info("User {} created successfully", userDTO.getUsername());
             return new ResponseEntity<>("Usuario creado correctamente.", HttpStatus.CREATED);
         } catch (AlreadyExistingUserException e) {
@@ -56,7 +56,7 @@ public class UserController {
     public ResponseEntity<?> getUser(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password) {
 
         try {
-            UserDTO user = sessionService.getUser(username, password);
+            UserDTO user = userDTOMapper.toDTO(sessionService.getUser(username, password));
             log.info("Successful login for user: {}", username);
             return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (UserNotFoundException e) {

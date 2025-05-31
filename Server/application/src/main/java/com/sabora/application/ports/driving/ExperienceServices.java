@@ -1,10 +1,11 @@
 package com.sabora.application.ports.driving;
 
-import com.sabora.server.DTOs.ExperienceDTO;
+import com.sabora.application.domain.Experience;
+
 import java.util.List;
 
 public interface ExperienceServices {
-    ExperienceDTO addExperience(ExperienceDTO experienceDTO);
-    void endExperience(ExperienceDTO experienceDTO);
-    List<ExperienceDTO> getUnfinishedExperiences(String client);
+    Experience addExperience(Experience experience);
+    void endExperience(Experience experience);
+    List<Experience> getUnfinishedExperiences(String client);
 }

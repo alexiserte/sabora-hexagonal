@@ -1,20 +1,19 @@
 package com.sabora.application.services;
 
-import com.sabora.server.Entities.Cliente;
-import com.sabora.server.Repositories.ClienteRepository;
-import com.sabora.server.Services.UserService;
+import com.sabora.application.domain.Cliente;
+import com.sabora.application.exception.User.UserValidationException;
+import com.sabora.application.ports.driven.ClientRepositoryPort;
+import com.sabora.application.ports.driving.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class ClienteService implements UserService<Cliente> {
 
-    private ClienteRepository clienteRepository;
-
-    public ClienteService(ClienteRepository clienteRepository){
-        this.clienteRepository = clienteRepository;
-    }
+    private ClientRepositoryPort clienteRepository;
 
     @Override
     public void registerUser(Cliente user) {
@@ -25,10 +24,8 @@ public class ClienteService implements UserService<Cliente> {
     public Cliente getUser(String username) {
         List<Cliente> users = clienteRepository.findAll();
         for (Cliente user : users) {
-            if (user.getUsername().equals(username)) {
-                return user;
-            }
+            if (username.equals(user.getUsername())) return user;
         }
-        return null;
+        throw  new UserValidationException(username);
     }
 }

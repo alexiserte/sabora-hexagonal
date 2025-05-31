@@ -1,20 +1,19 @@
 package com.sabora.application.services;
 
-import com.sabora.server.Entities.GlassesUser;
-import com.sabora.server.Repositories.GlassesUserRepository;
-import com.sabora.server.Services.UserService;
+import com.sabora.application.domain.GlassesUser;
+import com.sabora.application.ports.driven.GlassesUserRepositoryPort;
+import com.sabora.application.ports.driving.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class GlassesUserService  implements UserService<GlassesUser> {
 
-    private GlassesUserRepository glassesUserRepository;
+    private GlassesUserRepositoryPort glassesUserRepository;
 
-    public GlassesUserService(GlassesUserRepository glassesUserRepository){
-        this.glassesUserRepository = glassesUserRepository;
-    }
 
     @Override
     public void registerUser(GlassesUser user) {

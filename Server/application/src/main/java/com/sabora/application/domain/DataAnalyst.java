@@ -1,18 +1,13 @@
 package com.sabora.application.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.Table;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@SuperBuilder
 public class DataAnalyst extends User {
-    @Builder
-    public DataAnalyst(String dni, String name, String apellidos, String email, String password, String telefono, String username) {
-        super(dni, name, apellidos, email, password, telefono, username);
-    }
 }

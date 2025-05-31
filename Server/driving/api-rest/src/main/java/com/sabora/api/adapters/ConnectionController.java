@@ -1,20 +1,22 @@
 package com.sabora.api.adapters;
 
-import com.sabora.server.Entities.ConnectionObject;
-import com.sabora.server.Services.Implementation.NewConnectionServices;
+
+import com.sabora.api.dtos.ConnectionObjectDTO;
+import com.sabora.application.ports.driving.NewConnectionServices;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor
 public class ConnectionController {
 
-    @Autowired
-    NewConnectionServices connectionServices;
+    private NewConnectionServices connectionServices;
+
 
     @PostMapping("/connection")
-    public ResponseEntity<?> connection(@RequestBody ConnectionObject object, HttpServletRequest request){
+    public ResponseEntity<?> connection(@RequestBody ConnectionObjectDTO object, HttpServletRequest request){
         System.out.println(object.getName());
         System.out.println(object.getLocalIp());
         connectionServices.createConnection(object.getName(),object.getLocalIp(),request.getRemoteAddr());
@@ -22,7 +24,7 @@ public class ConnectionController {
     }
 
     @DeleteMapping("/connection")
-    public ResponseEntity<?> removeConnection(@RequestBody ConnectionObject object){
+    public ResponseEntity<?> removeConnection(@RequestBody ConnectionObjectDTO object){
         connectionServices.removeConnection(object.getName());
         return ResponseEntity.ok("Connection removed");
     }

@@ -1,6 +1,6 @@
 package com.sabora.application.services;
 
-import com.sabora.server.Entities.ConnectionParams;
+import com.sabora.application.domain.ConnectionParams;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

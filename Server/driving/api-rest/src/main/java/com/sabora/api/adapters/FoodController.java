@@ -1,9 +1,9 @@
 package com.sabora.api.adapters;
 
-import com.sabora.server.DTOs.FoodDTO;
-import com.sabora.server.Mappers.FoodMapper;
-import com.sabora.server.Entities.Food;
-import com.sabora.server.Services.FoodService;
+import com.sabora.api.dtos.FoodDTO;
+import com.sabora.api.mappers.FoodDTOMapper;
+import com.sabora.application.ports.driving.FoodService;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -12,16 +12,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/food")
+@AllArgsConstructor
 public class FoodController {
 
     private final FoodService foodService;
-    private final FoodMapper foodMapper;
+    private final FoodDTOMapper foodMapper;
     private static final Logger log = LoggerFactory.getLogger(FoodController.class);
 
-    public FoodController(FoodService foodService, FoodMapper foodMapper) {
-        this.foodService = foodService;
-        this.foodMapper = foodMapper;
-    }
 
     @GetMapping("")
     public ResponseEntity<?> getFood(@RequestParam(name = "name") String name){
@@ -36,10 +33,9 @@ public class FoodController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> postFood(@RequestBody  FoodDTO foodDTO){
-        Food food = foodMapper.toEntity(foodDTO);
-        foodService.addFood(food);
-        log.info("Food {} added successfully", food.getName());
+    public ResponseEntity<?> postFood(@RequestBody FoodDTO foodDTO){
+        foodService.addFood(foodMapper.toDomain(foodDTO));
+        log.info("Food {} added successfully", foodDTO.getName());
         return new ResponseEntity<>("Food added successfully", HttpStatus.CREATED);
     }
 }

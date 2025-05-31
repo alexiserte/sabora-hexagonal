@@ -1,7 +1,8 @@
 package com.sabora.api.adapters;
 
-import com.sabora.server.Clients.FileServiceClient;
-import com.sabora.server.Utils.FileManagementUtils.FileUtils;
+
+import com.sabora.application.FileManagementUtils.FileUtils;
+import com.sabora.application.ports.driving.FileServiceClientServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URI;
 import java.net.http.HttpClient;
-import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
@@ -18,16 +18,16 @@ import java.net.http.HttpResponse;
 public class FileManagementController {
 
     @Autowired
-    private FileServiceClient fileServiceClient;
+    private FileServiceClientServices fileServiceClient;
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam(name = "file") MultipartFile file) {
-        return fileServiceClient.uploadFile(file);
+        return ResponseEntity.ok(fileServiceClient.uploadFile(file));
     }
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteFile(@RequestParam(name = "fileName") String fileName) {
-        return fileServiceClient.deleteFile(fileName);
+        return ResponseEntity.ok(fileServiceClient.deleteFile(fileName));
     }
 
     @GetMapping("/resources/{fileName}")

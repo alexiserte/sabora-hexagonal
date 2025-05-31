@@ -1,7 +1,5 @@
 package com.sabora.application.domain;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import lombok.*;
 
 import java.math.BigDecimal;

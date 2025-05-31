@@ -1,8 +1,10 @@
 package com.sabora.application.services;
 
-import com.sabora.server.Entities.Food;
-import com.sabora.server.Repositories.FoodRepository;
-import com.sabora.server.Services.FoodService;
+
+import com.sabora.application.domain.Food;
+import com.sabora.application.ports.driven.FoodRepositoryPort;
+import com.sabora.application.ports.driving.FoodService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -10,13 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class FoodServiceImplementation implements FoodService {
 
-    private final FoodRepository foodRepository;
+    private final FoodRepositoryPort foodRepository;
 
-    public FoodServiceImplementation(FoodRepository foodRepository) {
-        this.foodRepository = foodRepository;
-    }
 
     @Override
     public void addFood(Food food) {

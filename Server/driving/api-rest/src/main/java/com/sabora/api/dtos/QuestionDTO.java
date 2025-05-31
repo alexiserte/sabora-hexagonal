@@ -2,10 +2,8 @@ package com.sabora.api.dtos;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -22,6 +20,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 public abstract class QuestionDTO {
     private int id;
     private String question;
