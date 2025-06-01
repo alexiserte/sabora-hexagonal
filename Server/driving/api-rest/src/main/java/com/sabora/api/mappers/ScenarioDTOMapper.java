@@ -12,7 +12,7 @@ public interface ScenarioDTOMapper {
     @Mapping(target="sound", source="sound.name")
     ScenarioDTO toDTO(Scenario scenario);
 
-
+    @Mapping(target="sound", ignore = true)
     Scenario mapSimple(ScenarioDTO scenarioDTO);
 
     default Scenario toDomain(ScenarioDTO scenarioDTO) {
@@ -23,4 +23,5 @@ public interface ScenarioDTOMapper {
         scenario.setSound(Sound.builder().name(scenarioDTO.getSound()).build());
         return scenario;
     }
+
 }
