@@ -4,7 +4,9 @@ import com.sabora.application.domain.Scenario;
 import com.sabora.application.ports.driven.ScenarioRepositoryPort;
 import com.sabora.database.mappers.ScenarioEntityMapper;
 import com.sabora.database.repositories.ScenarioJpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ScenarioRepositoryPortAdapter implements ScenarioRepositoryPort {
 
     private ScenarioJpaRepository scenarioJpaRepository;
