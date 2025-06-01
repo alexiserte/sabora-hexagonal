@@ -12,5 +12,6 @@ public interface QuestionEntityMapper {
     QuestionMO toEntity(Question questionMO);
 
     @Mapping(target = "form", ignore = true)
+    @Mapping(target = "options", ignore = true)
     Question toDomain(QuestionMO questionMO);
 }

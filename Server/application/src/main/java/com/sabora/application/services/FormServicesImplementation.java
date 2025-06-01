@@ -80,7 +80,12 @@ public class FormServicesImplementation implements FormServices {
         form.setQuestions(questionRepository.findByFormId((id)));
         for (Question question : form.getQuestions()) {
             question.setForm(form);
-            question.setOptions(questionOptionRepository.findByQuestionId(question.getId()));
+            var options =  questionOptionRepository.findByQuestionId(question.getId());
+            for (QuestionOption option : options) {
+                option.setQuestion(question);
+            }
+            question.setOptions(options);
+            questionOptionRepository.findByQuestionId(question.getId());
         }
         return form;
     }
