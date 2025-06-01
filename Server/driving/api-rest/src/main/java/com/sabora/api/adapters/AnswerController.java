@@ -3,6 +3,7 @@ package com.sabora.api.adapters;
 
 import com.sabora.api.dtos.FormAnswerDTO;
 import com.sabora.api.dtos.SimpleMessageDTO;
+import com.sabora.api.mappers.AnswerDTOMapper;
 import com.sabora.api.mappers.FormAnswerDTOMapper;
 import com.sabora.application.ports.driving.FormAnswerServices;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ public class AnswerController {
 
     private FormAnswerServices formAnswerServices;
     private FormAnswerDTOMapper formAnswerDTOMapper;
+    private AnswerDTOMapper answerDTOMapper;
     private static final Logger log = Logger.getLogger(AnswerController.class.getName());
 
     @PostMapping("/form/{id}/answer")
@@ -50,7 +52,7 @@ public class AnswerController {
     public ResponseEntity<?> getAnswersToAQuestion(@PathVariable String id, @PathVariable String questionId) {
         try{
             log.info("Getting answers to question with id: " + questionId + " from form with id: " + id);
-            return ResponseEntity.ok(formAnswerServices.getAnswersToAQuestion(Integer.parseInt(questionId)));
+            return ResponseEntity.ok(answerDTOMapper.toDTOAnswers(formAnswerServices.getAnswersToAQuestion(Integer.parseInt(questionId))));
         } catch (Exception e) {
             log.severe("Error getting answers to question with id: " + questionId + " from form with id: " + id);
             log.severe(e.getMessage());

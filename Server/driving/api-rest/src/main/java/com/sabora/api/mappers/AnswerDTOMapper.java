@@ -31,4 +31,21 @@ public interface AnswerDTOMapper {
                 )
                 .collect(Collectors.toList());
     }
+
+
+    default List<AnswerDTO> toDTOAnswers(List<Answer> answers) {
+        if (answers == null) {
+            throw new IllegalArgumentException("Answer list cannot be null");
+        }
+
+        return answers.stream()
+                .map(answer ->
+                        AnswerDTO.builder()
+                                .id(answer.getId())
+                                .questionId(answer.getQuestion().getId())
+                                .answer(answer.getValue())
+                                .build()
+                )
+                .collect(Collectors.toList());
+    }
 }

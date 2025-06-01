@@ -1,6 +1,7 @@
 package com.sabora.api.adapters;
 
 import com.sabora.api.dtos.FoodDTO;
+import com.sabora.api.dtos.SimpleMessageDTO;
 import com.sabora.api.mappers.FoodDTOMapper;
 import com.sabora.application.ports.driving.FoodService;
 import lombok.AllArgsConstructor;
@@ -36,6 +37,6 @@ public class FoodController {
     public ResponseEntity<?> postFood(@RequestBody FoodDTO foodDTO){
         foodService.addFood(foodMapper.toDomain(foodDTO));
         log.info("Food {} added successfully", foodDTO.getName());
-        return new ResponseEntity<>("Food added successfully", HttpStatus.CREATED);
+        return new ResponseEntity<>(SimpleMessageDTO.builder().message("Food added successfully").build(), HttpStatus.CREATED);
     }
 }
