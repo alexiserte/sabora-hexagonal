@@ -1,18 +1,17 @@
 package com.sabora.database.mappers;
 
-import com.sabora.application.domain.*;
-import com.sabora.database.entities.*;
+import com.sabora.application.domain.*; // dominio, sin MO
+import com.sabora.database.entities.*;  // entidades, con MO
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring", uses = {FormEntityMapper.class})
 public interface QuestionEntityMapper {
 
-    // El método genérico que mapea de entidad (JPA) a dominio (MO)
+    // Mapea de entidad (MO) a dominio (sin MO)
     @Mapping(target = "form", ignore = true)
-    QuestionMO toDomain(QuestionMO entity);
+    Question toDomain(QuestionMO entity);
 
-    // Métodos específicos para cada subtipo de entidad a MO
     AnswerWritingQuestion toDomain(AnswerWritingQuestionMO entity);
 
     MultipleAnswerQuestion toDomain(MultipleAnswerQuestionMO entity);
@@ -21,20 +20,20 @@ public interface QuestionEntityMapper {
 
     UniqueAnswerQuestion toDomain(UniqueAnswerQuestionMO entity);
 
-
+    // Mapea de dominio a entidad
     @Mapping(target = "form", ignore = true)
-    QuestionMO toEntity(Question questionMO);
+    QuestionMO toEntity(Question domain);
 
-    // Métodos específicos de dominio a entidad para los subtipos
-    AnswerWritingQuestionMO toEntity(AnswerWritingQuestion questionMO);
+    AnswerWritingQuestionMO toEntity(AnswerWritingQuestion domain);
 
-    MultipleAnswerQuestionMO toEntity(MultipleAnswerQuestion questionMO);
+    MultipleAnswerQuestionMO toEntity(MultipleAnswerQuestion domain);
 
-    RangeQuestionMO toEntity(RangeQuestion questionMO);
+    RangeQuestionMO toEntity(RangeQuestion domain);
 
-    UniqueAnswerQuestionMO toEntity(UniqueAnswerQuestion questionMO);
+    UniqueAnswerQuestionMO toEntity(UniqueAnswerQuestion domain);
 
-    // Método por defecto para que MapStruct elija según instancia
+    // Métodos polimórficos para que MapStruct elija según instancia
+
     default Question mapPolymorphic(QuestionMO entity) {
         if (entity instanceof AnswerWritingQuestionMO e) return toDomain(e);
         if (entity instanceof MultipleAnswerQuestionMO e) return toDomain(e);
@@ -43,11 +42,11 @@ public interface QuestionEntityMapper {
         throw new IllegalArgumentException("Tipo de pregunta no soportado: " + entity.getClass());
     }
 
-    default QuestionMO mapPolymorphic(Question questionMO) {
-        if (questionMO instanceof AnswerWritingQuestion q) return toEntity(q);
-        if (questionMO instanceof MultipleAnswerQuestion q) return toEntity(q);
-        if (questionMO instanceof RangeQuestion q) return toEntity(q);
-        if (questionMO instanceof UniqueAnswerQuestion q) return toEntity(q);
-        throw new IllegalArgumentException("Tipo de pregunta no soportado: " + questionMO.getClass());
+    default QuestionMO mapPolymorphic(Question domain) {
+        if (domain instanceof AnswerWritingQuestion q) return toEntity(q);
+        if (domain instanceof MultipleAnswerQuestion q) return toEntity(q);
+        if (domain instanceof RangeQuestion q) return toEntity(q);
+        if (domain instanceof UniqueAnswerQuestion q) return toEntity(q);
+        throw new IllegalArgumentException("Tipo de pregunta no soportado: " + domain.getClass());
     }
 }
