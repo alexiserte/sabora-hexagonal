@@ -12,6 +12,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDTO> handleAllExceptions(Exception ex) {
         ErrorDTO error = new ErrorDTO();
+        ex.printStackTrace();
         error.setError(ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
