@@ -1,50 +1,51 @@
 package com.sabora.api.mappers;
 
 import com.sabora.application.domain.*;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.openapitools.model.*;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface QuestionDTOMapper {
+
+    @Mapping(target = "title", source = "question")
     RangeQuestion toDomain(RangeQuestionDTO dto);
 
+    @InheritInverseConfiguration
     RangeQuestionDTO toDTO(RangeQuestion domain);
 
+    @Mapping(target = "title", source = "question")
     MultipleAnswerQuestion toDomain(MultipleAnswerQuestionDTO dto);
 
+    @InheritInverseConfiguration
     MultipleAnswerQuestionDTO toDTO(MultipleAnswerQuestion domain);
 
+    @Mapping(target = "title", source = "question")
     UniqueAnswerQuestion toDomain(UniqueAnswerQuestionDTO dto);
 
+    @InheritInverseConfiguration
     UniqueAnswerQuestionDTO toDTO(UniqueAnswerQuestion domain);
 
+    @Mapping(target = "title", source = "question")
     AnswerWritingQuestion toDomain(AnswerRedactionQuestionDTO dto);
 
+    @InheritInverseConfiguration
     AnswerRedactionQuestionDTO toDTO(AnswerWritingQuestion domain);
 
     default Question toDomain(QuestionDTO dto) {
-
         if (dto instanceof RangeQuestionDTO) {
-            var question = toDomain((RangeQuestionDTO) dto);
-            question.setTitle(dto.getQuestion());
-            return question;
+            return toDomain((RangeQuestionDTO) dto);
         } else if (dto instanceof MultipleAnswerQuestionDTO) {
-            var question = toDomain((MultipleAnswerQuestionDTO) dto);
-            question.setTitle(dto.getQuestion());
-            return question;
+            return toDomain((MultipleAnswerQuestionDTO) dto);
         } else if (dto instanceof UniqueAnswerQuestionDTO) {
-            var question = toDomain((UniqueAnswerQuestionDTO) dto);
-            question.setTitle(dto.getQuestion());
-            return question;
+            return toDomain((UniqueAnswerQuestionDTO) dto);
         } else if (dto instanceof AnswerRedactionQuestionDTO) {
-            var question = toDomain((AnswerRedactionQuestionDTO) dto);
-            question.setTitle(dto.getQuestion());
-            return question;
-        } else {
-            throw new IllegalArgumentException("Unknown QuestionDTO subtype: " + dto.getClass());
+            return toDomain((AnswerRedactionQuestionDTO) dto);
         }
+        throw new IllegalArgumentException("Unknown QuestionDTO subtype: " + dto.getClass());
     }
 
     default QuestionDTO toDTO(Question domain) {
@@ -56,10 +57,10 @@ public interface QuestionDTOMapper {
             return toDTO((UniqueAnswerQuestion) domain);
         } else if (domain instanceof AnswerWritingQuestion) {
             return toDTO((AnswerWritingQuestion) domain);
-        } else {
-            throw new IllegalArgumentException("Unknown Question subtype: " + domain.getClass());
         }
+        throw new IllegalArgumentException("Unknown Question subtype: " + domain.getClass());
     }
+
 
     default List<String> toOptionsList(List<QuestionOption> options) {
         return options.stream()
