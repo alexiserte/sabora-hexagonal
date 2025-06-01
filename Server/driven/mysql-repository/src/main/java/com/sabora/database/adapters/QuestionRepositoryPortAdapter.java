@@ -27,9 +27,7 @@ public class QuestionRepositoryPortAdapter implements QuestionRepositoryPort {
     @Override
     public List<Question> findByFormId(Integer formId) {
         List<com.sabora.database.entities.QuestionMO> entities = questionJpaRepository.findByFormId(formId);
-        for (com.sabora.database.entities.QuestionMO entity : entities) {
-            entity.getOptions().forEach(option -> option.setQuestion(entity));
-        }
+
         return entities.stream()
                 .map(questionEntityMapper::mapPolymorphicToDomain)
                 .collect(Collectors.toList());
