@@ -7,6 +7,8 @@ import com.sabora.database.repositories.QuestionOptionJpaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @AllArgsConstructor
 public class QuestionOptionRepositoryPortAdapter implements QuestionOptionRepositoryPort {
@@ -18,5 +20,13 @@ public class QuestionOptionRepositoryPortAdapter implements QuestionOptionReposi
     public QuestionOption save(QuestionOption questionOption) {
         return optionEntityMapper
                 .toDomain(questionOptionJpaRepository.save(optionEntityMapper.toEntity(questionOption)));
+    }
+
+    @Override
+    public List<QuestionOption> findByQuestionId(int id) {
+        return questionOptionJpaRepository.findByQuestionId(id)
+                .stream()
+                .map(optionEntityMapper::toDomain)
+                .toList();
     }
 }

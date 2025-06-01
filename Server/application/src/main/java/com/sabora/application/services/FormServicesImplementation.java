@@ -75,7 +75,12 @@ public class FormServicesImplementation implements FormServices {
 
     @Override
     public Form getFormById(Integer id) {
-        return formRepository.findById(Long.valueOf(id));
+        var form = formRepository.findById(Long.valueOf(id));
+        form.setQuestions(questionRepository.findByFormId((id)));
+        for (Question question : form.getQuestions()) {
+            question.setOptions(questionOptionRepository.findByQuestionId(question.getId()));
+        }
+        return form;
     }
 
     @Override
