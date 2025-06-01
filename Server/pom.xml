@@ -186,7 +186,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>${project.basedir}/driving/api-rest/src/main/java/com/sabora/api/contracts/sabora-api.yaml</inputSpec>  <!-- Ruta correcta a tu archivo -->
+							<inputSpec>driving/api-rest/src/main/java/com/sabora/api/contracts/sabora-api.yaml</inputSpec>
 							<generatorName>spring</generatorName>  <!-- O el generador que uses -->
 							<output>${project.build.directory}/generated-sources/openapi</output>
 							<!-- Otras configuraciones -->
