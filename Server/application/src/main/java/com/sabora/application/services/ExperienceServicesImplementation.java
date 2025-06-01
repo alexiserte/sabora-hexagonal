@@ -2,14 +2,12 @@ package com.sabora.application.services;
 
 import com.sabora.application.domain.Cliente;
 import com.sabora.application.domain.Experience;
-import com.sabora.application.domain.ExperienceSound;
 import com.sabora.application.ports.driven.*;
 import com.sabora.application.ports.driving.ExperienceServices;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,7 +37,7 @@ public class ExperienceServicesImplementation implements ExperienceServices {
 
     @Override
     public void endExperience(Experience experience) {
-       experienceRepository.save(experience);
+        experienceRepository.save(experience);
     }
 
     @Override

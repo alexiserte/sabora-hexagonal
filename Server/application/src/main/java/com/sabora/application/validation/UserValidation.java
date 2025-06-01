@@ -10,22 +10,25 @@ public class UserValidation {
     private static final String phoneRegex = "^[0-9]{9}$";
 
     private static boolean isValidEmail(String email) {
-       if (!email.matches(emailRegex)) throw new UserValidationException("The given email is not valid. Please provide a valid email (x@y.z)");
-       return true;
+        if (!email.matches(emailRegex))
+            throw new UserValidationException("The given email is not valid. Please provide a valid email (x@y.z)");
+        return true;
     }
 
     private static boolean isValidDNI(String dni) {
-        if (!dni.matches(dniRegex)) throw new UserValidationException("The given DNI is not valid. Please provide a valid DNI (8 digits followed by a letter)");
+        if (!dni.matches(dniRegex))
+            throw new UserValidationException("The given DNI is not valid. Please provide a valid DNI (8 digits followed by a letter)");
         return true;
     }
 
     private static boolean isValidPhone(String phone) {
-        if (!phone.matches(phoneRegex)) throw new UserValidationException("The given phone number is not valid. Please provide a valid phone number (9 digits)");
+        if (!phone.matches(phoneRegex))
+            throw new UserValidationException("The given phone number is not valid. Please provide a valid phone number (9 digits)");
         return true;
     }
 
 
-    public static boolean validateUser(User user){
+    public static boolean validateUser(User user) {
         return isValidEmail(user.getEmail()) && isValidDNI(user.getDni()) && isValidPhone(String.valueOf(user.getTelefono()));
     }
 }

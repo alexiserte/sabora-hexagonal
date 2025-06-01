@@ -6,6 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AmbientMusicJpaRepository extends JpaRepository<AmbientMusicMO, Integer>
-{
+public interface AmbientMusicJpaRepository extends JpaRepository<AmbientMusicMO, Integer> {
 }

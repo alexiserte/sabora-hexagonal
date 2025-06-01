@@ -1,7 +1,6 @@
 package com.sabora.database.entities;
 
 import jakarta.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,11 +15,11 @@ import lombok.Setter;
 public class QuestionOptionMO {
 
     @Id
-    @Column(name="id")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="texto", length=255, nullable=false)
+    @Column(name = "texto", length = 255, nullable = false)
     private String text;
 
     @ManyToOne

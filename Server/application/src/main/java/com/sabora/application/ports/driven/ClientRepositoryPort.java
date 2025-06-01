@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface ClientRepositoryPort {
     Cliente save(Cliente cliente);
+
     List<Cliente> findAll();
 }

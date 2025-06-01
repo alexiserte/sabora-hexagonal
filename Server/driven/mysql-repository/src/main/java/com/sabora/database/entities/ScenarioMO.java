@@ -15,17 +15,17 @@ import lombok.Setter;
 public class ScenarioMO {
 
     @Id
-    @Column(name="id")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="nombre", length=500, nullable=false, unique=true)
+    @Column(name = "nombre", length = 500, nullable = false, unique = true)
     private String name;
 
-    @Column(name="lugar", length=500, nullable=false)
+    @Column(name = "lugar", length = 500, nullable = false)
     private String place;
 
-    @Column(name="foto", length = 500, nullable = false)
+    @Column(name = "foto", length = 500, nullable = false)
     private String photoPath;
 
     @ManyToOne

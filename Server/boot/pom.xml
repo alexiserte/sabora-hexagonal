@@ -23,15 +23,15 @@
         </dependency>
 
         <dependency>
-        <groupId>com.sabora</groupId>
+            <groupId>com.sabora</groupId>
             <artifactId>api-rest</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-        <groupId>com.sabora</groupId>
-        <artifactId>mysql-repository</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-    </dependency>
+            <groupId>com.sabora</groupId>
+            <artifactId>mysql-repository</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>com.sabora</groupId>
             <artifactId>rest-repository</artifactId>

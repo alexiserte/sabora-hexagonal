@@ -7,5 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface FoodSpecialistEntityMapper {
     FoodSpecialistMO toEntity(FoodSpecialist foodSpecialistMO);
+
     FoodSpecialist toDomain(FoodSpecialistMO foodSpecialistMO);
 }

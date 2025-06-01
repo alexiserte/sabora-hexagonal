@@ -8,16 +8,18 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = "com.sabora")
 @EntityScan(basePackages = {
-		"com.sabora.database.entities"
+        "com.sabora.database.entities"
 })
 @EnableJpaRepositories(basePackages = {
-		"com.sabora.database.repositories"
+        "com.sabora.database.repositories"
 })
 @EnableFeignClients(basePackages = {
-		"com.sabora.restrepository.clients"
+        "com.sabora.restrepository.clients"
 })
 public class ServerApplication {
 
-	public static void main(String[] args) {SpringApplication.run(ServerApplication.class, args);}
+    public static void main(String[] args) {
+        SpringApplication.run(ServerApplication.class, args);
+    }
 
 }

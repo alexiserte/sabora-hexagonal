@@ -15,7 +15,7 @@ public class ConnectionParamsMO {
     private String remoteIp;
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Name: " + name + " Local IP: " + localIp + " Remote IP: " + remoteIp;
     }
 }

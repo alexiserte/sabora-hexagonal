@@ -7,5 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface ExperienceSoundEntityMapper {
     ExperienceSound toDomain(ExperienceSoundMO experienceSoundEntity);
+
     ExperienceSoundMO toEntity(ExperienceSound experienceSound);
 }

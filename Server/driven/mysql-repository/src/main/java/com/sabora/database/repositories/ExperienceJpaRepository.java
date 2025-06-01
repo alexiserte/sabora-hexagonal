@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ExperienceJpaRepository extends JpaRepository<ExperienceMO, Integer>{
+public interface ExperienceJpaRepository extends JpaRepository<ExperienceMO, Integer> {
     ExperienceMO findById(int id);
 
     List<ExperienceMO> findByClientAndScenarioAndSoundAndFood(ClienteMO client, ScenarioMO scenario, SoundMO sound, FoodMO food);

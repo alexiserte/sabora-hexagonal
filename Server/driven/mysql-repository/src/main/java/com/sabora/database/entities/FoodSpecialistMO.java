@@ -17,7 +17,7 @@ import lombok.Setter;
 @PrimaryKeyJoinColumn(name = "dni")
 public class FoodSpecialistMO extends UserMO {
 
-    @Column(name="organizacion",length = 20,nullable=false)
+    @Column(name = "organizacion", length = 20, nullable = false)
     private String organization;
 
     @Builder

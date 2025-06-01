@@ -19,11 +19,11 @@ public class ExperienceMO {
 
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
-    @Column(name="tiempo")
+    @Column(name = "tiempo")
     private Long time;
 
     @ManyToOne

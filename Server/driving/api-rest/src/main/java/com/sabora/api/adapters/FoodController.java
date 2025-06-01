@@ -27,19 +27,19 @@ public class FoodController implements FoodApi {
 
 
     @GetMapping("")
-    public ResponseEntity<FoodDTO> getFood(@RequestParam(name = "name") String name){
+    public ResponseEntity<FoodDTO> getFood(@RequestParam(name = "name") String name) {
         log.info("Getting food with name: {}", name);
         return ResponseEntity.ok(foodMapper.toDTO(foodService.getFood(name)));
     }
 
     @GetMapping("s")
-    public ResponseEntity<List<FoodDTO>> getAllFoods(){
+    public ResponseEntity<List<FoodDTO>> getAllFoods() {
         log.info("Getting all foods");
         return ResponseEntity.ok(foodService.getAllFoods().stream().map(foodMapper::toDTO).collect(Collectors.toList()));
     }
 
     @PostMapping("")
-    public ResponseEntity<SimpleMessageDTO> postFood(@RequestBody FoodDTO foodDTO){
+    public ResponseEntity<SimpleMessageDTO> postFood(@RequestBody FoodDTO foodDTO) {
         foodService.addFood(foodMapper.toDomain(foodDTO));
         log.info("Food {} added successfully", foodDTO.getName());
         return new ResponseEntity<>(new SimpleMessageDTO("Food added succesfully"), HttpStatus.CREATED);

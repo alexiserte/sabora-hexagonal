@@ -1,7 +1,6 @@
 package com.sabora.application.services;
 
 import com.sabora.application.domain.Scenario;
-import com.sabora.application.ports.driven.FileServiceClientRepositoryPort;
 import com.sabora.application.ports.driven.ScenarioRepositoryPort;
 import com.sabora.application.ports.driven.SoundRepositoryPort;
 import com.sabora.application.ports.driving.ScenarioServices;

@@ -9,10 +9,10 @@ import org.openapitools.model.ScenarioDTO;
 @Mapper(componentModel = "spring")
 public interface ScenarioDTOMapper {
 
-    @Mapping(target="sound", source="sound.name")
+    @Mapping(target = "sound", source = "sound.name")
     ScenarioDTO toDTO(Scenario scenario);
 
-    @Mapping(target="sound", ignore = true)
+    @Mapping(target = "sound", ignore = true)
     Scenario mapSimple(ScenarioDTO scenarioDTO);
 
     default Scenario toDomain(ScenarioDTO scenarioDTO) {

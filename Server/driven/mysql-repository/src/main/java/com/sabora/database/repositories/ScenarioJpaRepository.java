@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ScenarioJpaRepository extends JpaRepository<ScenarioMO, Integer>
-{
+public interface ScenarioJpaRepository extends JpaRepository<ScenarioMO, Integer> {
     ScenarioMO findByName(String name);
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class GlassesUserService  implements UserService<GlassesUser> {
+public class GlassesUserService implements UserService<GlassesUser> {
 
     private GlassesUserRepositoryPort glassesUserRepository;
 

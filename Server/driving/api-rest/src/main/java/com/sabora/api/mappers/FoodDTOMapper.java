@@ -7,5 +7,6 @@ import org.openapitools.model.FoodDTO;
 @Mapper(componentModel = "spring")
 public interface FoodDTOMapper {
     FoodDTO toDTO(Food food);
+
     Food toDomain(FoodDTO foodDTO);
 }

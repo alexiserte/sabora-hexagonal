@@ -36,5 +36,6 @@ public interface AnswerDTOMapper {
     List<AnswerDTO> toDTOAnswers(List<Answer> answers);
 
     AnswerDTO toDTO(Answer answer);
+
     Answer toDomain(AnswerDTO answerDTO);
 }

@@ -41,14 +41,14 @@ public class ExperienceRepositoryPortAdapter implements ExperienceRepositoryPort
         if (clientEntity == null || scenarioEntity == null || soundEntity == null || foodEntity == null) {
             throw new RuntimeException(
                     "Client, scenario, sound, or food not found: " +
-                    "client=" + client + ", scenario=" + scenario +
-                    ", sound=" + sound + ", food=" + food
+                            "client=" + client + ", scenario=" + scenario +
+                            ", sound=" + sound + ", food=" + food
             );
         }
 
         return experienceJpaRepository.findByClientAndScenarioAndSoundAndFood(
-                clientEntity, scenarioEntity, soundEntity, foodEntity
-        ).stream()
+                        clientEntity, scenarioEntity, soundEntity, foodEntity
+                ).stream()
                 .map(experienceEntityMapper::toDomain)
                 .toList();
     }

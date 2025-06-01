@@ -15,7 +15,7 @@ public class SoundRepositoryPortAdapter implements SoundRepositoryPort {
     @Override
     public Sound findByName(String name) {
         return soundEntityMapper.toDomain(
-            soundJpaRepository.findByName(name)
+                soundJpaRepository.findByName(name)
         );
     }
 }

@@ -777,6 +777,10 @@ paths:
       responses:
         '201':
           description: Usuario creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleMessageDTO'
         '400':
           description: Petición inválida (usuario ya existe o datos incorrectos)
         '500':
@@ -1034,7 +1038,7 @@ components:
               type: array
               items:
                 type: string
-              example: ["Manzana", "Banana", "Naranja"]
+              example: [ "Manzana", "Banana", "Naranja" ]
 
     UniqueAnswerQuestionDTO:
       allOf:
@@ -1045,7 +1049,7 @@ components:
               type: array
               items:
                 type: string
-              example: ["Sí", "No"]
+              example: [ "Sí", "No" ]
 
     AnswerRedactionQuestionDTO:
       allOf:
@@ -1125,7 +1129,7 @@ components:
         specificProperties:
           type: object
           additionalProperties: true
-          example: { "edad": 25, "preferencias": ["vegano", "dulce"] }
+          example: { "edad": 25, "preferencias": [ "vegano", "dulce" ] }
           description: Propiedades específicas del tipo de usuario (pueden ser cualquier cosa)
 
     ErrorDTO:

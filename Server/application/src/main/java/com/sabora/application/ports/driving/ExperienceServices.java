@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ExperienceServices {
     Experience addExperience(Experience experience);
+
     void endExperience(Experience experience);
+
     List<Experience> getUnfinishedExperiences(String client);
 }

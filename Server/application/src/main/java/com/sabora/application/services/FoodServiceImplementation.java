@@ -31,8 +31,8 @@ public class FoodServiceImplementation implements FoodService {
     @Override
     public Food getFood(String name) {
         List<Food> foods = foodRepository.findAll();
-        for(Food food: foods){
-            if(food.getName().equals(name)){
+        for (Food food : foods) {
+            if (food.getName().equals(name)) {
                 return food;
             }
         }
@@ -47,8 +47,8 @@ public class FoodServiceImplementation implements FoodService {
     @Override
     public List<Food> getHighCalorieFoods(List<Food> foods) {
         List<Food> highCalorieFoods = new ArrayList<>();
-        for(Food food: foods){
-            if(food.getCalories().compareTo(BigDecimal.valueOf(2000)) == 1){
+        for (Food food : foods) {
+            if (food.getCalories().compareTo(BigDecimal.valueOf(2000)) == 1) {
                 highCalorieFoods.add(food);
             }
         }

@@ -26,6 +26,6 @@ public class ClienteService implements UserService<Cliente> {
         for (Cliente user : users) {
             if (username.equals(user.getUsername())) return user;
         }
-        throw  new UserValidationException(username);
+        throw new UserValidationException(username);
     }
 }

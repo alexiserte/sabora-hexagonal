@@ -11,7 +11,7 @@ import java.util.Map;
 @Mapper(componentModel = "spring")
 public interface UserDTOMapper {
 
-        default User toUser(UserDTO dto) {
+    default User toUser(UserDTO dto) {
         String dni = dto.getDni();
         String name = dto.getName();
         String apellidos = dto.getApellidos();

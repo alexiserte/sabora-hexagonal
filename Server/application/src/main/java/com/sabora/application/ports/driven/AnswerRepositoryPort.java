@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface AnswerRepositoryPort {
     Answer save(Answer answer);
+
     List<Answer> findByQuestionId(Integer questionId);
 }

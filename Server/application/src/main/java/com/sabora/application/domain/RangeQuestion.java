@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class RangeQuestion extends Question{
+public class RangeQuestion extends Question {
     private int min;
     private int max;
     private int interval;

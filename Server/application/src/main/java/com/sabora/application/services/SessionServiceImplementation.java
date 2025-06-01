@@ -1,5 +1,7 @@
 package com.sabora.application.services;
 
+import com.sabora.application.Encryption.DataEncryption;
+import com.sabora.application.Encryption.PasswordEncrypter;
 import com.sabora.application.config.EncryptionConfig;
 import com.sabora.application.domain.Cliente;
 import com.sabora.application.domain.User;
@@ -7,10 +9,7 @@ import com.sabora.application.exception.User.AlreadyExistingUserException;
 import com.sabora.application.exception.User.UserNotFoundException;
 import com.sabora.application.ports.driven.UserRepositoryPort;
 import com.sabora.application.ports.driving.SessionService;
-
 import com.sabora.application.ports.driving.UserService;
-import com.sabora.application.Encryption.DataEncryption;
-import com.sabora.application.Encryption.PasswordEncrypter;
 import com.sabora.application.validation.UserValidation;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
@@ -50,16 +49,16 @@ public class SessionServiceImplementation implements SessionService {
         user.setPassword(passwordEncrypter.encryptPassword(user.getPassword()));
 
         UserService<User> userService = (UserService<User>) userServices.get(user.getClass().getSimpleName());
-        if(userRepository.existsByUsername(user.getUsername())){
-                throw new AlreadyExistingUserException(user.getUsername());
-        }else{
-                String base64Key = encryptionConfig.getSecretKey();
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new AlreadyExistingUserException(user.getUsername());
+        } else {
+            String base64Key = encryptionConfig.getSecretKey();
             try {
                 user.setDni(DataEncryption.encrypt(user.getDni(), base64Key));
                 user.setEmail(DataEncryption.encrypt(user.getEmail(), base64Key));
                 user.setTelefono(DataEncryption.encrypt(String.valueOf(user.getTelefono()), base64Key));
 
-                if(user instanceof Cliente){
+                if (user instanceof Cliente) {
                     Cliente cliente = (Cliente) user;
                     cliente.setBankAccount(DataEncryption.encrypt(cliente.getBankAccount(), base64Key));
                 }

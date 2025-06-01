@@ -1,7 +1,13 @@
 package com.sabora.database.entities;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -11,10 +17,10 @@ import lombok.*;
 @PrimaryKeyJoinColumn(name = "dni")
 public class ClienteMO extends UserMO {
 
-    @Column(name="empresa", length=20, nullable=false)
+    @Column(name = "empresa", length = 20, nullable = false)
     private String business;
 
-    @Column(name="cuenta_bancaria", length=512, nullable=false)
+    @Column(name = "cuenta_bancaria", length = 512, nullable = false)
     private String bankAccount;
 
     @Builder

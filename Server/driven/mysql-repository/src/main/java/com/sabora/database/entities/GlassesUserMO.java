@@ -1,9 +1,15 @@
 package com.sabora.database.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Check;
 
 @Getter
@@ -17,10 +23,10 @@ public class GlassesUserMO extends UserMO {
 
     @Min(0)
     @Max(122)
-    @Column(name="edad", nullable=false)
+    @Column(name = "edad", nullable = false)
     private int age;
 
-    @Column(name="sexo", nullable=false)
+    @Column(name = "sexo", nullable = false)
     private String gender;
 
     @Builder

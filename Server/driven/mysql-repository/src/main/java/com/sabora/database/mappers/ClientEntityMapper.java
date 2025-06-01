@@ -7,5 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface ClientEntityMapper {
     ClienteMO toEntity(Cliente cliente);
+
     Cliente toDomain(ClienteMO clienteMO);
 }

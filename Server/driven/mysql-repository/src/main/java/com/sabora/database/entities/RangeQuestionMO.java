@@ -1,8 +1,14 @@
 package com.sabora.database.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -13,14 +19,14 @@ import lombok.*;
 public class RangeQuestionMO extends QuestionMO {
 
     @Min(0)
-    @Column(name="min", nullable=false)
+    @Column(name = "min", nullable = false)
     private int min;
 
-    @Column(name="max", nullable=false)
+    @Column(name = "max", nullable = false)
     private int max;
 
     @Min(0)
-    @Column(name="intervalo", nullable=false)
+    @Column(name = "intervalo", nullable = false)
     private int interval;
 
     @Builder

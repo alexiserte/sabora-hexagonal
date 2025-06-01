@@ -9,21 +9,25 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface QuestionDTOMapper {
     RangeQuestion toDomain(RangeQuestionDTO dto);
+
     RangeQuestionDTO toDTO(RangeQuestion domain);
 
     MultipleAnswerQuestion toDomain(MultipleAnswerQuestionDTO dto);
+
     MultipleAnswerQuestionDTO toDTO(MultipleAnswerQuestion domain);
 
     UniqueAnswerQuestion toDomain(UniqueAnswerQuestionDTO dto);
+
     UniqueAnswerQuestionDTO toDTO(UniqueAnswerQuestion domain);
 
     AnswerWritingQuestion toDomain(AnswerRedactionQuestionDTO dto);
+
     AnswerRedactionQuestionDTO toDTO(AnswerWritingQuestion domain);
 
     default Question toDomain(QuestionDTO dto) {
 
         if (dto instanceof RangeQuestionDTO) {
-            var question =  toDomain((RangeQuestionDTO) dto);
+            var question = toDomain((RangeQuestionDTO) dto);
             question.setTitle(dto.getQuestion());
             return question;
         } else if (dto instanceof MultipleAnswerQuestionDTO) {

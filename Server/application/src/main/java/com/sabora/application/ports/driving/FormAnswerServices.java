@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface FormAnswerServices {
     void answerForm(FormAnswer formAnswer);
+
     List<Answer> getFormAnswers(Integer formId);
+
     List<Answer> getAnswersToAQuestion(Integer questionId);
 }

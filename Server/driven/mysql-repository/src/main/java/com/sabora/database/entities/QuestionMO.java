@@ -19,11 +19,11 @@ import java.util.List;
 public class QuestionMO {
 
     @Id
-    @Column(name="id")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="titulo", length=1000, nullable=false)
+    @Column(name = "titulo", length = 1000, nullable = false)
     private String title;
 
     @ManyToOne
