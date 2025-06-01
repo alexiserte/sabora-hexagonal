@@ -1,10 +1,11 @@
 package com.sabora.api.adapters;
 
-import com.sabora.api.dtos.ExperienceDTO;
-import com.sabora.api.dtos.SimpleMessageDTO;
 import com.sabora.api.mappers.ExperienceDTOMapper;
 import com.sabora.application.ports.driving.ExperienceServices;
 import lombok.AllArgsConstructor;
+import org.openapitools.api.ExperienceApi;
+import org.openapitools.model.ExperienceDTO;
+import org.openapitools.model.SimpleMessageDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/experience")
 @AllArgsConstructor
-public class ExperienceController {
+public class ExperienceController implements ExperienceApi {
 
     private ExperienceServices experienceServices;
     private ExperienceDTOMapper experienceDTOMapper;
@@ -34,9 +35,7 @@ public class ExperienceController {
     public ResponseEntity<SimpleMessageDTO> endExperience(@RequestBody ExperienceDTO experienceDTO) {
         experienceServices.endExperience(experienceDTOMapper.toDomain(experienceDTO));
         return ResponseEntity.ok(
-                SimpleMessageDTO.builder()
-                        .message("Experience ended successfully")
-                        .build()
+                new SimpleMessageDTO("Experience ended successfully")
         );
     }
 

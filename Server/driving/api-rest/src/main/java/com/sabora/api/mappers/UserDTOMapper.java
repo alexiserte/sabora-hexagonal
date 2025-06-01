@@ -1,16 +1,17 @@
 package com.sabora.api.mappers;
 
-import com.sabora.api.dtos.UserDTO;
 import com.sabora.application.domain.*;
 import com.sabora.application.exception.User.IllegalUserType;
 import org.mapstruct.Mapper;
+import org.openapitools.model.UserDTO;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Mapper(componentModel = "spring")
 public interface UserDTOMapper {
 
-    default User toUser(UserDTO dto) {
+        default User toUser(UserDTO dto) {
         String dni = dto.getDni();
         String name = dto.getName();
         String apellidos = dto.getApellidos();
@@ -18,7 +19,7 @@ public interface UserDTOMapper {
         String password = dto.getPassword();
         String telefono = String.valueOf(dto.getTelefono());
         String username = dto.getUsername();
-        HashMap<String, Object> props = dto.getSpecificProperties();
+        Map<String, Object> props = dto.getSpecificProperties();
 
         switch (dto.getType()) {
             case "GlassesUser":
@@ -73,20 +74,21 @@ public interface UserDTOMapper {
     }
 
     default UserDTO toDTO(User user) {
-        UserDTO.UserDTOBuilder builder = UserDTO.builder()
-                .type(user.getClass().getSimpleName())
-                .dni(user.getDni())
-                .name(user.getName())
-                .apellidos(user.getApellidos())
-                .email(user.getEmail())
-                .password(user.getPassword())
-                .telefono(Long.parseLong(user.getTelefono()))
-                .username(user.getUsername());
+        UserDTO dto = new UserDTO();
+
+        dto.setType(user.getClass().getSimpleName());
+        dto.setDni(user.getDni());
+        dto.setName(user.getName());
+        dto.setApellidos(user.getApellidos());
+        dto.setEmail(user.getEmail());
+        dto.setPassword(user.getPassword());
+        dto.setTelefono(Long.parseLong(user.getTelefono()));
+        dto.setUsername(user.getUsername());
 
         HashMap<String, Object> props = getProps(user);
+        dto.setSpecificProperties(props);
 
-        builder.specificProperties(props);
-        return builder.build();
+        return dto;
     }
 
     private static HashMap<String, Object> getProps(User user) {

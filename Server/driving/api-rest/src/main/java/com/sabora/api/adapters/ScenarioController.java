@@ -1,10 +1,10 @@
 package com.sabora.api.adapters;
 
-
-import com.sabora.api.dtos.ScenarioDTO;
 import com.sabora.api.mappers.ScenarioDTOMapper;
 import com.sabora.application.ports.driving.ScenarioServices;
 import lombok.AllArgsConstructor;
+import org.openapitools.api.ScenarioApi;
+import org.openapitools.model.ScenarioDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,14 +14,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @AllArgsConstructor
-public class ScenarioController {
+public class ScenarioController implements ScenarioApi {
 
     private ScenarioServices scenarioServices;
     private ScenarioDTOMapper scenarioDTOMapper;
 
-    @PostMapping("/scenario")
-    public ResponseEntity<?> createScenario(@RequestBody ScenarioDTO scenarioDTO, MultipartFile file){
+    @Override
+    public ResponseEntity<ScenarioDTO> createScenario(ScenarioDTO scenarioDTO, MultipartFile file){
         scenarioServices.createScenario(scenarioDTOMapper.toDomain(scenarioDTO), file);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+
 }

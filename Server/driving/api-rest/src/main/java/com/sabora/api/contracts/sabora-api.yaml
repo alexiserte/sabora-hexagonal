@@ -80,7 +80,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/FormAnswerDTO'
+                  $ref: '#/components/schemas/AnswerDTO'
         '404':
           description: Formulario no encontrado.
           content:
@@ -188,9 +188,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SimpleMessageDTO'
+                $ref: '#/components/schemas/SimpleMessageDTO'
         '404':
           description: Formulario no encontrado.
           content:
@@ -279,9 +277,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ExperienceDTO'
+                $ref: '#/components/schemas/ExperienceDTO'
         '404':
           description: Formulario no encontrado.
           content:
@@ -313,9 +309,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SimpleMessageDTO'
+                $ref: '#/components/schemas/SimpleMessageDTO'
         '404':
           description: Formulario no encontrado.
           content:
@@ -553,6 +547,7 @@ paths:
   /form/all:
     get:
       summary: Obtener todos los formularios
+      operationId: getForm
       tags:
         - Form
       responses:
@@ -572,6 +567,7 @@ paths:
       summary: Obtener formulario por ID
       tags:
         - Form
+      operationId: getFormById
       parameters:
         - name: id
           in: path
@@ -593,6 +589,7 @@ paths:
       summary: Eliminar formulario por ID
       tags:
         - Form
+      operationId: deleteForm
       parameters:
         - name: id
           in: path
@@ -602,10 +599,27 @@ paths:
           description: ID del formulario a eliminar
       responses:
         '200':
-          description: Formulario eliminado correctamente
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleMessageDTO'
+        '404':
+          description: Formulario no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
 
   /form:
     post:
+      operationId: postForm
       summary: Crear un nuevo formulario
       tags:
         - Form
@@ -619,12 +633,13 @@ paths:
         '200':
           description: Formulario creado correctamente
           content:
-            text/plain:
+            application/json:
               schema:
                 type: string
-                example: "Form added successfully"
+                $ref: '#/components/schemas/SimpleMessageDTO'
         '400':
           description: Datos inválidos
+
   /scenario:
     post:
       tags:
@@ -633,33 +648,31 @@ paths:
       description: Creates a new scenario with the provided details and optional file
       operationId: createScenario
       requestBody:
+        required: true
         content:
           multipart/form-data:
             schema:
               type: object
               properties:
                 scenarioDTO:
+                  description: The scenario object as JSON string
                   $ref: '#/components/schemas/ScenarioDTO'
                 file:
                   type: string
                   format: binary
                   description: Optional file to upload with the scenario
-        required: true
       responses:
         '201':
           description: Scenario created successfully
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: Scenario created successfully
+                $ref: '#/components/schemas/ScenarioDTO'
         '400':
           description: Invalid input data
         '500':
           description: Internal server error
+
   /tablet/connection:
     post:
       tags:
@@ -680,8 +693,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                example: "Connection created"
+                $ref: '#/components/schemas/SimpleMessageDTO'
         '400':
           description: Invalid input data
         '500':
@@ -693,21 +705,19 @@ paths:
       summary: Remove a tablet connection
       description: Removes an existing tablet connection
       operationId: removeTabletConnection
-      parameters:
-        - in: query
-          name: name
-          schema:
-            type: string
-          required: true
-          description: Nombre de usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectionObjectDTO'
       responses:
         '200':
           description: Connection removed successfully
           content:
             application/json:
               schema:
-                type: string
-                example: "Connection removed"
+                $ref: '#/components/schemas/SimpleMessageDTO'
         '404':
           description: Connection not found
         '500':
@@ -747,12 +757,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ConnectionObjectDTO'
+                  $ref: '#/components/schemas/ConnectionParamsDTO'
         '500':
           description: Internal server error
 
   /user:
     post:
+      operationId: register
       summary: Register a new user
       tags:
         - User
@@ -773,6 +784,7 @@ paths:
 
     get:
       summary: Get user by username and password
+      operationId: getUser
       description: Obtiene un usuario verificando nombre de usuario y contraseña.
       tags:
         - User
@@ -862,6 +874,8 @@ components:
         message:
           type: string
           example: "Form answered successfully"
+      required:
+        - message
 
     ConnectionObjectDTO:
       type: object
@@ -923,7 +937,6 @@ components:
           type: array
           items:
             type: string
-            example: ["Sonido1", "Sonido2"]
     FoodDTO:
       type: object
       properties:
@@ -1102,6 +1115,7 @@ components:
           description: Contraseña del usuario
         telefono:
           type: integer
+          format: int64
           example: 600123456
           description: Número de teléfono
         username:

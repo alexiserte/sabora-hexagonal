@@ -1,11 +1,11 @@
 package com.sabora.api.mappers;
 
-import com.sabora.api.dtos.AnswerDTO;
-import com.sabora.api.dtos.FormAnswerDTO;
 import com.sabora.application.domain.Answer;
 import com.sabora.application.domain.Experience;
 import com.sabora.application.domain.Question;
 import org.mapstruct.Mapper;
+import org.openapitools.model.AnswerDTO;
+import org.openapitools.model.FormAnswerDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,19 +33,8 @@ public interface AnswerDTOMapper {
     }
 
 
-    default List<AnswerDTO> toDTOAnswers(List<Answer> answers) {
-        if (answers == null) {
-            throw new IllegalArgumentException("Answer list cannot be null");
-        }
+    List<AnswerDTO> toDTOAnswers(List<Answer> answers);
 
-        return answers.stream()
-                .map(answer ->
-                        AnswerDTO.builder()
-                                .id(answer.getId())
-                                .questionId(answer.getQuestion().getId())
-                                .answer(answer.getValue())
-                                .build()
-                )
-                .collect(Collectors.toList());
-    }
+    AnswerDTO toDTO(Answer answer);
+    Answer toDomain(AnswerDTO answerDTO);
 }

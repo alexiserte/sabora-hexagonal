@@ -1,8 +1,8 @@
 package com.sabora.api.mappers;
 
-import com.sabora.api.dtos.*;
 import com.sabora.application.domain.*;
 import org.mapstruct.Mapper;
+import org.openapitools.model.*;
 
 import java.util.List;
 

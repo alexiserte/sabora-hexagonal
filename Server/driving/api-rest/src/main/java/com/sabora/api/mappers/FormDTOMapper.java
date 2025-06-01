@@ -1,10 +1,10 @@
 package com.sabora.api.mappers;
 
-import com.sabora.api.dtos.FormDTO;
 import com.sabora.application.domain.FoodSpecialist;
 import com.sabora.application.domain.Form;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.openapitools.model.FormDTO;
 
 @Mapper(componentModel = "spring", uses = {QuestionDTOMapper.class})
 public interface FormDTOMapper {

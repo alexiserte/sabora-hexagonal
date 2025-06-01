@@ -1,9 +1,9 @@
 package com.sabora.api.mappers;
 
-import com.sabora.api.dtos.ExperienceDTO;
 import com.sabora.application.domain.Experience;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.openapitools.model.ExperienceDTO;
 
 @Mapper(componentModel = "spring")
 public interface ExperienceDTOMapper {
