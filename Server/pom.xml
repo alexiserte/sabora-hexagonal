@@ -182,23 +182,14 @@
 				<version>7.0.0</version>
 				<executions>
 					<execution>
-						<id>generate-api-interfaces</id>
 						<goals>
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>${project.basedir}/driving/api-rest/src/main/java/com/sabora/api/contracts/sabora-api.yaml</inputSpec>
+							<inputSpec>${project.basedir}/src/main/resources/openapi.yaml</inputSpec>  <!-- Ruta correcta a tu archivo -->
+							<generatorName>spring</generatorName>  <!-- O el generador que uses -->
 							<output>${project.build.directory}/generated-sources/openapi</output>
-							<generatorName>spring</generatorName>
-							<apiPackage>com.sabora.api.adapters</apiPackage>
-							<modelPackage>com.sabora.api.dtos</modelPackage>
-							<configOptions>
-								<interfaceOnly>true</interfaceOnly>
-								<skipDefaultInterface>true</skipDefaultInterface>
-								<useTags>true</useTags>
-								<dateLibrary>java8</dateLibrary>
-							</configOptions>
-							<addCompileSourceRoot>true</addCompileSourceRoot>
+							<!-- Otras configuraciones -->
 						</configuration>
 					</execution>
 				</executions>
