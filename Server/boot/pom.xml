@@ -15,6 +15,29 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.sabora</groupId>
+            <artifactId>application</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+        <groupId>com.sabora</groupId>
+            <artifactId>api-rest</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+        <groupId>com.sabora</groupId>
+        <artifactId>mysql-repository</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+        <dependency>
+            <groupId>com.sabora</groupId>
+            <artifactId>rest-repository</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
