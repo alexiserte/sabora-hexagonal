@@ -10,7 +10,12 @@
     <artifactId>boot</artifactId>
     <name>Archetype - boot</name>
     <url>http://maven.apache.org</url>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
