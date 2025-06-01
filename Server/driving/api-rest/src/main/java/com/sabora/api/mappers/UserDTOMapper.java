@@ -3,9 +3,11 @@ package com.sabora.api.mappers;
 import com.sabora.api.dtos.UserDTO;
 import com.sabora.application.domain.*;
 import com.sabora.application.exception.User.IllegalUserType;
+import org.mapstruct.Mapper;
 
 import java.util.HashMap;
 
+@Mapper(componentModel = "spring")
 public interface UserDTOMapper {
 
     default User toUser(UserDTO dto) {
