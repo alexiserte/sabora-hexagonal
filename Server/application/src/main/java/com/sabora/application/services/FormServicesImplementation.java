@@ -77,11 +77,6 @@ public class FormServicesImplementation implements FormServices {
     public Form getFormById(Integer id) {
         var form = formRepository.findById(Long.valueOf(id));
         form.setQuestions(questionRepository.findByFormId((id)));
-        for (Question question : form.getQuestions()) {
-            question.setOptions(questionOptionRepository.findByQuestionId(question.getId()));
-            System.out.println("Question ID: " + question.getId());
-            System.out.println("Options: " + question.getOptions());
-        }
         return form;
     }
 
