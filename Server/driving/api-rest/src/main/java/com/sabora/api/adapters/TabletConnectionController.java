@@ -33,8 +33,8 @@ public class TabletConnectionController implements TabletConnectionsApi {
     }
 
     @Override
-    public ResponseEntity<SimpleMessageDTO> removeTabletConnection(ConnectionObjectDTO object) {
-        connectionServices.removeConnection(object.getName());
+    public ResponseEntity<SimpleMessageDTO> removeTabletConnection(String tabletName) {
+        connectionServices.removeConnection(tabletName);
         return ResponseEntity.ok(
                 new SimpleMessageDTO("Connection removed successfully")
         );

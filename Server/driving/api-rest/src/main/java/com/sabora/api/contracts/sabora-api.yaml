@@ -705,12 +705,13 @@ paths:
       summary: Remove a tablet connection
       description: Removes an existing tablet connection
       operationId: removeTabletConnection
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ConnectionObjectDTO'
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          required: true
+          description: Tablet connection name
       responses:
         '200':
           description: Connection removed successfully
